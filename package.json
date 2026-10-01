@@ -12,8 +12,8 @@
     "db:migrate": "turbo run db:migrate",
     "db:push": "turbo run db:push",
     "db:studio": "turbo run db:studio",
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down"
+    "db:up": "docker compose -f infra/postgres/docker-compose.yml up -d",
+    "db:down": "docker compose -f infra/postgres/docker-compose.yml down"
   },
   "devDependencies": {
     "@shadcn/lint": "^0.2.0",
