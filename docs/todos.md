@@ -118,13 +118,20 @@ Client side (documentation in `auth-client.md`, screens not built):
 
 - [x] `packages/errors`: error shape, scrubbing, shared options; wired into api, web and native
 - [x] Sentry EU organization and three projects (`little-progress-server`, `-web`, `-mobile`); DSNs in Infisical dev
-- [ ] Add the DSNs to Infisical staging and prod when those environments exist
+- [ ] Add the DSNs to Infisical staging and prod when those environments exist (left for now)
 - [x] Sentry auth token, org and project are in Infisical dev `/web`
-- [ ] Enable `@sentry/cli` in `pnpm-workspace.yaml` `allowBuilds` for EAS builds
-- [ ] Set `SENTRY_RELEASE` to the git SHA in CI
-- [ ] Create alert rules: new production issue, API error-rate spike, weekly digest
+- [x] `@sentry/cli` (and `esbuild`) enabled in `pnpm-workspace.yaml` `allowBuilds`
+- [ ] EAS builds: set the secrets `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` so native source maps upload
+- [ ] CI/CD and alerts: see the section "CI/CD and release tracking"
 - [x] Proved capture with real DSNs on api, web and native (debug route, `/debug` page, native test buttons)
 - [ ] Use `AppError` in the real routes as they are added (entries, uploads, reports)
+
+## CI/CD and release tracking (not started)
+
+- [ ] Set up CI (GitHub Actions, see `docs/plan.md` CI/CD): check, check-types, tests, build
+- [ ] Pass the commit hash to Sentry as `SENTRY_RELEASE` (GitHub Actions has it as `GITHUB_SHA`): API at deploy time, web and native at build time. Check what each SDK needs when this is built
+- [ ] Give CI the web source map token (`SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`) through Infisical
+- [ ] After the first deploy, create the Sentry alert rules on the website (Alerts > Create Alert): new issue in `environment = production`, a metric alert for API error-rate spikes, and the weekly report under Settings > Notifications
 
 ## User flows (`docs/user-flows.md`)
 

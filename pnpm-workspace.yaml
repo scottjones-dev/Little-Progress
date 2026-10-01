@@ -3,8 +3,8 @@ packages:
   - "packages/*"
 
 allowBuilds:
-  "@sentry/cli": false
-  esbuild: false
+  "@sentry/cli": true
+  esbuild: true
 
 minimumReleaseAgeExclude:
   - pg-cloudflare@1.4.1

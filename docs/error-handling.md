@@ -53,7 +53,7 @@ Rule for code: never put entry content, names, notes or tokens in an error messa
 1. Create a Sentry organization with **EU data storage** (de.sentry.io).
 2. Create three projects: `api` (Node/Hono), `web` (Next.js), `native` (React Native).
 3. Put the DSNs in Infisical: `/api` `SENTRY_DSN`; `/web` `NEXT_PUBLIC_SENTRY_DSN`; `/native` `EXPO_PUBLIC_SENTRY_DSN`. Do this for dev, staging and prod (use `SENTRY_ENVIRONMENT` on the API to tell staging from prod).
-4. Source maps (readable stack traces), later: create an auth token and set `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` for the web build. Without the token builds still pass, just with unreadable traces. For native, the `@sentry/cli` build script is currently disabled in `pnpm-workspace.yaml` (`allowBuilds`). Enable it when you set up EAS builds.
+4. Source maps (readable stack traces), later: create an auth token and set `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` for the web build. Without the token builds still pass, just with unreadable traces. For native, the `@sentry/cli` build script is enabled in `pnpm-workspace.yaml` (`allowBuilds`); EAS builds need the `SENTRY_AUTH_TOKEN`, `SENTRY_ORG` and `SENTRY_PROJECT` secrets.
 5. Alerts to create in Sentry: new issue in production, error-rate spike on `api`, weekly digest.
 
 ## 5. Check it works
