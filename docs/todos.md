@@ -89,7 +89,8 @@ Server side (`packages/auth`, built to the Better Auth docs):
 - [x] Delete account with email confirmation; a family with no parents left is deleted with its data
 - [x] `family` table replaced by the organization; `child`, `carer`, `food`, `entry`, `attachment` reference `organization.id`
 - [x] Docs: `auth.md` rewritten, `auth-client.md` written, `user-flows.md` updated
-- [ ] **You:** add Google and Microsoft client id and secret to Infisical `/api` (redirect URIs in `auth.md` section 10); settle the production domain for `PASSKEY_RP_ID`
+- [x] Google and Microsoft credentials are in Infisical `dev /api`; both providers answer with a real sign-in redirect
+- [ ] **You:** add the same redirect URIs for staging and production in both consoles and the production credentials to those Infisical environments (URIs in `auth.md` section 10); settle the production domain for `PASSKEY_RP_ID`
 - [ ] **You:** replace the invalid `NOVU_SECRET_KEY` ("API Key not found") so auth emails actually send
 - [ ] Tests for the server (list in `auth.md` section 12), then a CI job for them
 - [ ] Verify the delete-account flow end to end once emails send (the family cleanup query itself is checked)
