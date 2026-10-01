@@ -59,5 +59,5 @@ Rule for code: never put entry content, names, notes or tokens in an error messa
 ## 5. Check it works
 
 - API: `GET /api/_debug/error` (development only) returns the standard 500 body and, with a DSN, one event with the `request_id` tag and no cookies or headers.
-- Web: throw in a page and open it; the event appears in the `web` project.
-- Native: call `Sentry.captureException(new Error("test"))` from a screen.
+- Web: open `http://localhost:3000/debug` (development only, 404 in production). Buttons send a captured error, throw in a click handler, or crash while rendering; the link fails on the server. The events appear in the web project.
+- Native: the home screen shows two test buttons in development (`src/components/sentry-test.tsx`): send a captured error, or crash a screen to see the error screen. Native crashes (not JS errors) need a development build.

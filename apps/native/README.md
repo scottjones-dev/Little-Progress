@@ -14,7 +14,7 @@ pnpm --filter @repo/native dev        # Expo only (secrets via Infisical /native
 pnpm --filter @repo/native dev:local  # without Infisical
 ```
 
-Scan the QR code with Expo Go. Errors are reported to Sentry from `src/app/_layout.tsx` (with an Expo Router `ErrorBoundary`); `metro.config.js` adds Sentry debug ids. Native crashes need a development build, see `docs/error-handling.md`. Code lives under `src/app` (expo-router). Colours and name come from `@repo/config/app`; the API URL from `@repo/env/native` (`src/lib/api.ts`).
+Scan the QR code with Expo Go. Errors are reported to Sentry from `src/app/_layout.tsx` (with an Expo Router `ErrorBoundary`); `metro.config.js` adds Sentry debug ids. In development the home screen has Sentry test buttons (`src/components/sentry-test.tsx`). Native crashes need a development build, see `docs/error-handling.md`. Code lives under `src/app` (expo-router). Colours and name come from `@repo/config/app`; the API URL from `@repo/env/native` (`src/lib/api.ts`).
 
 ## Tests
 
