@@ -1,0 +1,28 @@
+name: littleprogress-storage
+
+services:
+  floci:
+    image: floci/floci:latest
+    environment:
+      FLOCI_STORAGE_MODE: hybrid
+      FLOCI_STORAGE_PERSISTENT_PATH: /app/data
+    ports:
+      - "4566:4566"
+    volumes:
+      - floci-data:/app/data
+
+  floci-ui:
+    depends_on:
+      - floci
+    environment:
+      AWS_ACCESS_KEY_ID: test
+      AWS_REGION: us-east-1
+      AWS_SECRET_ACCESS_KEY: test
+      FLOCI_ENDPOINT: http://floci:4566
+      PORT: "4500"
+    image: floci/floci-ui:latest
+    ports:
+      - "4500:4500"
+
+volumes:
+  floci-data:
