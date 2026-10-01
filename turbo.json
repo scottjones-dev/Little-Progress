@@ -41,9 +41,17 @@
     "db:push": {
       "cache": false
     },
-    "db:studio": {
-      "cache": false,
-      "persistent": true
+    "db:check": {
+      "cache": false
+    },
+    "db:export": {
+      "cache": false
+    },
+    "db:pull": {
+      "cache": false
+    },
+    "db:up": {
+      "cache": false
     }
   }
 }

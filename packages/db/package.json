@@ -10,10 +10,14 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
+    "dev": "infisical run --path=/api -- drizzle-kit studio",
+    "db:check": "infisical run --path=/api -- drizzle-kit check",
+    "db:export": "infisical run --path=/api -- drizzle-kit export",
     "db:generate": "infisical run --path=/api -- drizzle-kit generate",
     "db:migrate": "infisical run --path=/api -- drizzle-kit migrate",
+    "db:pull": "infisical run --path=/api -- drizzle-kit pull",
     "db:push": "infisical run --path=/api -- drizzle-kit push",
-    "db:studio": "infisical run --path=/api -- drizzle-kit studio"
+    "db:up": "infisical run --path=/api -- drizzle-kit up"
   },
   "dependencies": {
     "@repo/env": "workspace:*",

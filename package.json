@@ -8,12 +8,15 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "prepare": "husky",
+    "db:check": "turbo run db:check",
+    "db:export": "turbo run db:export",
     "db:generate": "turbo run db:generate",
     "db:migrate": "turbo run db:migrate",
+    "db:pull": "turbo run db:pull",
     "db:push": "turbo run db:push",
-    "db:studio": "turbo run db:studio",
-    "db:up": "docker compose -f infra/postgres/docker-compose.yml up -d",
-    "db:down": "docker compose -f infra/postgres/docker-compose.yml down"
+    "db:up": "turbo run db:up",
+    "infra:up": "docker compose -f infra/postgres/docker-compose.yml up -d",
+    "infra:down": "docker compose -f infra/postgres/docker-compose.yml down"
   },
   "devDependencies": {
     "@shadcn/lint": "^0.2.0",
