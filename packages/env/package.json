@@ -7,6 +7,7 @@
     "./api": "./src/api.ts",
     "./db": "./src/db.ts",
     "./native": "./src/native.ts",
+    "./notifications": "./src/notifications.ts",
     "./storage": "./src/storage.ts",
     "./web": "./src/web.ts"
   },

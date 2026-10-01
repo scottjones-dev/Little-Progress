@@ -51,14 +51,27 @@ Later
 
 Delivery layer on Novu. Auth and other features call a typed `notify()`; they never import Novu or `@repo/emails`. Design in `docs/auth.mdx` section 5.
 
-- [ ] Scaffold package under `src/` with README (what, why, example, tests, depends on / used by)
-- [ ] `@repo/env` entry for `NOVU_SECRET_KEY` (and region); dev key in Infisical
-- [ ] Decide workflow style: code-first (Novu Framework, `renderEmail`) or uploaded HTML with `{{payload.x}}` tokens (lean: code-first)
-- [ ] Typed `notify(eventId, { to, payload })`: event id decides payload type; catches and logs its own errors
-- [ ] Workflows: `verify-email`, `reset-password`, `password-changed` first, then `new-location-sign-in`, `account-locked`, `two-factor-changed`
-- [ ] Mark security, verify and reset workflows critical so preferences cannot disable them
-- [ ] Vitest: payload typing, error swallowing, subscriber mapping; integration test against Novu dev/self-hosted if feasible
-- [ ] Privacy notice: Novu stores recipient emails and payloads; pick EU region if offered
+Done
+
+- [x] Package scaffolded under `src/` with README
+- [x] `@repo/env/notifications` (`NOVU_SECRET_KEY` optional in dev, `NOVU_REGION` default `eu`)
+- [x] Decided: code-first workflows (Novu Framework + Hono bridge at `/api/novu`), Novu Cloud EU
+- [x] Typed `notify(eventId, { to, payload, idempotencyKey })`; never throws, never logs payloads
+- [x] One event catalog (`events.ts`) and one generic workflow builder; 5 events (`magic-link` unused)
+- [x] Security and account workflows critical (read-only preferences); push for `password-changed` and `new-location-sign-in`
+- [x] Expo device token helpers (`registerDevice` / `unregisterDevice`)
+- [x] Vitest (35 tests): catalog vs templates, validation, notify behaviour, workflow definitions, bridge 503, devices
+
+To do
+
+- [ ] **You:** create the Novu Cloud (EU) account, add `NOVU_SECRET_KEY` to Infisical `dev /api`, connect the Resend and Expo Push integrations in the dashboard
+- [ ] Live test: `pnpm dev`, `pnpm --filter @repo/notifications studio`, trigger `verify-email`, confirm the email arrives rendered by `@repo/emails`
+- [ ] Production: public API URL for `/api/novu`, `novu sync`, separate prod Novu environment and key
+- [ ] Add events `account-locked`, `two-factor-changed` (and optional `passkey-changed`, `account-linked`) with their email templates
+- [ ] SMS: choose a provider, add the Novu integration, add an `sms` field to the catalog and a `step.sms` in `workflows.ts`
+- [ ] Expo app: ask for push permission, get the Expo token (`expo-notifications`), call `POST /api/devices` (API route behind auth, not built yet)
+- [ ] Wire Better Auth callbacks to `notify` (see Auth below)
+- [ ] Privacy notice: Novu stores recipient emails and payloads (EU region chosen)
 
 ## Auth (`docs/auth.mdx`)
 
@@ -77,6 +90,13 @@ Order follows section 13 of the design.
 - [ ] Expo client; Apple sign-in once the Apple Developer account is paid
 - [ ] Write the lost-2FA support process before launch
 - [ ] Decide: Apple relay emails vs `allowDifferentEmails`; require 2FA for parents; last-login cookie consent
+
+## User flows (`docs/user-flows.md`)
+
+- [x] Write flows for parent onboarding, carer quick-log, parent daily use, reports and insights
+- [ ] Review the open questions in section 10 and settle them
+- [ ] Add the new routes it implies to `docs/plan.md` (`POST /family`, `POST /children`, invites)
+- [ ] Wireframes for each screen in a `.pen` file
 
 ## Testing infrastructure
 

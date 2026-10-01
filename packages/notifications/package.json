@@ -1,0 +1,33 @@
+{
+  "name": "@repo/notifications",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./bridge": "./src/bridge.ts",
+    "./devices": "./src/devices.ts",
+    "./events": "./src/events.ts",
+    "./notify": "./src/notify.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "studio": "novu dev --port 9000 --route /api/novu",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@novu/api": "^3.19.1",
+    "@novu/framework": "^2.14.0",
+    "@repo/config": "workspace:*",
+    "@repo/emails": "workspace:*",
+    "@repo/env": "workspace:*",
+    "hono": "4.13.12",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "novu": "^2.21.3",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  }
+}

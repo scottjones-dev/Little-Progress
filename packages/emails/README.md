@@ -58,7 +58,7 @@ const { html, text, subject } = await renderEmail("verify-email", {
 ## Depends on / used by
 
 - Depends on `@repo/config` (brand data), `@react-email/components`, `@react-email/render`, `react-email` (preview CLI).
-- Will be used by `apps/api` (notifications) later.
+- Used by `packages/notifications`, which renders these templates inside its Novu email step.
 
 ## Notes
 

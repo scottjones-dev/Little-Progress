@@ -2,7 +2,7 @@
 
 A private family care diary for a toddler who is behind on solids and development. It records detailed feeding trials plus sleep, nappies, milk and milestones, surfaces patterns over time, and produces printable reports for health visitors, dietitians and paediatricians. Parents have full accounts; carers (nursery, grandparents) log through a shared-PIN quick-log screen.
 
-The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). Open work is tracked in [`docs/todos.md`](docs/todos.md). Project rules for contributors and AI agents are in [`AGENTS.md`](AGENTS.md).
+The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). What each person does screen by screen is in [`docs/user-flows.md`](docs/user-flows.md). Open work is tracked in [`docs/todos.md`](docs/todos.md). Project rules for contributors and AI agents are in [`AGENTS.md`](AGENTS.md).
 
 ## Workspaces
 
@@ -16,6 +16,7 @@ The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). O
 | [`packages/db`](packages/db) | Drizzle schema, migrations, client, care vocabulary |
 | [`packages/storage`](packages/storage) | S3-compatible storage (AWS S3, Cloudflare R2, Floci) |
 | [`packages/emails`](packages/emails) | React Email templates, preview on port 5000 |
+| [`packages/notifications`](packages/notifications) | `notify()` for email, push and later SMS, delivered through Novu |
 | [`infra/postgres`](infra/postgres) | Local PostgreSQL via Docker |
 | [`infra/storage`](infra/storage) | Local S3 emulator (Floci) and its UI via Docker |
 

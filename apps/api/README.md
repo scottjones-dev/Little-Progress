@@ -8,10 +8,11 @@ Web and native share one backend that owns authorisation, validation and data ac
 
 ## Routes
 
-| Route              | Description    |
-| ------------------ | -------------- |
-| `GET /api`         | app name       |
+| Route | Description |
+| --- | --- |
+| `GET /api` | app name |
 | `GET /api/healthz` | liveness check |
+| `ALL /api/novu` | Novu bridge: Novu calls it to run notification workflows (503 until `NOVU_SECRET_KEY` is set) |
 
 Secure headers are on and CORS is limited to `WEB_ORIGIN`. Auth, entries, uploads and reports are planned (see `docs/plan.md`).
 
