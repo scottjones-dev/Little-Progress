@@ -117,11 +117,13 @@ Client side (documentation in `auth-client.md`, screens not built):
 ## Error handling and Sentry (`docs/error-handling.md`)
 
 - [x] `packages/errors`: error shape, scrubbing, shared options; wired into api, web and native
-- [ ] Create the Sentry EU organization and the three projects (`api`, `web`, `native`), put the DSNs in Infisical (dev, staging, prod)
-- [ ] Create a Sentry auth token for source maps (`SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`); enable `@sentry/cli` in `pnpm-workspace.yaml` `allowBuilds` for EAS builds
+- [x] Sentry EU organization and three projects (`little-progress-server`, `-web`, `-mobile`); DSNs in Infisical dev
+- [ ] Add the DSNs to Infisical staging and prod when those environments exist
+- [x] Sentry auth token, org and project are in Infisical dev `/web`
+- [ ] Enable `@sentry/cli` in `pnpm-workspace.yaml` `allowBuilds` for EAS builds
 - [ ] Set `SENTRY_RELEASE` to the git SHA in CI
 - [ ] Create alert rules: new production issue, API error-rate spike, weekly digest
-- [ ] Prove capture with real DSNs (debug route, a web throw, a native `captureException`)
+- [x] Proved capture with real DSNs on api, web and native (debug route, `/debug` page, native test buttons)
 - [ ] Use `AppError` in the real routes as they are added (entries, uploads, reports)
 
 ## User flows (`docs/user-flows.md`)
