@@ -1,4 +1,5 @@
 import type { Novu } from "@novu/api";
+import { z } from "zod";
 
 import { getNovu } from "./client";
 import { events } from "./events";
@@ -23,6 +24,29 @@ interface Deps {
   client: Pick<Novu, "trigger"> | null;
   log: (message: string, details: Record<string, string>) => void;
 }
+
+const sdkErrorSchema = z.object({ body: z.string() });
+const bodyMessageSchema = z.object({ message: z.string() });
+
+/**
+ * The most useful one-line reason for a failed send. Novu's SDK hides the real reason
+ * (for example `workflow_not_found`) behind "Response validation failed", so prefer the
+ * message in the HTTP body when there is one. Never includes the payload.
+ */
+const describeError = (error: Error) => {
+  const sdkError = sdkErrorSchema.safeParse(error);
+  if (sdkError.success) {
+    try {
+      const body = bodyMessageSchema.safeParse(JSON.parse(sdkError.data.body));
+      if (body.success) {
+        return body.data.message;
+      }
+    } catch {
+      // The body was not JSON; fall back to the error message.
+    }
+  }
+  return error.message;
+};
 
 /**
  * Builds notify() with its dependencies. Tests pass fakes; the app uses the default below.
@@ -54,7 +78,7 @@ export const createNotify =
     } catch (error) {
       // Log the event and subscriber only, never the payload (it holds one-time links).
       log("notify failed", {
-        error: error instanceof Error ? error.message : String(error),
+        error: error instanceof Error ? describeError(error) : String(error),
         eventId,
         subscriberId: to.subscriberId,
       });
