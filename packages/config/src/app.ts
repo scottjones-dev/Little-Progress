@@ -1,5 +1,10 @@
 export const app = {
-  author: { name: "Scott Jones" },
+  api: { basePath: "/api", port: 9000 },
+  author: {
+    email: "scottjones@alicesystems.co.uk",
+    name: "Scott Jones",
+    url: "https://alicesystems.co.uk",
+  },
   backgroundColor: "#0F1012",
   description:
     "A private family care diary for tracking feeding, sleep, nappies and development milestones, with patterns and reports to share with health professionals.",
