@@ -26,6 +26,18 @@ export default defineConfig({
       },
     },
     {
+      // The error scrubber walks arbitrary event data from Sentry's SDKs, so unknown-typed
+      // values and typeof checks are the point of that file.
+      files: ["packages/errors/src/scrub.ts"],
+      rules: {
+        "anti-slop/no-known-value-widening": "off",
+        "anti-slop/no-runtime-typeof": "off",
+        "anti-slop/no-unknown-parameters": "off",
+        "anti-slop/no-unknown-returns": "off",
+        "anti-slop/no-unsafe-dictionary-type": "off",
+      },
+    },
+    {
       // Email: shadcn token rules target app UI; email clients need exact pixel values.
       files: ["packages/emails/**"],
       rules: {

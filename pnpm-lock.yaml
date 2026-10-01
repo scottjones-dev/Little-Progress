@@ -47,9 +47,18 @@ importers:
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
+      '@repo/errors':
+        specifier: workspace:*
+        version: link:../../packages/errors
       '@repo/notifications':
         specifier: workspace:*
         version: link:../../packages/notifications
+      '@sentry/hono':
+        specifier: ^11.1.0
+        version: 11.1.0(@hono/node-server@2.1.3(hono@4.13.12))(@sentry/node@11.1.0(@babel/core@7.29.7(supports-color@8.1.1)))(hono@4.13.12)
+      '@sentry/node':
+        specifier: ^11.1.0
+        version: 11.1.0(@babel/core@7.29.7(supports-color@8.1.1))
       hono:
         specifier: 4.13.12
         version: 4.13.12
@@ -159,7 +168,7 @@ importers:
         version: link:../../packages/env
       next:
         specifier: 16.3.7
-        version: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react:
         specifier: 19.2.8
         version: 19.2.8
@@ -193,13 +202,13 @@ importers:
     dependencies:
       '@better-auth/drizzle-adapter':
         specifier: ^1.7.6
-        version: 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))
+        version: 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))
       '@better-auth/expo':
         specifier: ^1.7.6
-        version: 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(better-auth@1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(expo-constants@57.0.20)(expo-linking@57.0.11)(expo-web-browser@57.0.3(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)))
+        version: 1.7.6(5c3713e399c7c930f15a244520b99de2)
       '@better-auth/passkey':
         specifier: ^1.7.6
-        version: 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-auth@1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.0(zod@4.6.5))(nanostores@1.5.4)
+        version: 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-auth@1.7.6(@opentelemetry/api@1.9.1)(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.0(zod@4.6.5))(nanostores@1.5.4)
       '@repo/config':
         specifier: workspace:*
         version: link:../config
@@ -214,10 +223,10 @@ importers:
         version: link:../notifications
       better-auth:
         specifier: ^1.7.6
-        version: 1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
+        version: 1.7.6(@opentelemetry/api@1.9.1)(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
       drizzle-orm:
         specifier: 1.0.0-rc.4
-        version: 1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
+        version: 1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
       zod:
         specifier: 4.6.5
         version: 4.6.5
@@ -242,7 +251,7 @@ importers:
         version: link:../env
       drizzle-orm:
         specifier: 1.0.0-rc.4
-        version: 1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
+        version: 1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
       pg:
         specifier: 8.23.1
         version: 8.23.1
@@ -286,7 +295,7 @@ importers:
     devDependencies:
       '@react-email/ui':
         specifier: 6.11.0
-        version: 6.11.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.11.0(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@types/node':
         specifier: 26.4.1
         version: 26.4.1
@@ -307,7 +316,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/env:
     dependencies:
@@ -335,7 +344,26 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+
+  packages/errors:
+    dependencies:
+      zod:
+        specifier: 4.6.5
+        version: 4.6.5
+    devDependencies:
+      '@repo/config':
+        specifier: workspace:*
+        version: link:../config
+      '@types/node':
+        specifier: 26.4.1
+        version: 26.4.1
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: 5.0.3
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/notifications:
     dependencies:
@@ -344,7 +372,7 @@ importers:
         version: 3.19.1
       '@novu/framework':
         specifier: ^2.14.0
-        version: 2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@4.6.5)
+        version: 2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@4.6.5)
       '@repo/config':
         specifier: workspace:*
         version: link:../config
@@ -366,7 +394,7 @@ importers:
         version: 26.4.1
       novu:
         specifier: ^2.21.3
-        version: 2.21.3(@types/node@26.4.1)(@types/react@19.2.18)(debug@4.4.3(supports-color@8.1.1))(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-devtools-core@6.1.5)(supports-color@8.1.1)
+        version: 2.21.3(@types/node@26.4.1)(@types/react@19.2.18)(debug@4.4.3(supports-color@8.1.1))(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-devtools-core@6.1.5)(supports-color@8.1.1)
       tsx:
         specifier: 4.23.15
         version: 4.23.15
@@ -375,7 +403,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
 
   packages/storage:
     dependencies:
@@ -406,7 +434,7 @@ importers:
         version: 7.0.2
       vitest:
         specifier: 5.0.3
-        version: 5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+        version: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
 
 packages:
 
@@ -2170,14 +2198,30 @@ packages:
     resolution: {integrity: sha512-5E8EKp30Ee06FQRpax204nyZOb1uv0kW72VfZXkU/4hG4CcqDsJbfrNnUjB6xIPSvIwAAlwv76MdIAsOflkLXg==}
     engines: {node: '>=18.0.0'}
 
+  '@opentelemetry/api@1.9.1':
+    resolution: {integrity: sha512-gLyJlPHPZYdAk1JENA9LeHejZe1Ti77/pTeFm/nMXmQH/HFZlcS/O2XJB+L8fkbrNSqhdtlvjBVjxwUYanNH5Q==}
+    engines: {node: '>=8.0.0'}
+
   '@opentelemetry/semantic-conventions@1.43.0':
     resolution: {integrity: sha512-eSYWTm620tTk45EKSedaUL8MFYI8hW164hIXsgIHyxu3VobUB3fFCu5t0hQby6OoWRPsG1KkKUG2M5UadiLiVg==}
     engines: {node: '>=14'}
+
+  '@oxc-parser/binding-android-arm-eabi@0.143.0':
+    resolution: {integrity: sha512-n9uozULWflPqBtdmI8lAabLqGKNgLVNN0ZH8HfgCwpKGNtzRzauB76jTiW/3YLkcA7N1zskpi9GdVnZuu1SAvg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [android]
 
   '@oxc-parser/binding-android-arm-eabi@0.148.0':
     resolution: {integrity: sha512-pHASv9g5pASxb7akHERZNSkrEqPhFaUix98o7d9hbTpolnnFWl7UiRrcMhCsV1+iVO4/cJwKsbKRJTFNs2tdBQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
+    os: [android]
+
+  '@oxc-parser/binding-android-arm64@0.143.0':
+    resolution: {integrity: sha512-9BbdjHETk6O3zH/DDid9IgBtF0GlpLabNKN231uraXpRDSfY+iiZxTP5bk1Z63GBownVdhdINFIeddmMz4MzpQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
     os: [android]
 
   '@oxc-parser/binding-android-arm64@0.148.0':
@@ -2186,10 +2230,22 @@ packages:
     cpu: [arm64]
     os: [android]
 
+  '@oxc-parser/binding-darwin-arm64@0.143.0':
+    resolution: {integrity: sha512-gh+6ecoHUy4/sUcolBl/1qPXKBbYNxFY0Pk0ujgQvINTMSftJY7o4yb8gOkDJPeZeB8+a+u7xTe6umoP8N5HFA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [darwin]
+
   '@oxc-parser/binding-darwin-arm64@0.148.0':
     resolution: {integrity: sha512-yiSJmzGUvCUaJT8X3j40gVcX+ckuHQMuiOtF8DvzTs5+JtB/7XuHFPp4M+vv5u+HlBtDUd4Ks5pyHpWz8mfnkg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
+    os: [darwin]
+
+  '@oxc-parser/binding-darwin-x64@0.143.0':
+    resolution: {integrity: sha512-qd1hl2d+lXgHv/VQ/M9qm8TrMC5T4RqDBwtOnl+1D0QMjwcz+8AaB4JSg8STgeag0GP6a6L74XEGAsrTSJWNzQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
     os: [darwin]
 
   '@oxc-parser/binding-darwin-x64@0.148.0':
@@ -2198,14 +2254,32 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@oxc-parser/binding-freebsd-x64@0.143.0':
+    resolution: {integrity: sha512-M5XXcNa7aOqLPKTR41msfghKu2yQ4xWvCm11/gwU0JzOzHNk5sgW//rVEjJ+LO48+VDAMzXTSzurUVxIDKwozw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [freebsd]
+
   '@oxc-parser/binding-freebsd-x64@0.148.0':
     resolution: {integrity: sha512-vFsPx+a/qFECPnz/H8nC6x6MDvnWscLTCo/5muojEF54ERUq1kdgbvnWo95YnkhjF9sTIcG/uDxQBh1gffaufQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [freebsd]
 
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.143.0':
+    resolution: {integrity: sha512-T/GXusuOkPNQhCQCSBbcU/N8j0rAypuDBl1IyFK+lyYT594XsVz80clPC/OtbSSpBGyJxj8uYEfctxVuxVYoww==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
   '@oxc-parser/binding-linux-arm-gnueabihf@0.148.0':
     resolution: {integrity: sha512-eOr3M+6iGbbxNL4PSS0VtsyQ2eOUxSBh00BqO22SbolDimPSYsBuLr/LCrZBkiqW2BoabhR6V4R8jrRAay7hjg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm]
+    os: [linux]
+
+  '@oxc-parser/binding-linux-arm-musleabihf@0.143.0':
+    resolution: {integrity: sha512-oKu4RcBlXSqo3OC62dp6YTnQaZIurNDpCX3BnAM3+bJxt7s8J2TJKMnC0UYer1qhlRaDCg6wkTaTw+2IlsZ12w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm]
     os: [linux]
@@ -2216,12 +2290,26 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@oxc-parser/binding-linux-arm64-gnu@0.143.0':
+    resolution: {integrity: sha512-WJBbD186AZmMGaSIhlktC+rPl8L3peCTXAh88Ih9uEvK0en2mPojGyCGYiL6mHtV1RPV3JyfJW5t6n5hh0lXhA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
   '@oxc-parser/binding-linux-arm64-gnu@0.148.0':
     resolution: {integrity: sha512-Fnu95O4eZ5i++GPvIzBEZ8y4ddTLR+D9paYa8JRaRk6ZK7nHQiWP5xtrhcPQsXqgat1d7sU/d5rbbI0p1FTHSQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
+
+  '@oxc-parser/binding-linux-arm64-musl@0.143.0':
+    resolution: {integrity: sha512-t1AcYOwEzgceadT4v5e+vaCCb0AncCA3v5AyzfBAz/tMq11qzVccXKzNHtkWdjBsgvTKwRkaUF3QvT4kot8vcQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
 
   '@oxc-parser/binding-linux-arm64-musl@0.148.0':
     resolution: {integrity: sha512-3CQy/BMdx7N7H3qrcPxUL+a2CwUZodUcf6oq8iJuNZ9C6Ol1aq3mcWzsgySJ7CHFLvpX21ZDPp1r1X0QLbu/AQ==}
@@ -2230,10 +2318,24 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxc-parser/binding-linux-ppc64-gnu@0.143.0':
+    resolution: {integrity: sha512-RsnO/NoD8376LMJq8JS8TwI0ieNaFRTuNe2GVJntQg6gwZNMENZsEbknHdVwjpOmxdGLGodcwaGSbAeRr5Bgjw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
   '@oxc-parser/binding-linux-ppc64-gnu@0.148.0':
     resolution: {integrity: sha512-9LkaYvfiF8hMOw900csAvkf1oxE8XlmMeGowu5BcastSSwV8mKvKRMNU7HsV+ycyj1dQD8pX5qgOw8ja6SJacg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [ppc64]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-parser/binding-linux-riscv64-gnu@0.143.0':
+    resolution: {integrity: sha512-48fSVfR9TZi5CASZFyv0VC6z6BCoeihFsX031mAD/oSH7d9PYsPgIqza7d9mjP7Z2KTEpTFyH6SIu0Ui6R1vdg==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
     os: [linux]
     libc: [glibc]
 
@@ -2244,6 +2346,13 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@oxc-parser/binding-linux-riscv64-musl@0.143.0':
+    resolution: {integrity: sha512-T8CpdD+SfE01DnIOD4HpVxu0ZJOfMJ/VhCvikKfaXAxkZ+9veyLM/D2hpi7Y2hFUyPmVQO3FNZHmYzV/WlVR4g==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [riscv64]
+    os: [linux]
+    libc: [musl]
+
   '@oxc-parser/binding-linux-riscv64-musl@0.148.0':
     resolution: {integrity: sha512-uPqZexvKJmEgq4mAu36qe2xTfXZE7oyik1R7KtZ5tl8qKlq1U1fIqTFRUEBZqRGvforoTrGIpatRzcoPKO66RA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2251,10 +2360,24 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxc-parser/binding-linux-s390x-gnu@0.143.0':
+    resolution: {integrity: sha512-QLdeMsCcacenPEFsfxnBUDF1y6opyz5+fmOz9bfD5Y7fiGCMupUCuB3KTPQhNwshIG1P9fPqar9MHxuBDd4bwQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
   '@oxc-parser/binding-linux-s390x-gnu@0.148.0':
     resolution: {integrity: sha512-9oUHvnTbp7ZraFsTC8PN6XhdhPSSxZumYvixWl7Smi353gEULvK6yV0sXNVrdFMHQeaDKFCi8TgDhNK7/A+Y+Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [s390x]
+    os: [linux]
+    libc: [glibc]
+
+  '@oxc-parser/binding-linux-x64-gnu@0.143.0':
+    resolution: {integrity: sha512-659ujfqLy6k7cuH3sbzhd8b+ztSq+i6E2E9pG78Q0BmHjAExfGIdgc8cGgMdwAozDXeZFHkJ+LXYJdWsaGdgyw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
     os: [linux]
     libc: [glibc]
 
@@ -2265,6 +2388,13 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@oxc-parser/binding-linux-x64-musl@0.143.0':
+    resolution: {integrity: sha512-/Mw/9j4TfZcnKphPrzOE6t4MMknXadcAAuVUlDRTF/ETWB5xOgQvOJV2Mh9We/bWxZdoxaGAdc+hy4GuYwQ2yQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@oxc-parser/binding-linux-x64-musl@0.148.0':
     resolution: {integrity: sha512-qQoPDZUFV0bh9xA09XydmkjMBpgc1ukJuhMvzQ9QeVmFaHTS9W5TE5CoLmSl3QQyUP9OuHO3x/WPZTIIZPWR3Q==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2272,16 +2402,34 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@oxc-parser/binding-openharmony-arm64@0.143.0':
+    resolution: {integrity: sha512-8rIKWR2BFuifbIK/1XB9wTaSdtuJ25dlE7ZQYDnEwj/2xH2vHsxnvIjHT3ZjSVuLLwGGlSslIG/fbOJ8TV8rTw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [openharmony]
+
   '@oxc-parser/binding-openharmony-arm64@0.148.0':
     resolution: {integrity: sha512-1UGbaQWEXUCLqAmaR5kwRDjx/R4S5LQKZkM9CHmaHkuKhriOF32aRLfS0jCRNE2yGQJLMEA1z9UucbBVqjXnDw==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
     os: [openharmony]
 
+  '@oxc-parser/binding-win32-arm64-msvc@0.143.0':
+    resolution: {integrity: sha512-5U9kQYMfRRI6Zq7KDxgbIP0RMnKrfn3gLepRMgJuRkPSUALTiRCk9d/uyhb4lGDjUdzwK7mBkKqhLgzBPCmLpQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [arm64]
+    os: [win32]
+
   '@oxc-parser/binding-win32-arm64-msvc@0.148.0':
     resolution: {integrity: sha512-pWKdzRDNG2+NK4h/V6U/CYERcfYD6u28h5IB/VJVsrZaD3muvE58tUj22lieL5vLZ+XFi1GPv9YXckZbJZ9BLA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [arm64]
+    os: [win32]
+
+  '@oxc-parser/binding-win32-ia32-msvc@0.143.0':
+    resolution: {integrity: sha512-25P7AaHk4R88Yv2XH4gToDVmh0cOu+bEURQU10CRrmvgabfRArSGAP5osmwUKeSUHj0VS50upbpbRWWW/m7mHA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [ia32]
     os: [win32]
 
   '@oxc-parser/binding-win32-ia32-msvc@0.148.0':
@@ -2290,11 +2438,20 @@ packages:
     cpu: [ia32]
     os: [win32]
 
+  '@oxc-parser/binding-win32-x64-msvc@0.143.0':
+    resolution: {integrity: sha512-ORMh3JE1s6V7ySicdRK7vgaDQnn5o+UHg9ct989PlWHbel8O9ARrmWXM6kZjrBMtNucxNayQ8g69G0VfWzhANw==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [x64]
+    os: [win32]
+
   '@oxc-parser/binding-win32-x64-msvc@0.148.0':
     resolution: {integrity: sha512-Ye6vB7VQulghWYkYkECOBYFRVEizz4XyRTUAv+t8BuyurhKU7uD0P9eowL+mKG5Mf8MSYx+DI3Cm8SKZvYG7bQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     cpu: [x64]
     os: [win32]
+
+  '@oxc-project/types@0.143.0':
+    resolution: {integrity: sha512-u6JZdLBTLotrNC9Vd6vPssINdzcCzleKAH6EJKImQb7GtYvX5keN2dxkoK44stCc4tffE6QQRtZTXVSzsLUlWA==}
 
   '@oxc-project/types@0.148.0':
     resolution: {integrity: sha512-Nm4s/jB+4FpFsPhWGEC4h7rzksesmtnMXomo6rCMcg/b8zLQuOziRgkCS1fxDCXOlJB/6Q8oABOZ/OP6RIPj9A==}
@@ -3204,6 +3361,72 @@ packages:
 
   '@selderee/plugin-htmlparser2@0.11.0':
     resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
+
+  '@sentry/bundler-plugins@11.1.0':
+    resolution: {integrity: sha512-0p22SeSdyCnr7PaFkSHZnOzc8lpPlkiA+rsjye9JACR9Hd/n7e9Ssvanw19R7LdqS05foYQSViJIsrVbk45Y3w==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@babel/core': ^7.18.5
+      rollup: '>=3.2.0'
+      webpack: '>=5.1.0'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+      rollup:
+        optional: true
+      webpack:
+        optional: true
+
+  '@sentry/conventions@0.24.0':
+    resolution: {integrity: sha512-pmmF2mLy7A23z8gnLRG87lYu4SSPIBColtfqu9cfkh1omn/0CI3w0/AqZ/uf/VGAtM/wJMN61J58Ks/IWBCHpQ==}
+    engines: {node: '>=14'}
+
+  '@sentry/core@11.1.0':
+    resolution: {integrity: sha512-ObM47oMWxRQiVxUdkV6bs2BeHxPVWim571hw1iT3suyAc8iRfJ27f+QdIdmDKZtvHFGJ0Vh/LpeTZP5Z8FXyEA==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/hono@11.1.0':
+    resolution: {integrity: sha512-dfDioCjOpC8SNI9V1EtiHIymRDjh98GqlLysumQ/yPxxqxWhWaBU9gjlH5yOtxpfhUVpYv/JYxW0vEX2O7au/A==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@cloudflare/workers-types': ^4.x || ^5.x
+      '@hono/node-server': ^1.x || ^2.x
+      '@sentry/bun': 11.1.0
+      '@sentry/cloudflare': 11.1.0
+      '@sentry/deno': 11.1.0
+      '@sentry/node': 11.1.0
+      hono: ^4.x
+    peerDependenciesMeta:
+      '@cloudflare/workers-types':
+        optional: true
+      '@hono/node-server':
+        optional: true
+      '@sentry/bun':
+        optional: true
+      '@sentry/cloudflare':
+        optional: true
+      '@sentry/deno':
+        optional: true
+      '@sentry/node':
+        optional: true
+
+  '@sentry/node@11.1.0':
+    resolution: {integrity: sha512-8QPZILpVGkggpCe1Qt9VaPQ8UWy6EAVY/94HB2EWqSn6Xx9J7f3pMlncxOQfwv09S7iZDs1Lmfj/Zf7iftinZw==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/opentelemetry@11.1.0':
+    resolution: {integrity: sha512-ZFRwYDSuTIzpS1yOFTMn6p568tQW8k7KIjwzlI8VMOYYAEDkXQK+D/ZUGedSA/iu9fbiZXX+/wFfKqk7AYIiGg==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.9.0
+
+  '@sentry/server-runtime-injection@11.1.0':
+    resolution: {integrity: sha512-tp5ihEibsCQG/qTqL7yqU3PXQLsXM9Nm+ELPMy6hptkyuiOCuDOXpAzthWcSDHVIdBYIC7iUPmpcZihfTXx6Mw==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
+
+  '@sentry/server-utils@11.1.0':
+    resolution: {integrity: sha512-5IQtU8SommZyTZgJxZFunQQHay8Vq78D8P0qP9ggQ1hTa6GU6kQKBDDN8eNayUA/Hl2qPei/LAmvmyiZNDIJ0Q==}
+    engines: {node: '>=20.19.0 <22.0.0 || >=22.12.0 <23.0.0 || >=23.2.0'}
 
   '@shadcn/lint@0.2.0':
     resolution: {integrity: sha512-DTYr427BR8cDc0J0Y++u1Uh12NAYGmdPiqgy4wKSogi7RNEhFanIcfBMPRPUvkunt9QiJUfI7B28TW39MrPCFA==}
@@ -4392,6 +4615,10 @@ packages:
 
   dotenv@16.6.1:
     resolution: {integrity: sha512-uBq4egWHTcTt33a72vpSG0z3HnPuIl6NqYcTrKEg2azoEyl2hpW0zqlxysq2pK9HlDIHyHyakeYaYnSAwd8bow==}
+    engines: {node: '>=12'}
+
+  dotenv@17.4.2:
+    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
     engines: {node: '>=12'}
 
   drizzle-kit@1.0.0-rc.4:
@@ -6210,6 +6437,10 @@ packages:
     resolution: {integrity: sha512-5b6Y85tPxZZ7QytO+BQzysW31HJku27cRIlkbAXaNx+BdcVi+LlRFmVXzeF6a7JCwJpyw5c4b+YSVImQIrBpuQ==}
     engines: {node: '>=10'}
 
+  oxc-parser@0.143.0:
+    resolution: {integrity: sha512-ov0NzaDCOInknS7mP1cwKdJERt3utPW8ldjtdUXQ8Ty0GEFD08wk422vCUN0d7pST6kqtV7dxoI9w1Zi0l/9TA==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+
   oxc-parser@0.148.0:
     resolution: {integrity: sha512-syxUKHeUll89RIABQADcI7sikYrwyssvA6gj4phSSIPezKVM8yMaLAiLLSc7fmzVvrwybfFGFbW5zme9sX87rg==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -6798,6 +7029,11 @@ packages:
   send@1.2.1:
     resolution: {integrity: sha512-1gnZf7DFcoIcajTjTwjwuDjzuz4PPcY2StKPlsGAQ1+YH20IRVrBaXSWmdjowTJ6u8Rc01PoYOGHXfP1mYcZNQ==}
     engines: {node: '>= 18'}
+
+  sentry@0.44.1:
+    resolution: {integrity: sha512-LK+RJ2PFsJKM+P0D/zYC+M5gFB1ytfVONU9DVUqJu67YFlwnj3wGJkUzBhCS8R4iUqRdRTAYbFbRKTAe03rW/Q==}
+    engines: {node: '>=20.0'}
+    hasBin: true
 
   serialize-error@2.1.0:
     resolution: {integrity: sha512-ghgmKt5o4Tly5yEG/UJp8qTd0AN7Xalw4XBtDEKP655B699qMEtra1WlXeE6WIvdEG481JvRxULKsInq/iNysw==}
@@ -8346,7 +8582,7 @@ snapshots:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
 
-  '@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)':
+  '@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)':
     dependencies:
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.2
@@ -8357,19 +8593,21 @@ snapshots:
       kysely: 0.29.6
       nanostores: 1.5.4
       zod: 4.6.5
+    optionalDependencies:
+      '@opentelemetry/api': 1.9.1
 
-  '@better-auth/drizzle-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))':
+  '@better-auth/drizzle-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
     optionalDependencies:
-      drizzle-orm: 1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
+      drizzle-orm: 1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
 
-  '@better-auth/expo@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(better-auth@1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(expo-constants@57.0.20)(expo-linking@57.0.11)(expo-web-browser@57.0.3(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)))':
+  '@better-auth/expo@1.7.6(5c3713e399c7c930f15a244520b99de2)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-fetch/fetch': 1.3.2
-      better-auth: 1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
+      better-auth: 1.7.6(@opentelemetry/api@1.9.1)(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
       better-call: 1.4.0(zod@4.6.5)
       zod: 4.6.5
     optionalDependencies:
@@ -8377,43 +8615,43 @@ snapshots:
       expo-linking: 57.0.11(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)
       expo-web-browser: 57.0.3(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))
 
-  '@better-auth/kysely-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(kysely@0.29.6)':
+  '@better-auth/kysely-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(kysely@0.29.6)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
     optionalDependencies:
       kysely: 0.29.6
 
-  '@better-auth/memory-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)':
+  '@better-auth/memory-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/mongo-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)':
+  '@better-auth/mongo-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/passkey@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-auth@1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.0(zod@4.6.5))(nanostores@1.5.4)':
+  '@better-auth/passkey@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-auth@1.7.6(@opentelemetry/api@1.9.1)(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))))(better-call@1.4.0(zod@4.6.5))(nanostores@1.5.4)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.2
       '@simplewebauthn/browser': 13.3.0
       '@simplewebauthn/server': 13.3.3
-      better-auth: 1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
+      better-auth: 1.7.6(@opentelemetry/api@1.9.1)(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)))
       better-call: 1.4.0(zod@4.6.5)
       nanostores: 1.5.4
       zod: 4.6.5
 
-  '@better-auth/prisma-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)':
+  '@better-auth/prisma-adapter@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
 
-  '@better-auth/telemetry@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)':
+  '@better-auth/telemetry@1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)':
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.2
 
@@ -8693,85 +8931,6 @@ snapshots:
 
   '@expo-google-fonts/material-symbols@0.4.48': {}
 
-  '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8))(expo-router@57.0.24)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)':
-    dependencies:
-      '@expo/code-signing-certificates': 0.0.6
-      '@expo/config': 57.0.9(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/config-plugins': 57.0.9(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/devcert': 1.2.1(supports-color@8.1.1)
-      '@expo/env': 2.4.3(supports-color@8.1.1)
-      '@expo/image-utils': 0.11.5(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/inline-modules': 0.1.7(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/json-file': 11.0.1
-      '@expo/log-box': 57.0.4(@expo/dom-webview@57.0.1)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
-      '@expo/metro': 56.0.2(supports-color@8.1.1)
-      '@expo/metro-config': 57.0.12(expo@57.0.26)(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/metro-file-map': 57.0.3(supports-color@8.1.1)
-      '@expo/osascript': 2.7.1
-      '@expo/package-manager': 1.13.1
-      '@expo/plist': 0.8.1
-      '@expo/prebuild-config': 57.0.16(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/require-utils': 57.0.5(supports-color@8.1.1)(typescript@7.0.2)
-      '@expo/router-server': 57.0.11(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8))(expo-router@57.0.24)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
-      '@expo/schema-utils': 57.0.2
-      '@expo/spawn-async': 1.8.0
-      '@expo/ws-tunnel': 2.0.0(ws@8.22.0)
-      '@expo/xcpretty': 4.4.5
-      '@react-native/dev-middleware': 0.86.3(supports-color@8.1.1)
-      accepts: 1.3.8
-      agent-cli-detector: 0.1.7
-      arg: 5.0.2
-      bplist-creator: 0.1.0
-      bplist-parser: 0.3.2
-      chalk: 4.1.2
-      ci-info: 3.9.0
-      compression: 1.8.2(supports-color@8.1.1)
-      connect: 3.7.0(supports-color@8.1.1)
-      debug: 4.4.3(supports-color@8.1.1)
-      dnssd-advertise: 1.1.6
-      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
-      expo-server: 57.0.3
-      fetch-nodeshim: 0.4.10
-      getenv: 2.0.0
-      glob: 13.0.6
-      lan-network: 0.2.1
-      multitars: 1.0.2
-      node-forge: 1.4.0
-      npm-package-arg: 11.0.3
-      ora: 3.4.0
-      picomatch: 4.0.7
-      pretty-format: 29.7.0
-      progress: 2.0.3
-      prompts: 2.4.2
-      resolve-from: 5.0.0
-      sandbox-cli-detector: 0.2.0
-      semver: 7.8.5
-      send: 0.19.2(supports-color@8.1.1)
-      slugify: 1.6.9
-      stacktrace-parser: 0.1.11
-      structured-headers: 0.4.1
-      terminal-link: 2.1.1
-      toqr: 0.1.1
-      wrap-ansi: 7.0.0
-      ws: 8.22.0
-      zod: 3.25.76
-    optionalDependencies:
-      expo-router: 57.0.24(6ef198e254ce399784e9ba92a4387243)
-      react-native: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
-    transitivePeerDependencies:
-      - '@expo/dom-webview'
-      - '@expo/metro-runtime'
-      - bufferutil
-      - expo-constants
-      - expo-font
-      - react
-      - react-dom
-      - react-server-dom-webpack
-      - supports-color
-      - typescript
-      - utf-8-validate
-    optional: true
-
   '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4)(expo-router@57.0.24)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1)(typescript@7.0.2)':
     dependencies:
       '@expo/code-signing-certificates': 0.0.6
@@ -8849,6 +9008,85 @@ snapshots:
       - supports-color
       - typescript
       - utf-8-validate
+
+  '@expo/cli@57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4)(expo-router@57.0.24)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)':
+    dependencies:
+      '@expo/code-signing-certificates': 0.0.6
+      '@expo/config': 57.0.9(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/config-plugins': 57.0.9(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/devcert': 1.2.1(supports-color@8.1.1)
+      '@expo/env': 2.4.3(supports-color@8.1.1)
+      '@expo/image-utils': 0.11.5(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/inline-modules': 0.1.7(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/json-file': 11.0.1
+      '@expo/log-box': 57.0.4(@expo/dom-webview@57.0.1)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
+      '@expo/metro': 56.0.2(supports-color@8.1.1)
+      '@expo/metro-config': 57.0.12(expo@57.0.26)(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/metro-file-map': 57.0.3(supports-color@8.1.1)
+      '@expo/osascript': 2.7.1
+      '@expo/package-manager': 1.13.1
+      '@expo/plist': 0.8.1
+      '@expo/prebuild-config': 57.0.16(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/require-utils': 57.0.5(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/router-server': 57.0.11(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4)(expo-router@57.0.24)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)
+      '@expo/schema-utils': 57.0.2
+      '@expo/spawn-async': 1.8.0
+      '@expo/ws-tunnel': 2.0.0(ws@8.22.0)
+      '@expo/xcpretty': 4.4.5
+      '@react-native/dev-middleware': 0.86.3(supports-color@8.1.1)
+      accepts: 1.3.8
+      agent-cli-detector: 0.1.7
+      arg: 5.0.2
+      bplist-creator: 0.1.0
+      bplist-parser: 0.3.2
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      compression: 1.8.2(supports-color@8.1.1)
+      connect: 3.7.0(supports-color@8.1.1)
+      debug: 4.4.3(supports-color@8.1.1)
+      dnssd-advertise: 1.1.6
+      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
+      expo-server: 57.0.3
+      fetch-nodeshim: 0.4.10
+      getenv: 2.0.0
+      glob: 13.0.6
+      lan-network: 0.2.1
+      multitars: 1.0.2
+      node-forge: 1.4.0
+      npm-package-arg: 11.0.3
+      ora: 3.4.0
+      picomatch: 4.0.7
+      pretty-format: 29.7.0
+      progress: 2.0.3
+      prompts: 2.4.2
+      resolve-from: 5.0.0
+      sandbox-cli-detector: 0.2.0
+      semver: 7.8.5
+      send: 0.19.2(supports-color@8.1.1)
+      slugify: 1.6.9
+      stacktrace-parser: 0.1.11
+      structured-headers: 0.4.1
+      terminal-link: 2.1.1
+      toqr: 0.1.1
+      wrap-ansi: 7.0.0
+      ws: 8.22.0
+      zod: 3.25.76
+    optionalDependencies:
+      expo-router: 57.0.24(42bae618dc11f7e5d8ffa1c46d8bf4f0)
+      react-native: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
+    transitivePeerDependencies:
+      - '@expo/dom-webview'
+      - '@expo/metro-runtime'
+      - bufferutil
+      - expo-constants
+      - expo-font
+      - react
+      - react-dom
+      - react-server-dom-webpack
+      - supports-color
+      - typescript
+      - utf-8-validate
+    optional: true
 
   '@expo/code-signing-certificates@0.0.6':
     dependencies:
@@ -9030,7 +9268,7 @@ snapshots:
       postcss: 8.5.28
       resolve-from: 5.0.0
     optionalDependencies:
-      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
+      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1)(typescript@7.0.2)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -9141,22 +9379,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8))(expo-router@57.0.24)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)':
-    dependencies:
-      debug: 4.4.3(supports-color@8.1.1)
-      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
-      expo-constants: 57.0.20(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(supports-color@8.1.1)
-      expo-font: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
-      expo-server: 57.0.3
-      react: 19.2.8
-    optionalDependencies:
-      '@expo/metro-runtime': 57.0.16(@expo/log-box@57.0.4)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
-      expo-router: 57.0.24(6ef198e254ce399784e9ba92a4387243)
-      react-dom: 19.2.8(react@19.2.8)
-    transitivePeerDependencies:
-      - supports-color
-    optional: true
-
   '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4)(expo-router@57.0.24)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(supports-color@8.1.1)':
     dependencies:
       debug: 4.4.3(supports-color@8.1.1)
@@ -9171,6 +9393,22 @@ snapshots:
       react-dom: 19.2.3(react@19.2.3)
     transitivePeerDependencies:
       - supports-color
+
+  '@expo/router-server@57.0.11(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4)(expo-router@57.0.24)(expo-server@57.0.3)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(supports-color@8.1.1)':
+    dependencies:
+      debug: 4.4.3(supports-color@8.1.1)
+      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
+      expo-constants: 57.0.20(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(supports-color@8.1.1)
+      expo-font: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
+      expo-server: 57.0.3
+      react: 19.2.8
+    optionalDependencies:
+      '@expo/metro-runtime': 57.0.16(@expo/log-box@57.0.4)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
+      expo-router: 57.0.24(42bae618dc11f7e5d8ffa1c46d8bf4f0)
+      react-dom: 19.2.8(react@19.2.8)
+    transitivePeerDependencies:
+      - supports-color
+    optional: true
 
   '@expo/schema-utils@57.0.2': {}
 
@@ -9498,7 +9736,7 @@ snapshots:
     dependencies:
       zod: 4.6.5
 
-  '@novu/framework@2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@3.25.76)':
+  '@novu/framework@2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@3.25.76)':
     dependencies:
       ajv: 8.20.0
       ajv-formats: 2.1.1(ajv@8.20.0)
@@ -9514,7 +9752,7 @@ snapshots:
     optionalDependencies:
       express: 5.2.1(supports-color@8.1.1)
       hono: 4.13.12
-      next: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       zod: 3.25.76
       zod-to-json-schema: 3.25.2(zod@3.25.76)
     transitivePeerDependencies:
@@ -9522,7 +9760,7 @@ snapshots:
       - supports-color
       - workflow
 
-  '@novu/framework@2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@4.6.5)':
+  '@novu/framework@2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@4.6.5)':
     dependencies:
       ajv: 8.20.0
       ajv-formats: 2.1.1(ajv@8.20.0)
@@ -9538,7 +9776,7 @@ snapshots:
     optionalDependencies:
       express: 5.2.1(supports-color@8.1.1)
       hono: 4.13.12
-      next: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       zod: 4.6.5
       zod-to-json-schema: 3.25.2(zod@3.25.76)
     transitivePeerDependencies:
@@ -9557,64 +9795,125 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
+  '@opentelemetry/api@1.9.1': {}
+
   '@opentelemetry/semantic-conventions@1.43.0': {}
 
+  '@oxc-parser/binding-android-arm-eabi@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-android-arm-eabi@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-android-arm64@0.143.0':
     optional: true
 
   '@oxc-parser/binding-android-arm64@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-darwin-arm64@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-darwin-arm64@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-darwin-x64@0.143.0':
     optional: true
 
   '@oxc-parser/binding-darwin-x64@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-freebsd-x64@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-freebsd-x64@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm-gnueabihf@0.143.0':
     optional: true
 
   '@oxc-parser/binding-linux-arm-gnueabihf@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-linux-arm-musleabihf@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-linux-arm-musleabihf@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-arm64-gnu@0.143.0':
     optional: true
 
   '@oxc-parser/binding-linux-arm64-gnu@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-linux-arm64-musl@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-linux-arm64-musl@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-ppc64-gnu@0.143.0':
     optional: true
 
   '@oxc-parser/binding-linux-ppc64-gnu@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-linux-riscv64-gnu@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-linux-riscv64-gnu@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-riscv64-musl@0.143.0':
     optional: true
 
   '@oxc-parser/binding-linux-riscv64-musl@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-linux-s390x-gnu@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-linux-s390x-gnu@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-linux-x64-gnu@0.143.0':
     optional: true
 
   '@oxc-parser/binding-linux-x64-gnu@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-linux-x64-musl@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-linux-x64-musl@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-openharmony-arm64@0.143.0':
     optional: true
 
   '@oxc-parser/binding-openharmony-arm64@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-win32-arm64-msvc@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-win32-arm64-msvc@0.148.0':
+    optional: true
+
+  '@oxc-parser/binding-win32-ia32-msvc@0.143.0':
     optional: true
 
   '@oxc-parser/binding-win32-ia32-msvc@0.148.0':
     optional: true
 
+  '@oxc-parser/binding-win32-x64-msvc@0.143.0':
+    optional: true
+
   '@oxc-parser/binding-win32-x64-msvc@0.148.0':
     optional: true
+
+  '@oxc-project/types@0.143.0': {}
 
   '@oxc-project/types@0.148.0':
     optional: true
@@ -10378,11 +10677,11 @@ snapshots:
     dependencies:
       react: 19.2.8
 
-  '@react-email/ui@6.11.0(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@react-email/ui@6.11.0(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       esbuild: 0.28.1
       jiti: 2.6.1
-      next: 16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      next: 16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
     transitivePeerDependencies:
       - '@babel/core'
       - '@opentelemetry/api'
@@ -10631,6 +10930,65 @@ snapshots:
     dependencies:
       domhandler: 5.0.3
       selderee: 0.11.0
+
+  '@sentry/bundler-plugins@11.1.0(@babel/core@7.29.7(supports-color@8.1.1))':
+    dependencies:
+      '@sentry/core': 11.1.0
+      dotenv: 17.4.2
+      glob: 13.0.6
+      magic-string: 0.30.21
+      oxc-parser: 0.143.0
+      sentry: 0.44.1
+      supports-color: 8.1.1
+    optionalDependencies:
+      '@babel/core': 7.29.7(supports-color@8.1.1)
+
+  '@sentry/conventions@0.24.0': {}
+
+  '@sentry/core@11.1.0':
+    dependencies:
+      '@sentry/conventions': 0.24.0
+
+  '@sentry/hono@11.1.0(@hono/node-server@2.1.3(hono@4.13.12))(@sentry/node@11.1.0(@babel/core@7.29.7(supports-color@8.1.1)))(hono@4.13.12)':
+    dependencies:
+      '@opentelemetry/api': 1.9.1
+      '@sentry/conventions': 0.24.0
+      '@sentry/core': 11.1.0
+      hono: 4.13.12
+    optionalDependencies:
+      '@hono/node-server': 2.1.3(hono@4.13.12)
+      '@sentry/node': 11.1.0(@babel/core@7.29.7(supports-color@8.1.1))
+
+  '@sentry/node@11.1.0(@babel/core@7.29.7(supports-color@8.1.1))':
+    dependencies:
+      '@opentelemetry/api': 1.9.1
+      '@sentry/bundler-plugins': 11.1.0(@babel/core@7.29.7(supports-color@8.1.1))
+      '@sentry/conventions': 0.24.0
+      '@sentry/core': 11.1.0
+      '@sentry/opentelemetry': 11.1.0(@opentelemetry/api@1.9.1)
+      '@sentry/server-runtime-injection': 11.1.0
+      '@sentry/server-utils': 11.1.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - rollup
+      - webpack
+
+  '@sentry/opentelemetry@11.1.0(@opentelemetry/api@1.9.1)':
+    dependencies:
+      '@opentelemetry/api': 1.9.1
+      '@sentry/conventions': 0.24.0
+      '@sentry/core': 11.1.0
+
+  '@sentry/server-runtime-injection@11.1.0':
+    dependencies:
+      '@sentry/core': 11.1.0
+      '@sentry/server-utils': 11.1.0
+
+  '@sentry/server-utils@11.1.0':
+    dependencies:
+      '@opentelemetry/api': 1.9.1
+      '@sentry/conventions': 0.24.0
+      '@sentry/core': 11.1.0
 
   '@shadcn/lint@0.2.0':
     dependencies:
@@ -11154,7 +11512,7 @@ snapshots:
       react-refresh: 0.14.2
     optionalDependencies:
       '@babel/runtime': 7.29.7
-      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
+      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.3(react@19.2.3))(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)(supports-color@8.1.1)(typescript@7.0.2)
     transitivePeerDependencies:
       - '@babel/core'
       - supports-color
@@ -11176,15 +11534,15 @@ snapshots:
       jsonpointer: 5.0.1
       leven: 3.1.0
 
-  better-auth@1.7.6(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))):
+  better-auth@1.7.6(@opentelemetry/api@1.9.1)(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))):
     dependencies:
-      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
-      '@better-auth/drizzle-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))
-      '@better-auth/kysely-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(kysely@0.29.6)
-      '@better-auth/memory-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)
-      '@better-auth/mongo-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)
-      '@better-auth/prisma-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)
-      '@better-auth/telemetry': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)
+      '@better-auth/core': 1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4)
+      '@better-auth/drizzle-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5))
+      '@better-auth/kysely-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(kysely@0.29.6)
+      '@better-auth/memory-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)
+      '@better-auth/mongo-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)
+      '@better-auth/prisma-adapter': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)
+      '@better-auth/telemetry': 1.7.6(@better-auth/core@1.7.6(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)(@opentelemetry/api@1.9.1)(better-call@1.4.0(zod@4.6.5))(jose@6.2.12)(kysely@0.29.6)(nanostores@1.5.4))(@better-auth/utils@0.4.2)(@better-fetch/fetch@1.3.2)
       '@better-auth/utils': 0.4.2
       '@better-fetch/fetch': 1.3.2
       '@noble/ciphers': 2.4.0
@@ -11197,12 +11555,12 @@ snapshots:
       zod: 4.6.5
     optionalDependencies:
       drizzle-kit: 1.0.0-rc.4
-      drizzle-orm: 1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
-      next: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      drizzle-orm: 1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5)
+      next: 16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       pg: 8.23.1
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
-      vitest: 5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
+      vitest: 5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
     transitivePeerDependencies:
       - '@opentelemetry/api'
 
@@ -11722,6 +12080,8 @@ snapshots:
 
   dotenv@16.6.1: {}
 
+  dotenv@17.4.2: {}
+
   drizzle-kit@1.0.0-rc.4:
     dependencies:
       '@drizzle-team/brocli': 0.12.1
@@ -11730,8 +12090,9 @@ snapshots:
       get-tsconfig: 4.14.3
       jiti: 2.7.0
 
-  drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5):
+  drizzle-orm@1.0.0-rc.4(@opentelemetry/api@1.9.1)(@types/pg@8.23.1)(pg@8.23.1)(zod@4.6.5):
     optionalDependencies:
+      '@opentelemetry/api': 1.9.1
       '@types/pg': 8.23.1
       pg: 8.23.1
       zod: 4.6.5
@@ -12165,7 +12526,7 @@ snapshots:
       - react-native-worklets
       - supports-color
 
-  expo-router@57.0.24(6ef198e254ce399784e9ba92a4387243):
+  expo-router@57.0.24(42bae618dc11f7e5d8ffa1c46d8bf4f0):
     dependencies:
       '@expo/log-box': 57.0.4(@expo/dom-webview@57.0.1)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
       '@expo/metro-runtime': 57.0.16(@expo/log-box@57.0.4)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
@@ -12183,7 +12544,7 @@ snapshots:
       expo-glass-effect: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
       expo-linking: 57.0.11(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)
       expo-server: 57.0.3
-      expo-symbols: 57.0.3(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8))(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
+      expo-symbols: 57.0.3(expo-font@57.0.4)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
       fast-deep-equal: 3.1.3
       invariant: 2.2.4
       nanoid: 3.3.19
@@ -12232,16 +12593,6 @@ snapshots:
       react: 19.2.3
       react-native: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1)
 
-  expo-symbols@57.0.3(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8))(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8):
-    dependencies:
-      '@expo-google-fonts/material-symbols': 0.4.48
-      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
-      expo-font: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
-      react: 19.2.8
-      react-native: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
-      sf-symbols-typescript: 2.2.0
-    optional: true
-
   expo-symbols@57.0.3(expo-font@57.0.4)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3):
     dependencies:
       '@expo-google-fonts/material-symbols': 0.4.48
@@ -12250,6 +12601,16 @@ snapshots:
       react: 19.2.3
       react-native: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1)
       sf-symbols-typescript: 2.2.0
+
+  expo-symbols@57.0.3(expo-font@57.0.4)(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8):
+    dependencies:
+      '@expo-google-fonts/material-symbols': 0.4.48
+      expo: 57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
+      expo-font: 57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
+      react: 19.2.8
+      react-native: 0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1)
+      sf-symbols-typescript: 2.2.0
+    optional: true
 
   expo-system-ui@57.0.4(expo@57.0.26)(react-native-web@0.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(supports-color@8.1.1):
     dependencies:
@@ -12318,7 +12679,7 @@ snapshots:
   expo@57.0.26(@babel/core@7.29.7(supports-color@8.1.1))(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-router@57.0.24)(react-dom@19.2.8(react@19.2.8))(react-native-web@0.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-native-worklets@0.10.1(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2):
     dependencies:
       '@babel/runtime': 7.29.7
-      '@expo/cli': 57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4(expo@57.0.26)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8))(expo-router@57.0.24)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
+      '@expo/cli': 57.0.27(@expo/dom-webview@57.0.1)(@expo/metro-runtime@57.0.16)(expo-constants@57.0.20)(expo-font@57.0.4)(expo-router@57.0.24)(expo@57.0.26)(react-dom@19.2.8(react@19.2.8))(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)(supports-color@8.1.1)(typescript@7.0.2)
       '@expo/config': 57.0.9(supports-color@8.1.1)(typescript@7.0.2)
       '@expo/config-plugins': 57.0.9(supports-color@8.1.1)(typescript@7.0.2)
       '@expo/devtools': 57.0.1(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.8)(supports-color@8.1.1))(react@19.2.8)
@@ -13868,7 +14229,7 @@ snapshots:
     dependencies:
       content-type: 2.1.0
 
-  next@16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  next@16.3.3(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@next/env': 16.3.3
       '@swc/helpers': 0.5.23
@@ -13887,6 +14248,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.3.3
       '@next/swc-win32-arm64-msvc': 16.3.3
       '@next/swc-win32-x64-msvc': 16.3.3
+      '@opentelemetry/api': 1.9.1
       babel-plugin-react-compiler: 1.0.0
       sharp: 0.35.5(@types/node@26.4.1)
     transitivePeerDependencies:
@@ -13894,7 +14256,7 @@ snapshots:
       - '@types/node'
       - babel-plugin-macros
 
-  next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
+  next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8):
     dependencies:
       '@next/env': 16.3.7
       '@swc/helpers': 0.5.23
@@ -13913,6 +14275,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 16.3.7
       '@next/swc-win32-arm64-msvc': 16.3.7
       '@next/swc-win32-x64-msvc': 16.3.7
+      '@opentelemetry/api': 1.9.1
       babel-plugin-react-compiler: 1.0.0
       sharp: 0.35.5(@types/node@26.4.1)
     transitivePeerDependencies:
@@ -13940,12 +14303,12 @@ snapshots:
 
   normalize-path@3.0.0: {}
 
-  novu@2.21.3(@types/node@26.4.1)(@types/react@19.2.18)(debug@4.4.3(supports-color@8.1.1))(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-devtools-core@6.1.5)(supports-color@8.1.1):
+  novu@2.21.3(@types/node@26.4.1)(@types/react@19.2.18)(debug@4.4.3(supports-color@8.1.1))(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-devtools-core@6.1.5)(supports-color@8.1.1):
     dependencies:
       '@anthropic-ai/claude-agent-sdk': 0.2.141(supports-color@8.1.1)(zod@3.25.76)
       '@babel/parser': 7.29.9
       '@inkjs/ui': 2.0.0(ink@7.1.1(@types/react@19.2.18)(react-devtools-core@6.1.5)(react@19.2.8))
-      '@novu/framework': 2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@3.25.76)
+      '@novu/framework': 2.14.0(express@5.2.1(supports-color@8.1.1))(hono@4.13.12)(next@16.3.7(@babel/core@7.29.7(supports-color@8.1.1))(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(supports-color@8.1.1)(zod-to-json-schema@3.25.2(zod@3.25.76))(zod@3.25.76)
       '@novu/ntfr-client': 0.0.5
       '@segment/analytics-node': 1.3.0
       async-sema: 3.0.1
@@ -14112,6 +14475,30 @@ snapshots:
       log-symbols: 4.1.0
       strip-ansi: 6.0.1
       wcwidth: 1.0.1
+
+  oxc-parser@0.143.0:
+    dependencies:
+      '@oxc-project/types': 0.143.0
+    optionalDependencies:
+      '@oxc-parser/binding-android-arm-eabi': 0.143.0
+      '@oxc-parser/binding-android-arm64': 0.143.0
+      '@oxc-parser/binding-darwin-arm64': 0.143.0
+      '@oxc-parser/binding-darwin-x64': 0.143.0
+      '@oxc-parser/binding-freebsd-x64': 0.143.0
+      '@oxc-parser/binding-linux-arm-gnueabihf': 0.143.0
+      '@oxc-parser/binding-linux-arm-musleabihf': 0.143.0
+      '@oxc-parser/binding-linux-arm64-gnu': 0.143.0
+      '@oxc-parser/binding-linux-arm64-musl': 0.143.0
+      '@oxc-parser/binding-linux-ppc64-gnu': 0.143.0
+      '@oxc-parser/binding-linux-riscv64-gnu': 0.143.0
+      '@oxc-parser/binding-linux-riscv64-musl': 0.143.0
+      '@oxc-parser/binding-linux-s390x-gnu': 0.143.0
+      '@oxc-parser/binding-linux-x64-gnu': 0.143.0
+      '@oxc-parser/binding-linux-x64-musl': 0.143.0
+      '@oxc-parser/binding-openharmony-arm64': 0.143.0
+      '@oxc-parser/binding-win32-arm64-msvc': 0.143.0
+      '@oxc-parser/binding-win32-ia32-msvc': 0.143.0
+      '@oxc-parser/binding-win32-x64-msvc': 0.143.0
 
   oxc-parser@0.148.0:
     dependencies:
@@ -15000,6 +15387,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  sentry@0.44.1: {}
+
   serialize-error@2.1.0: {}
 
   serve-static@1.16.3(supports-color@8.1.1):
@@ -15597,7 +15986,7 @@ snapshots:
       tsx: 4.23.15
       yaml: 2.9.1
 
-  vitest@5.0.3(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)):
+  vitest@5.0.3(@opentelemetry/api@1.9.1)(@types/node@26.4.1)(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)):
     dependencies:
       '@types/chai': 5.2.3
       '@vitest/mocker': 5.0.3(vite@8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
@@ -15614,6 +16003,7 @@ snapshots:
       vite: 8.3.1(@types/node@26.4.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1)
       why-is-node-running: 3.2.1
     optionalDependencies:
+      '@opentelemetry/api': 1.9.1
       '@types/node': 26.4.1
     transitivePeerDependencies:
       - msw
