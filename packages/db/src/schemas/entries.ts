@@ -20,8 +20,9 @@ import {
   settings,
   temperatures,
 } from "../vocab";
+import { organization } from "./auth";
 import { createdAt, id, updatedAt } from "./columns";
-import { carer, child, family } from "./family";
+import { carer, child } from "./family";
 import { food } from "./food";
 
 export const entry = pgTable(
@@ -31,9 +32,9 @@ export const entry = pgTable(
     clientId: uuid("client_id").notNull(),
     createdAt: createdAt(),
     deletedAt: timestamp("deleted_at", { withTimezone: true }),
-    familyId: uuid("family_id")
+    familyId: text("family_id")
       .notNull()
-      .references(() => family.id, { onDelete: "cascade" }),
+      .references(() => organization.id, { onDelete: "cascade" }),
     id: id(),
     kind: text("kind", { enum: entryKinds }).notNull(),
     loggedByCarerId: uuid("logged_by_carer_id").references(() => carer.id),

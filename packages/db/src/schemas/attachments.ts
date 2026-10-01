@@ -9,9 +9,10 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+import { organization } from "./auth";
 import { createdAt, id } from "./columns";
 import { entry } from "./entries";
-import { carer, family } from "./family";
+import { carer } from "./family";
 
 export const uploadStatuses = ["pending", "uploaded"] as const;
 
@@ -25,9 +26,9 @@ export const attachment = pgTable(
     entryId: uuid("entry_id").references(() => entry.id, {
       onDelete: "cascade",
     }),
-    familyId: uuid("family_id")
+    familyId: text("family_id")
       .notNull()
-      .references(() => family.id, { onDelete: "cascade" }),
+      .references(() => organization.id, { onDelete: "cascade" }),
     id: id(),
     key: text("key").notNull(),
     size: bigint("size", { mode: "number" }).notNull(),

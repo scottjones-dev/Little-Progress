@@ -5,29 +5,22 @@ import {
   pgTable,
   text,
   unique,
-  uuid,
 } from "drizzle-orm/pg-core";
 
+import { organization } from "./auth";
 import { createdAt, id, updatedAt } from "./columns";
 
-export const family = pgTable("family", {
-  carerPinHash: text("carer_pin_hash"),
-  carerPinVersion: text("carer_pin_version").notNull().default("1"),
-  createdAt: createdAt(),
-  id: id(),
-  joinCode: text("join_code").notNull().unique(),
-  name: text("name").notNull(),
-  updatedAt: updatedAt(),
-});
+// A family is a Better Auth organization (see ./auth.ts). Its carer PIN hash, PIN version
+// and join code live on the organization row as additional fields.
 
 export const child = pgTable(
   "child",
   {
     createdAt: createdAt(),
     dateOfBirth: date("date_of_birth").notNull(),
-    familyId: uuid("family_id")
+    familyId: text("family_id")
       .notNull()
-      .references(() => family.id, { onDelete: "cascade" }),
+      .references(() => organization.id, { onDelete: "cascade" }),
     id: id(),
     name: text("name").notNull(),
     timezone: text("timezone").notNull().default("Europe/London"),
@@ -42,9 +35,9 @@ export const carer = pgTable(
     active: boolean("active").notNull().default(true),
     createdAt: createdAt(),
     displayName: text("display_name").notNull(),
-    familyId: uuid("family_id")
+    familyId: text("family_id")
       .notNull()
-      .references(() => family.id, { onDelete: "cascade" }),
+      .references(() => organization.id, { onDelete: "cascade" }),
     id: id(),
     updatedAt: updatedAt(),
   },

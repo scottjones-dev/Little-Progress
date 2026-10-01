@@ -48,6 +48,8 @@ export const app = {
     quickLog: "/quick-log",
     report: "/report",
   },
+  // Deep-link scheme of the Expo app (app.json "scheme"). Auth trusts it for redirects.
+  scheme: "littleprogress",
   shortName: "LittleProgress",
   social: {
     github: "",

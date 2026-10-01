@@ -6,12 +6,15 @@ import { emailIds, registry, renderEmail } from "./registry";
 const tokenOf = (key: string) => `{{${key}}}`;
 
 describe("email registry", () => {
-  it("ships the five auth templates", () => {
+  it("ships the account and family templates", () => {
     expect(emailIds.toSorted()).toStrictEqual([
+      "delete-account",
+      "family-invite",
       "magic-link",
       "new-location-sign-in",
       "password-changed",
       "reset-password",
+      "two-factor-changed",
       "verify-email",
     ]);
   });

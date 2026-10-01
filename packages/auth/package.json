@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@better-auth/drizzle-adapter": "^1.7.6",
+    "@better-auth/expo": "^1.7.6",
+    "@better-auth/passkey": "^1.7.6",
     "@repo/config": "workspace:*",
     "@repo/db": "workspace:*",
     "@repo/env": "workspace:*",

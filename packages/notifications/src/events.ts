@@ -46,6 +46,23 @@ const defineEmailEvent = <Id extends EmailId>(
  * workflows, the typed notify() and the tests all read from it.
  */
 export const events = {
+  "delete-account": defineEmailEvent("delete-account", {
+    critical: true,
+    payload: z.object({
+      confirmUrl: z.url(),
+      expiresInHours: z.number().int().positive(),
+      name: z.string().min(1),
+    }),
+  }),
+  "family-invite": defineEmailEvent("family-invite", {
+    critical: true,
+    payload: z.object({
+      expiresInDays: z.number().int().positive(),
+      familyName: z.string().min(1),
+      inviteUrl: z.url(),
+      inviterName: z.string().min(1),
+    }),
+  }),
   // Unused for now: we are not offering magic-link sign-in. Kept so the template stays covered.
   "magic-link": defineEmailEvent("magic-link", {
     critical: true,
@@ -87,6 +104,15 @@ export const events = {
       expiresInMinutes: z.number().int().positive(),
       name: z.string().min(1),
       resetUrl: z.url(),
+    }),
+  }),
+  "two-factor-changed": defineEmailEvent("two-factor-changed", {
+    critical: true,
+    payload: z.object({
+      changedAt: z.string().min(1),
+      name: z.string().min(1),
+      secureAccountUrl: z.url(),
+      state: z.enum(["on", "off"]),
     }),
   }),
   "verify-email": defineEmailEvent("verify-email", {

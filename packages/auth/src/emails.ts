@@ -73,3 +73,65 @@ export const notifyPasswordChanged = (user: EmailUser) => {
     to: toRecipient(user),
   });
 };
+
+// Better Auth gives the delete confirmation link a fixed 1 day life.
+const DELETE_ACCOUNT_EXPIRES_IN_HOURS = 24;
+export const FAMILY_INVITE_EXPIRES_IN_SECONDS = 60 * 60 * 24 * 7;
+
+export const sendDeleteAccountVerification = ({
+  url,
+  user,
+}: {
+  url: string;
+  user: EmailUser;
+}) => {
+  void notify("delete-account", {
+    payload: {
+      confirmUrl: url,
+      expiresInHours: DELETE_ACCOUNT_EXPIRES_IN_HOURS,
+      name: user.name,
+    },
+    to: toRecipient(user),
+  });
+};
+
+/** The invitee may not have an account yet, so their email stands in for a user id. */
+export const sendFamilyInvite = ({
+  email,
+  familyName,
+  invitationId,
+  inviterName,
+}: {
+  email: string;
+  familyName: string;
+  invitationId: string;
+  inviterName: string;
+}) => {
+  void notify("family-invite", {
+    payload: {
+      expiresInDays: FAMILY_INVITE_EXPIRES_IN_SECONDS / (60 * 60 * 24),
+      familyName,
+      inviteUrl: `${env.WEB_ORIGIN}/accept-invitation/${invitationId}`,
+      inviterName,
+    },
+    to: { email, subscriberId: `invite:${email}` },
+  });
+};
+
+export const notifyTwoFactorChanged = (
+  user: EmailUser,
+  state: "off" | "on"
+) => {
+  void notify("two-factor-changed", {
+    payload: {
+      changedAt: new Intl.DateTimeFormat("en-GB", {
+        dateStyle: "long",
+        timeStyle: "short",
+      }).format(new Date()),
+      name: user.name,
+      secureAccountUrl: `${env.WEB_ORIGIN}/forgot-password`,
+      state,
+    },
+    to: toRecipient(user),
+  });
+};

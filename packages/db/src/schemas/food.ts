@@ -1,16 +1,16 @@
-import { index, pgTable, text, unique, uuid } from "drizzle-orm/pg-core";
+import { index, pgTable, text, unique } from "drizzle-orm/pg-core";
 
+import { organization } from "./auth";
 import { createdAt, id } from "./columns";
-import { family } from "./family";
 
 export const food = pgTable(
   "food",
   {
     category: text("category"),
     createdAt: createdAt(),
-    familyId: uuid("family_id")
+    familyId: text("family_id")
       .notNull()
-      .references(() => family.id, { onDelete: "cascade" }),
+      .references(() => organization.id, { onDelete: "cascade" }),
     id: id(),
     name: text("name").notNull(),
   },

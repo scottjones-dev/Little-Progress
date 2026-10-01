@@ -3,6 +3,12 @@ import type { ComponentType } from "react";
 
 import { renderElement } from "./render";
 import type { RenderedEmail } from "./render";
+import DeleteAccount, {
+  deleteAccountSubject,
+} from "./templates/delete-account";
+import type { DeleteAccountProps } from "./templates/delete-account";
+import FamilyInvite, { familyInviteSubject } from "./templates/family-invite";
+import type { FamilyInviteProps } from "./templates/family-invite";
 import MagicLink, { magicLinkSubject } from "./templates/magic-link";
 import type { MagicLinkProps } from "./templates/magic-link";
 import NewLocationSignIn, {
@@ -17,14 +23,21 @@ import ResetPassword, {
   resetPasswordSubject,
 } from "./templates/reset-password";
 import type { ResetPasswordProps } from "./templates/reset-password";
+import TwoFactorChanged, {
+  twoFactorChangedSubject,
+} from "./templates/two-factor-changed";
+import type { TwoFactorChangedProps } from "./templates/two-factor-changed";
 import VerifyEmail, { verifyEmailSubject } from "./templates/verify-email";
 import type { VerifyEmailProps } from "./templates/verify-email";
 
 export interface EmailPropsMap {
+  "delete-account": DeleteAccountProps;
+  "family-invite": FamilyInviteProps;
   "magic-link": MagicLinkProps;
   "new-location-sign-in": NewLocationSignInProps;
   "password-changed": PasswordChangedProps;
   "reset-password": ResetPasswordProps;
+  "two-factor-changed": TwoFactorChangedProps;
   "verify-email": VerifyEmailProps;
 }
 
@@ -72,6 +85,18 @@ const define = <P extends object>(entry: {
 };
 
 export const registry = {
+  "delete-account": define({
+    component: DeleteAccount,
+    id: "delete-account",
+    previewProps: DeleteAccount.PreviewProps,
+    subject: deleteAccountSubject,
+  }),
+  "family-invite": define({
+    component: FamilyInvite,
+    id: "family-invite",
+    previewProps: FamilyInvite.PreviewProps,
+    subject: familyInviteSubject,
+  }),
   "magic-link": define({
     component: MagicLink,
     id: "magic-link",
@@ -95,6 +120,12 @@ export const registry = {
     id: "reset-password",
     previewProps: ResetPassword.PreviewProps,
     subject: resetPasswordSubject,
+  }),
+  "two-factor-changed": define({
+    component: TwoFactorChanged,
+    id: "two-factor-changed",
+    previewProps: TwoFactorChanged.PreviewProps,
+    subject: twoFactorChangedSubject,
   }),
   "verify-email": define({
     component: VerifyEmail,
