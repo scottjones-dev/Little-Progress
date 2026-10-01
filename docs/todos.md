@@ -64,11 +64,11 @@ Done
 
 To do
 
-- [x] Novu key works: it belongs to a **US** account, so Infisical dev has `NOVU_REGION=us` (it was `eu`, which Novu rejected with "API Key not found")
+- [x] Novu is on the **EU** account: the EU key is in Infisical dev with `NOVU_REGION=eu` (an earlier US key and a stale API process caused "API Key not found" and "Signature does not match")
+- [x] All 8 workflows are registered in the EU account (via `novu sync` through the tunnel); a trigger is accepted and the email job runs
 - [x] The Novu tunnel now runs under `pnpm dev` (`@repo/notifications#dev`) and follows `NOVU_REGION` for the dashboard
-- [ ] **You:** open the dashboard once (`pnpm --filter @repo/notifications studio`) and confirm our workflows are listed under Local; a send fails with `workflow_not_found` until they are registered with the environment your key belongs to (`novu sync` for a deployed API)
 - [ ] **You:** in the Novu dashboard connect the Resend (email) and Expo Push integrations
-- [ ] Decide US or EU for Novu. Your account is US; the privacy plan assumed EU (recipient emails are stored in Novu). To move, create an EU account, set `NOVU_REGION=eu` and a new key
+- [ ] Dev sync: the tunnel URL changes on every `pnpm dev`, and Novu keeps the bridge URL from the last sync. Until it is automated (parse the tunnel URL in `src/scripts/dev.ts` and run `novu sync`), open the dashboard once per session with `pnpm --filter @repo/notifications studio` or run `novu sync --bridge-url <tunnel> --api-url https://eu.api.novu.co`
 - [ ] Live test: `pnpm dev`, trigger `verify-email`, confirm the email arrives rendered by `@repo/emails`
 - [ ] Production: public API URL for `/api/novu`, `novu sync`, separate prod Novu environment and key
 - [x] Events and templates added: `two-factor-changed`, `delete-account`, `family-invite`
