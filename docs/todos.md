@@ -64,7 +64,10 @@ Done
 
 To do
 
-- [ ] **You:** create the Novu Cloud (EU) account, add `NOVU_SECRET_KEY` to Infisical `dev /api`, connect the Resend and Expo Push integrations in the dashboard
+- [x] Novu key works: it belongs to a **US** account, so Infisical dev has `NOVU_REGION=us` (it was `eu`, which Novu rejected with "API Key not found")
+- [ ] **You:** register the workflows with Novu: run `pnpm dev`, then `pnpm --filter @repo/notifications studio` and log in to Novu when asked (a send currently fails with `workflow_not_found`)
+- [ ] **You:** in the Novu dashboard connect the Resend (email) and Expo Push integrations
+- [ ] Decide US or EU for Novu. Your account is US; the privacy plan assumed EU (recipient emails are stored in Novu). To move, create an EU account, set `NOVU_REGION=eu` and a new key
 - [ ] Live test: `pnpm dev`, `pnpm --filter @repo/notifications studio`, trigger `verify-email`, confirm the email arrives rendered by `@repo/emails`
 - [ ] Production: public API URL for `/api/novu`, `novu sync`, separate prod Novu environment and key
 - [x] Events and templates added: `two-factor-changed`, `delete-account`, `family-invite`

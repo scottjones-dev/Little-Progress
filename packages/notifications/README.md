@@ -7,7 +7,7 @@ One function, `notify()`, to tell a user something. It delivers by email today, 
 Auth and the API should never know which channel, provider or template is behind a message, and we do not want a different send function per email. Callers say _what happened_ and _who to tell_; this package decides the rest.
 
 ```
-apps/api  --notify()-->  @repo/notifications  --trigger-->  Novu Cloud (EU)  --> Resend (email)
+apps/api  --notify()-->  @repo/notifications  --trigger-->  Novu Cloud  --> Resend (email)
    ^                                                              |          --> Expo Push (phones)
    '------ /api/novu bridge (Novu runs our workflows here) <------'          --> SMS (provider TBD)
 ```
@@ -65,7 +65,7 @@ src/
 
 ## Set up Novu (once)
 
-1. Create a Novu Cloud account (EU) and copy the secret key into Infisical (`/api`) as `NOVU_SECRET_KEY` (`NOVU_REGION` defaults to `eu`).
+1. Create a Novu Cloud account and copy the secret key into Infisical (`/api`) as `NOVU_SECRET_KEY`. Set `NOVU_REGION` to the region the account was created in (`eu` by default; dev uses `us` today because that is where the account is). A key from one region is rejected by the other with "API Key not found".
 2. In the Novu dashboard add integrations: **Resend** (email, with your Resend API key), **Expo Push** (access token). Add an SMS integration later.
 3. Local: run the API (`pnpm dev`), then in another terminal `pnpm --filter @repo/notifications studio`. It opens a tunnel from Novu to `localhost:9000/api/novu` (you will be asked to log in to Novu).
 4. Production: the API must be publicly reachable at `/api/novu`; sync with `pnpm dlx novu sync --bridge-url https://<api-host>/api/novu --secret-key $NOVU_SECRET_KEY`.
