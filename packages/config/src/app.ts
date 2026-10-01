@@ -6,8 +6,21 @@ export const app = {
     url: "https://alicesystems.co.uk",
   },
   backgroundColor: "#0F1012",
+  colors: {
+    border: "#2A2C31",
+    gold: "#D97706",
+    goldText: "#0F1012",
+    mist: "#E2E8F0",
+    muted: "#94A3B8",
+    obsidian: "#0F1012",
+    surface: "#17181B",
+  },
   description:
     "A private family care diary for tracking feeding, sleep, nappies and development milestones, with patterns and reports to share with health professionals.",
+  email: {
+    from: "LittleProgress <no-reply@littleprogress.app>",
+    replyTo: "support@littleprogress.app",
+  },
   keywords: [
     "baby feeding diary",
     "weaning tracker",

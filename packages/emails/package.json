@@ -1,0 +1,35 @@
+{
+  "name": "@repo/emails",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./components/*": "./src/components/*.tsx",
+    "./registry": "./src/registry.ts",
+    "./render": "./src/render.ts",
+    "./templates/*": "./src/templates/*.tsx"
+  },
+  "scripts": {
+    "build": "tsx src/scripts/build.ts",
+    "check-types": "tsc --noEmit",
+    "dev": "email dev --dir src/templates --port 5000",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@react-email/components": "1.0.12",
+    "@react-email/render": "2.1.0",
+    "@repo/config": "workspace:*",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@react-email/ui": "6.11.0",
+    "@types/node": "26.4.1",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.5",
+    "react-email": "6.11.0",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  }
+}

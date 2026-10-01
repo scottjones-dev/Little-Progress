@@ -24,5 +24,13 @@ export default defineConfig({
         "unicorn/prefer-module": "off",
       },
     },
+    {
+      // Email: shadcn token rules target app UI; email clients need exact pixel values.
+      files: ["packages/emails/**"],
+      rules: {
+        "shadcn/no-arbitrary-values": "off",
+        "shadcn/no-raw-colors": "off",
+      },
+    },
   ],
 });

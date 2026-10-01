@@ -27,6 +27,26 @@ Later
 - [ ] Production R2 bucket: CORS, lifecycle rule for pending uploads, 7-day expiry for report PDFs
 - [ ] Azure Blob adapter behind `StorageProvider` (only if needed; Floci has an Azure emulator on `:4577`)
 
+## Emails (`packages/emails`)
+
+Done
+
+- [x] React Email + Tailwind package, preview on `http://localhost:5000` (runs under `pnpm dev`)
+- [x] 5 components (`layout`, `header`, `footer`, `button`, `callout`) using brand tokens from `packages/config/src/app.ts`
+- [x] 5 templates: `verify-email`, `reset-password`, `magic-link`, `password-changed`, `new-location-sign-in`
+- [x] Registry + `renderEmail()` (html, plain text, subject); `pnpm --filter @repo/emails build` emits `dist/html`, `dist/text`, `dist/manifest.json` with `{{variable}}` tokens (`EMAIL_TOKEN_PREFIX=payload.` for Novu)
+- [x] Vitest (23 tests): renders, branding, footer links, no rem units, token variables, build output
+
+Later
+
+- [ ] Notification layer in `apps/api`: send via Resend (`renderEmail` or `react:`) and/or Novu (upload `dist/html` + manifest, or render in a code step)
+- [ ] Wire Better Auth callbacks (verify, reset, magic link, password changed, new-location alert) to these templates
+- [ ] Real logo image in the header (`app.logos.mark` as absolute URL) once the asset exists
+- [ ] Translate email copy with the rest of the i18n work (strings are en-GB only for now)
+- [ ] Test in real clients (Gmail, Outlook, Apple Mail, dark mode) via the preview Compatibility panel or an email tester; add a light variant if dark renders badly
+- [ ] Templates for care notifications (family invite, report ready, weekly summary) when those features exist
+- [ ] Playwright check that every template renders at `localhost:5000` (desktop + 375px)
+
 ## Testing infrastructure
 
 - [x] Vitest added to `packages/storage` with `test` and `test:integration` scripts, plus root `pnpm test` / `pnpm test:integration` via turbo
