@@ -11,7 +11,8 @@
   },
   "scripts": {
     "check-types": "tsc --noEmit",
-    "studio": "novu dev --port 9000 --route /api/novu",
+    "dev": "infisical run --path=/api -- tsx src/scripts/dev.ts",
+    "studio": "infisical run --path=/api -- tsx src/scripts/dev.ts --open",
     "test": "vitest run"
   },
   "dependencies": {

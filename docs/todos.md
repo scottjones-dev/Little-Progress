@@ -65,10 +65,11 @@ Done
 To do
 
 - [x] Novu key works: it belongs to a **US** account, so Infisical dev has `NOVU_REGION=us` (it was `eu`, which Novu rejected with "API Key not found")
-- [ ] **You:** register the workflows with Novu: run `pnpm dev`, then `pnpm --filter @repo/notifications studio` and log in to Novu when asked (a send currently fails with `workflow_not_found`)
+- [x] The Novu tunnel now runs under `pnpm dev` (`@repo/notifications#dev`) and follows `NOVU_REGION` for the dashboard
+- [ ] **You:** open the dashboard once (`pnpm --filter @repo/notifications studio`) and confirm our workflows are listed under Local; a send fails with `workflow_not_found` until they are registered with the environment your key belongs to (`novu sync` for a deployed API)
 - [ ] **You:** in the Novu dashboard connect the Resend (email) and Expo Push integrations
 - [ ] Decide US or EU for Novu. Your account is US; the privacy plan assumed EU (recipient emails are stored in Novu). To move, create an EU account, set `NOVU_REGION=eu` and a new key
-- [ ] Live test: `pnpm dev`, `pnpm --filter @repo/notifications studio`, trigger `verify-email`, confirm the email arrives rendered by `@repo/emails`
+- [ ] Live test: `pnpm dev`, trigger `verify-email`, confirm the email arrives rendered by `@repo/emails`
 - [ ] Production: public API URL for `/api/novu`, `novu sync`, separate prod Novu environment and key
 - [x] Events and templates added: `two-factor-changed`, `delete-account`, `family-invite`
 - [ ] Optional later: `passkey-changed`, `account-linked`; `new-location-sign-in` needs a documented hook (not wired); `magic-link` is unused

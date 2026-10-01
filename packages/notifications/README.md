@@ -67,7 +67,7 @@ src/
 
 1. Create a Novu Cloud account and copy the secret key into Infisical (`/api`) as `NOVU_SECRET_KEY`. Set `NOVU_REGION` to the region the account was created in (`eu` by default; dev uses `us` today because that is where the account is). A key from one region is rejected by the other with "API Key not found".
 2. In the Novu dashboard add integrations: **Resend** (email, with your Resend API key), **Expo Push** (access token). Add an SMS integration later.
-3. Local: run the API (`pnpm dev`), then in another terminal `pnpm --filter @repo/notifications studio`. It opens a tunnel from Novu to `localhost:9000/api/novu` (you will be asked to log in to Novu).
+3. Local: `pnpm dev` starts it with everything else (`src/scripts/dev.ts`, headless). It opens a tunnel from Novu to the API's `/api/novu` and uses the dashboard for `NOVU_REGION` (the CLI alone would open the US dashboard). To open the dashboard in the browser run `pnpm --filter @repo/notifications studio`. The workflows appear in the dashboard's **Local** environment while the tunnel runs.
 4. Production: the API must be publicly reachable at `/api/novu`; sync with `pnpm dlx novu sync --bridge-url https://<api-host>/api/novu --secret-key $NOVU_SECRET_KEY`.
 
 Privacy: Novu stores recipient emails and payloads. Mention it in the privacy notice.
