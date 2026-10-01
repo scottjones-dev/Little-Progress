@@ -15,7 +15,7 @@ pnpm --filter @repo/web dev:local # without Infisical
 pnpm --filter @repo/web build
 ```
 
-Code lives under `src/app`. Name and description come from `@repo/config/app`; env from `@repo/env/web`.
+Errors are reported to Sentry (`src/instrumentation.ts`, `src/instrumentation-client.ts`, browser events through `/monitoring`) and shown by `error.tsx`, `global-error.tsx` and `not-found.tsx`; see `docs/error-handling.md`. Code lives under `src/app`. Name and description come from `@repo/config/app`; env from `@repo/env/web`.
 
 ## Tests
 
@@ -23,4 +23,4 @@ Code lives under `src/app`. Name and description come from `@repo/config/app`; e
 
 ## Depends on / used by
 
-Depends on `@repo/config`, `@repo/env`, Next.js, Tailwind. Talks to `apps/api`. shadcn/ui will be added when the UI is built.
+Depends on `@repo/config`, `@repo/env`, `@repo/errors`, `@sentry/nextjs`, Next.js, Tailwind. Talks to `apps/api`. shadcn/ui will be added when the UI is built.

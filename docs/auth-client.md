@@ -308,6 +308,8 @@ Needs a session signed in within 15 minutes (or the password). Warn that a famil
 
 ## 4. Errors
 
+Errors from our own API routes (not `/api/auth/*`) use the shape in `error-handling.md`: branch on `error.code`.
+
 Branch on `error.status` and `error.code`, never on the message text, and look the text up in the catalogs.
 
 | Situation | Status | Show |

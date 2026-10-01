@@ -101,7 +101,7 @@ Expo: offline queue (MMKV/SQLite) of pending entries with `client_id` → replay
 - **GitHub Actions**, Turbo remote cache; jobs on PR: install (pnpm, frozen lockfile) → `ultracite check` → `check-types` → unit/integration tests (Postgres service container) → `build` → Playwright E2E (web+api) → `infisical scan` + gitleaks.
 - **Security jobs**: `pnpm audit --prod` (fail on high/critical), Dependabot/Renovate (grouped weekly, auto-merge patch/dev), CodeQL (JS/TS), `actions/dependency-review-action`, OSV-Scanner on lockfile; pinned action SHAs; least-privilege `GITHUB_TOKEN`; npm provenance not needed (private).
 - **Deploy** (on `main`): web → Vercel (preview per PR); API → container image (Dockerfile, multi-stage, non-root) to Fly.io/Railway with `db:migrate` as a release step (forward-only, expand/contract migrations); mobile → EAS Build/Update (preview channel per PR, prod on tag). Secrets come from Infisical (GitHub Action `Infisical/secrets-action` w/ OIDC, no long-lived tokens in GitHub). Environments: preview/staging/prod, prod requires approval; rollback = redeploy previous image + EAS rollback; DB backups (PITR) verified by a restore drill.
-- Observability: Sentry (web, api, mobile; PII scrubbing on, no entry contents), structured JSON logs (pino) with request id, `/healthz` + `/readyz`, uptime check.
+- Observability: Sentry EU (web, api, mobile; built, see `error-handling.md`; PII scrubbing on, no entry contents), structured JSON logs (pino) with request id, `/healthz` + `/readyz`, uptime check.
 
 ## Analytics (privacy-first — children's health data)
 

@@ -17,6 +17,7 @@ The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). W
 | [`packages/storage`](packages/storage) | S3-compatible storage (AWS S3, Cloudflare R2, Floci) |
 | [`packages/emails`](packages/emails) | React Email templates, preview on port 5000 |
 | [`packages/auth`](packages/auth) | Better Auth for parent accounts (server side): email and password, verification |
+| [`packages/errors`](packages/errors) | Standard API error shape and the privacy rules for Sentry (api, web, native) |
 | [`packages/notifications`](packages/notifications) | `notify()` for email, push and later SMS, delivered through Novu |
 | [`infra/postgres`](infra/postgres) | Local PostgreSQL via Docker |
 | [`infra/storage`](infra/storage) | Local S3 emulator (Floci) and its UI via Docker |

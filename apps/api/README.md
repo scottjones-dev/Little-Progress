@@ -14,9 +14,10 @@ Web and native share one backend that owns authorisation, validation and data ac
 | `GET /api/healthz` | liveness check |
 | `GET/POST /api/auth/*` | Better Auth: sign-up, sign-in, verify email, reset and change password (see `packages/auth`) |
 | `GET /api/me` | the signed-in user, or 401 |
+| `GET /api/_debug/error` | development only: throws on purpose to prove error reporting works |
 | `ALL /api/novu` | Novu bridge: Novu calls it to run notification workflows (503 until `NOVU_SECRET_KEY` is set) |
 
-Secure headers are on and CORS is limited to `WEB_ORIGIN`. Auth, entries, uploads and reports are planned (see `docs/plan.md`).
+Every response has an `x-request-id`; every error uses the shape from `@repo/errors` and bugs are reported to Sentry (`src/instrument.ts`, see `docs/error-handling.md`). Secure headers are on and CORS is limited to `WEB_ORIGIN`. Auth, entries, uploads and reports are planned (see `docs/plan.md`).
 
 ## Run it
 
@@ -34,4 +35,4 @@ Port, base path and name come from `@repo/config/app`; env is validated by `@rep
 
 ## Depends on / used by
 
-Depends on `@repo/config`, `@repo/env`, `hono`, `@hono/node-server`. Called by `apps/web` and `apps/native`.
+Depends on `@repo/config`, `@repo/env`, `@repo/errors`, `@sentry/hono`, `hono`, `@hono/node-server`. Called by `apps/web` and `apps/native`.
