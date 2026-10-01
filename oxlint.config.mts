@@ -10,4 +10,19 @@ export default defineConfig({
   extends: [core, react, next, vitest, shadcn, antiSlop],
   ignorePatterns: core.ignorePatterns,
   jsPlugins: shadcn.jsPlugins,
+  overrides: [
+    {
+      // React Native: shadcn is web-only; RN uses StyleSheet and require() for assets.
+      files: ["apps/native/**"],
+      rules: {
+        "eslint/no-use-before-define": "off",
+        "node/global-require": "off",
+        "react/style-prop-object": "off",
+        "shadcn/no-arbitrary-values": "off",
+        "shadcn/no-inline-styles": "off",
+        "shadcn/no-raw-colors": "off",
+        "unicorn/prefer-module": "off",
+      },
+    },
+  ],
 });
