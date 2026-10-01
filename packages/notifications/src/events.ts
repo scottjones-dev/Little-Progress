@@ -92,7 +92,7 @@ export const events = {
   "verify-email": defineEmailEvent("verify-email", {
     critical: true,
     payload: z.object({
-      code: z.string().min(1),
+      code: z.string().min(1).optional(),
       expiresInMinutes: z.number().int().positive(),
       name: z.string().min(1),
       verifyUrl: z.url(),

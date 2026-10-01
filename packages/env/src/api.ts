@@ -7,7 +7,6 @@ export const env = createEnv({
   runtimeEnv: process.env,
   server: {
     AI_GATEWAY_API_KEY: z.string().min(1).optional(),
-    BETTER_AUTH_SECRET: z.string().min(32).optional(),
     CARER_TOKEN_SECRET: z.string().min(32).optional(),
     DATABASE_URL: z.url().optional(),
     NODE_ENV: z

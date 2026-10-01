@@ -12,6 +12,7 @@ Bad or missing config should fail at startup with a clear message, not deep insi
 | --- | --- | --- |
 | `@repo/env/api` | `apps/api` | `PORT`, `WEB_ORIGIN`, `NODE_ENV`, `DATABASE_URL`, auth secrets, `AI_GATEWAY_API_KEY` |
 | `@repo/env/db` | `packages/db` | `DATABASE_URL` (required) |
+| `@repo/env/auth` | `packages/auth` | `BETTER_AUTH_SECRET` (required), `BETTER_AUTH_URL`, `WEB_ORIGIN` |
 | `@repo/env/storage` | `packages/storage` | `S3_*`, `STORAGE_DRIVER` (required keys) |
 | `@repo/env/notifications` | `packages/notifications` | `NOVU_SECRET_KEY` (optional in dev), `NOVU_REGION` |
 | `@repo/env/web` | `apps/web` | `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_APP_URL` |
@@ -63,4 +64,4 @@ Generated values reach Infisical through a temporary owner-only file and are nev
 
 ## Depends on / used by
 
-Depends on `@repo/config`, `@t3-oss/env-core`, `@t3-oss/env-nextjs`, `zod`. Used by `apps/api`, `apps/web`, `apps/native`, `packages/db`, `packages/storage`, `packages/notifications`.
+Depends on `@repo/config`, `@t3-oss/env-core`, `@t3-oss/env-nextjs`, `zod`. Used by `apps/api`, `apps/web`, `apps/native`, `packages/db`, `packages/storage`, `packages/notifications`, `packages/auth`.

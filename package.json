@@ -8,6 +8,7 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "prepare": "husky",
+    "auth:generate": "infisical run --path=/api -- pnpm dlx auth@latest generate --config ./packages/auth/src/auth.ts --output ./packages/db/src/schemas/auth.ts -y",
     "db:check": "turbo run db:check",
     "db:export": "turbo run db:export",
     "db:generate": "turbo run db:generate",

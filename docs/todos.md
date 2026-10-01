@@ -77,8 +77,8 @@ To do
 
 Order follows section 13 of the design.
 
-- [ ] Install Better Auth, generate and migrate base tables (user, session, account, verification)
-- [ ] Mount handler in `apps/api` at `/api/auth/*`; wire verify, reset and password-changed to `notify`
+- [x] Install Better Auth, generate (`pnpm auth:generate`) and migrate base tables (user, session, account, verification)
+- [x] Mount handler in `apps/api` at `/api/auth/*`; wire verify, reset and password-changed to `notify` (`packages/auth`, server only)
 - [ ] Email and password with required verification; sign-in, sign-up, forgot and reset screens
 - [ ] Password-changed on both reset and in-settings change (after-hook on `/change-password`, verify hook exists)
 - [ ] Account lockout (`account_lock` table, 5 failures in 15 min, unlock email, "lock my account" link)

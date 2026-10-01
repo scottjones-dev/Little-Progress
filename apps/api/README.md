@@ -12,6 +12,8 @@ Web and native share one backend that owns authorisation, validation and data ac
 | --- | --- |
 | `GET /api` | app name |
 | `GET /api/healthz` | liveness check |
+| `GET/POST /api/auth/*` | Better Auth: sign-up, sign-in, verify email, reset and change password (see `packages/auth`) |
+| `GET /api/me` | the signed-in user, or 401 |
 | `ALL /api/novu` | Novu bridge: Novu calls it to run notification workflows (503 until `NOVU_SECRET_KEY` is set) |
 
 Secure headers are on and CORS is limited to `WEB_ORIGIN`. Auth, entries, uploads and reports are planned (see `docs/plan.md`).

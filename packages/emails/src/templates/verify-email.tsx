@@ -5,7 +5,8 @@ import { EmailCallout } from "../components/callout";
 import { EmailLayout } from "../components/layout";
 
 export interface VerifyEmailProps {
-  code: string;
+  /** Optional one-time code. Link-only for now; a code arrives with email OTP later. */
+  code?: string;
   expiresInMinutes: number;
   name: string;
   verifyUrl: string;
@@ -27,22 +28,25 @@ const VerifyEmail = ({
       Confirm your email
     </Heading>
     <Text className="text-mist m-0 mb-4 text-[15px] leading-[24px]">
-      Hi {name}, welcome. Enter this code, or use the button below, to verify
-      your email address.
+      Hi {name}, welcome.{" "}
+      {code
+        ? "Enter this code, or use the button below, to verify your email address."
+        : "Use the button below to verify your email address."}
     </Text>
-    <EmailCallout label="Verification code" variant="code">
-      {code}
-    </EmailCallout>
+    {code ? (
+      <EmailCallout label="Verification code" variant="code">
+        {code}
+      </EmailCallout>
+    ) : null}
     <EmailButton href={verifyUrl}>Verify email</EmailButton>
     <Text className="text-muted m-0 text-[13px] leading-[20px]">
-      This code expires in {expiresInMinutes} minutes. If you did not create an
-      account, you can safely ignore this email.
+      This {code ? "code" : "link"} expires in {expiresInMinutes} minutes. If
+      you did not create an account, you can safely ignore this email.
     </Text>
   </EmailLayout>
 );
 
 VerifyEmail.PreviewProps = {
-  code: "482 913",
   expiresInMinutes: 15,
   name: "Alex",
   verifyUrl: "https://littleprogress.app/verify?token=preview",

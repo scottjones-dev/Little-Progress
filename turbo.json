@@ -4,6 +4,7 @@
   "globalPassThroughEnv": [
     "AI_GATEWAY_API_KEY",
     "BETTER_AUTH_SECRET",
+    "BETTER_AUTH_URL",
     "CARER_TOKEN_SECRET",
     "DATABASE_URL",
     "EXPO_PUBLIC_API_URL",
