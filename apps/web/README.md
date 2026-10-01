@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# @repo/web
 
-## Getting Started
+The Next.js web app: parent dashboard, carer quick-log and printable reports.
 
-First, run the development server:
+## Why it exists
+
+The main way parents (and carers on a nursery tablet) use the diary in a browser. Currently a placeholder page that shows the app name; the real UI comes with auth and the entry form.
+
+## Run it
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm dev                          # whole repo; web on http://localhost:3000
+pnpm --filter @repo/web dev       # web only (secrets via Infisical /web)
+pnpm --filter @repo/web dev:local # without Infisical
+pnpm --filter @repo/web build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Code lives under `src/app`. Name and description come from `@repo/config/app`; env from `@repo/env/web`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`pnpm --filter @repo/web check-types`. No component or E2E tests yet (Playwright is planned, see `docs/todos.md`).
 
-## Learn More
+## Depends on / used by
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Depends on `@repo/config`, `@repo/env`, Next.js, Tailwind. Talks to `apps/api`. shadcn/ui will be added when the UI is built.

@@ -10,9 +10,12 @@
     "./templates/*": "./src/templates/*.tsx"
   },
   "scripts": {
-    "build": "tsx src/scripts/build.ts",
+    "build": "tsx src/scripts/build.ts && pnpm export",
     "check-types": "tsc --noEmit",
     "dev": "email dev --dir src/templates --port 5000",
+    "export": "email export --dir src/templates --outDir dist/export --pretty",
+    "preview:build": "email build --dir src/templates",
+    "preview:start": "email start --port 5000",
     "test": "vitest run"
   },
   "dependencies": {

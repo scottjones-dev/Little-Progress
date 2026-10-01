@@ -1,153 +1,60 @@
-# Turborepo starter
+# LittleProgress
 
-This Turborepo starter is maintained by the Turborepo core team.
+A private family care diary for a toddler who is behind on solids and development. It records detailed feeding trials plus sleep, nappies, milk and milestones, surfaces patterns over time, and produces printable reports for health visitors, dietitians and paediatricians. Parents have full accounts; carers (nursery, grandparents) log through a shared-PIN quick-log screen.
 
-## Using this example
+The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). Open work is tracked in [`docs/todos.md`](docs/todos.md). Project rules for contributors and AI agents are in [`AGENTS.md`](AGENTS.md).
 
-Run the following command:
+## Workspaces
 
-```sh
-npx create-turbo@latest
+| Workspace | What it is |
+| --- | --- |
+| [`apps/web`](apps/web) | Next.js web app (parent dashboard, quick-log, reports), port 3000 |
+| [`apps/native`](apps/native) | Expo mobile app, Metro on port 8081 |
+| [`apps/api`](apps/api) | Hono API, port 9000. The only thing that touches the database and storage |
+| [`packages/config`](packages/config) | Shared tsconfigs and global app constants (`@repo/config/app`) |
+| [`packages/env`](packages/env) | Validated environment variables per runtime |
+| [`packages/db`](packages/db) | Drizzle schema, migrations, client, care vocabulary |
+| [`packages/storage`](packages/storage) | S3-compatible storage (AWS S3, Cloudflare R2, Floci) |
+| [`packages/emails`](packages/emails) | React Email templates, preview on port 5000 |
+| [`infra/postgres`](infra/postgres) | Local PostgreSQL via Docker |
+| [`infra/storage`](infra/storage) | Local S3 emulator (Floci) and its UI via Docker |
+
+```
+web / native ──▶ api ──▶ Postgres (db)
+                   ├──▶ object storage (storage)
+                   └──▶ emails (render) ──▶ Resend / Novu later
+config + env are used by everything
 ```
 
-## What's inside?
+## Getting started
 
-This Turborepo includes the following packages/apps:
+Requirements: Node 24+, pnpm, Docker, the [Infisical CLI](https://infisical.com/docs/cli/overview) (logged in).
 
-### Apps and Packages
-
-- `@repo/config`: shared tsconfigs (`typescript/*`) and global app constants (`src/app.ts`)
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```bash
+pnpm install
+pnpm infra:up        # Postgres + storage (Docker)
+pnpm db:migrate      # create tables
+pnpm storage:init    # create the dev bucket
+pnpm dev             # web, api, native, email preview, Drizzle Studio
 ```
 
-Without global `turbo`, use your package manager:
+| Service       | URL                         |
+| ------------- | --------------------------- |
+| Web           | <http://localhost:3000>     |
+| API           | <http://localhost:9000/api> |
+| Email preview | <http://localhost:5000>     |
+| Expo (Metro)  | <http://localhost:8081>     |
+| Floci UI      | <http://localhost:4500>     |
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm exec turbo build
-pnpm exec turbo build
-```
+Secrets live in Infisical (`/api`, `/web`, `/native`); `.env.example` lists the key names. Each app also has a `dev:local` script that skips Infisical.
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## Everyday commands
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP] Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+| Command | Does |
+| --- | --- |
+| `pnpm check` / `pnpm fix` | lint and format check / auto-fix (Ultracite: Oxlint + Oxfmt) |
+| `pnpm check-types` | type-check every workspace |
+| `pnpm test` | unit tests (Vitest) in every workspace that has them |
+| `pnpm test:integration` | integration tests (needs `pnpm infra:up`) |
+| `pnpm build` | build everything (Next build, email templates) |
+| `pnpm db:generate` / `db:migrate` / `db:push` | Drizzle migrations |
