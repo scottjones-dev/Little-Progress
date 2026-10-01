@@ -9,6 +9,49 @@ Read `docs/README.md` inside that installed package first, then read the relevan
 This block is written and re-added by `turbo` before repository-scoped commands when an AI agent is detected. In the Turborepo source repository, its template is defined in `crates/turborepo-cli/src/cli/agent_guidance.rs`. Removing the managed block while updates are enabled means a later qualifying invocation will add it again. Set `"agentGuidance": false` in the root `turbo.json` or `turbo.jsonc` to opt out; this does not remove an existing block. Keep the block committed with your work to avoid an uncommitted change on the next agent invocation.
 <!-- END:turborepo-agent-rules -->
 
+# Project Rules (read these first)
+
+These rules apply to **everything** built in this repo. They override convenience.
+
+## 1. Use the CLI. Never hand-write what a tool can generate.
+
+- **Dependencies**: install with `pnpm add <pkg>` (or `pnpm add -D <pkg>`, `pnpm add <pkg> --filter <workspace>`). **Never** type a version into `package.json` by hand (no writing `"next": "3.45.6"`). The CLI picks the real, current version and updates `pnpm-lock.yaml`.
+- **New apps / packages**: if a scaffolder exists, use it instead of writing files by hand. Examples: `pnpm dlx create-next-app@latest`, `pnpm dlx create-vite@latest`, `pnpm dlx create-turbo@latest`, `pnpm dlx shadcn@latest init`. Run it, then adjust the output. Do not recreate its output from memory.
+- **Config / tooling**: prefer the tool's own `init` / `add` / `generate` command (e.g. `drizzle-kit generate`, `ultracite init`) over writing config files from scratch.
+- If no CLI exists for something, say so and then hand-write it, keeping it minimal.
+
+## 2. Always use a `src/` directory
+
+Every app and package keeps its code under `src/` (Next.js: `src/app`). When running a scaffolder, pass the flag / answer the prompt that enables `src/` (e.g. `create-next-app --src-dir`).
+
+## 3. Every package and app has a README
+
+- Each workspace (`apps/*`, `packages/*`, `infra/*`) has a `README.md` that explains: **what it is, why it exists, how to use it (example), how to run its tests, and what it depends on / what depends on it.**
+- The root `README.md` lists every workspace and how they fit together.
+- **Update the README in the same change** whenever you add, remove, or change behavior, exports, scripts, or env vars. A change without its README update is not finished.
+
+## 4. Test where possible and needed
+
+- Add tests alongside new logic (pure functions, data access, API handlers, utilities, anything with branches or edge cases). Use the workspace's existing test runner; if none exists, add one with the CLI (`pnpm add -D vitest`).
+- Cover the happy path, edge cases, and error cases.
+- Run the tests (and `pnpm exec ultracite check`) before calling a task done. Report failures honestly.
+- Pure presentational glue may skip tests; say why when you skip.
+
+## 5. Code must be readable and explainable
+
+- If you can't explain the code you just wrote in plain words, it's wrong. Rewrite it.
+- Prefer simple, obvious code over clever code. Clear names, small functions, no magic numbers.
+- Comment the **why** for anything non-obvious. After finishing, be able to give a short explanation of what each new file does and why it exists.
+- Don't add code, dependencies, or abstractions you can't justify.
+
+## 6. Plan with the System Design Primer
+
+Before designing or building anything non-trivial (new service, data model, API, caching, queue, storage, scaling decision), plan it using <https://github.com/donnemartin/system-design-primer> as the reference.
+
+- Start from requirements and constraints (users, traffic, read/write ratio, latency, consistency vs. availability), then estimate scale.
+- Walk the Primer's approach: high-level design → core components → scale it. Pick from its building blocks deliberately (load balancer, cache, CDN, DB replication/sharding/SQL vs NoSQL, async/queues, CAP trade-offs) and state the trade-off you chose.
+- Write the plan down (short, in the PR/README/`docs/`) **before** coding, and keep the README in sync with it.
+
 # Ultracite Code Standards
 
 This project uses **Ultracite**, a zero-config preset that enforces strict code quality standards through automated formatting and linting.
