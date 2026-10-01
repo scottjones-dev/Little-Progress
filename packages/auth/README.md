@@ -1,31 +1,31 @@
 # @repo/auth
 
-Parent accounts with [Better Auth](https://www.better-auth.com), **server side only**. There is no auth client or screens here; web and native clients come later.
+Parent accounts with [Better Auth](https://www.better-auth.com), **server side only**. There is no auth client or screens here; the client side is documented in [`docs/auth-client.md`](../../docs/auth-client.md).
 
 ## Why it exists
 
-Parents need accounts to keep a child's health diary private. This package holds the one Better Auth instance, wired to our Postgres (Drizzle) and to `@repo/notifications` for its emails. Carers use a separate PIN gate and are not covered here. The full design is in [`docs/auth.md`](../../docs/auth.md).
+Parents need accounts to keep a child's health diary private, and a family needs a way to share it. This package holds the one Better Auth instance, wired to our Postgres (Drizzle) and to `@repo/notifications` for its emails. Carers use a separate PIN gate and are not covered here. The full design is [`docs/auth.md`](../../docs/auth.md).
 
-## What it does today
+## What it does
 
-Email and password with required email verification:
+Built to the Better Auth docs, option by option:
 
-- sign up, sign in, sign out
-- verify email by link (sign-in is refused until verified)
-- forgot and reset password (link, 1 hour, signs out other sessions)
-- change password while signed in
-- a "password changed" email after a reset or a change
-- changing the email address is switched off (the email is the identity)
-- password sign-in limited to 5 attempts a minute per IP
+- **Email and password**: sign up, sign in, required email verification (link), forgot and reset password, change password, "password changed" email on both paths, email change switched off.
+- **Social sign-in**: Google and Microsoft, each active only when its credentials are set. Account linking (same email only, never unlink the last method). OAuth tokens are encrypted before storage.
+- **2FA**: TOTP, 10 backup codes, trusted devices, plus the plugin's own lockout. A "two-factor changed" email.
+- **Passkeys**, **last login method** (database only), **Expo** server plugin.
+- **Families**: the `organization` plugin. Creator is `owner`, a second parent is invited (7 days, verified email needed). One family per parent. The carer PIN hash, PIN version and join code are fields on the organization.
+- **Delete account** with an email confirmation; a family with no parents left is deleted with its data.
+- **Rate limit** in the database (5 sign-in attempts a minute per IP, Cloudflare IP header) and session settings (7 days, 15 minute fresh age).
 
-Not built yet (see `docs/auth.md` and `docs/todos.md`): Google and Microsoft sign-in, 2FA, passkeys, lockout, new-location email, email codes.
+Not built: Apple and Facebook sign-in, email OTP, the new-location email, tests. See `docs/todos.md`.
 
 ## Files
 
 ```
 src/
-  auth.ts    the Better Auth instance (exports `auth`; the CLI reads this file)
-  emails.ts  the three emails auth sends, all through notify()
+  auth.ts    the Better Auth instance (exports `auth` and `Session`; the CLI reads this file)
+  emails.ts  the emails auth sends, all through notify()
 ```
 
 Emails are sent with `void notify(...)` and never awaited. Better Auth's docs warn that waiting would make "email exists" requests slower than "email does not exist" ones and reveal who has an account.
@@ -56,18 +56,23 @@ pnpm db:generate     # Drizzle migration
 pnpm db:migrate
 ```
 
-`auth:generate` runs `pnpm dlx auth@latest generate --config ./packages/auth/src/auth.ts --output ./packages/db/src/schemas/auth.ts -y` inside `infisical run` because the config imports env and the database, which are validated at import. The generated file is excluded from Ultracite.
+`auth:generate` runs `pnpm dlx auth@latest generate --config ./packages/auth/src/auth.ts --output ./packages/db/src/schemas/auth.ts -y` inside `infisical run`, because the config imports env and the database, which are validated at import. The generated file is excluded from Ultracite.
 
-Drizzle 1.0 uses relations v2, so `auth.ts` imports the adapter from `@better-auth/drizzle-adapter/relations-v2`, which makes the generator emit `defineRelationsPart` instead of the old `relations()`.
+Things to know:
+
+- Drizzle 1.0 uses relations v2, so `auth.ts` imports the adapter from `@better-auth/drizzle-adapter/relations-v2`. The generator then emits `defineRelationsPart` instead of the old `relations()`.
+- Chicken and egg: the CLI loads `auth.ts`, which imports the generated tables. After adding a plugin, run `auth:generate` first (it prints a harmless "schema mismatch" note), then add the new tables to the adapter's `schema` map in `auth.ts`.
+- If `drizzle-kit generate` asks rename-or-create questions it cannot ask non-interactively, pass answers with `--hints '[{"type":"create","kind":"table","entity":["public","name"]}]'`.
+- Our own tables (`child`, `carer`, `food`, `entry`, `attachment`) reference `organization.id` through their `family_id` columns.
 
 ## Environment
 
-From `@repo/env/auth` (Infisical `/api`): `BETTER_AUTH_SECRET` (32+ characters), `BETTER_AUTH_URL` (the API's public URL, default `http://localhost:9000`), `WEB_ORIGIN`.
+From `@repo/env/auth` (Infisical `/api`): `BETTER_AUTH_SECRET` (32+ characters; also keys token encryption), `BETTER_AUTH_URL` (the API's public URL), `WEB_ORIGIN`, `PASSKEY_RP_ID` (default `localhost`), and optional `GOOGLE_CLIENT_ID/SECRET`, `MICROSOFT_CLIENT_ID/SECRET`.
 
 ## Tests
 
-None yet. Planned (see `docs/auth.md` section 12): verify, reset and change-password flows, the same answer for existing and new emails, and the sign-in rate limit.
+None yet (deferred on request). The planned list is in `docs/auth.md` section 12. A manual smoke test of the running API passed: sign-up, unverified sign-in refused, verified sign-in, `/api/me`, organization create and the one-family limit, invite, 2FA enrol, change-email refused, passkey options, the 429 with `X-Retry-After`.
 
 ## Depends on / used by
 
-Depends on `better-auth`, `@better-auth/drizzle-adapter`, `@repo/db`, `@repo/env`, `@repo/notifications`, `@repo/config`. Used by `apps/api`.
+Depends on `better-auth`, `@better-auth/drizzle-adapter`, `@better-auth/passkey`, `@better-auth/expo`, `@repo/db`, `@repo/env`, `@repo/notifications`, `@repo/config`. Used by `apps/api`.

@@ -32,7 +32,7 @@ void notify("password-changed", {
 
 ## Add a notification
 
-Everything is driven by the catalog in `src/events.ts`. Add one entry:
+Everything is driven by the catalog in `src/events.ts` (today: `verify-email`, `reset-password`, `password-changed`, `two-factor-changed`, `delete-account`, `family-invite`, `new-location-sign-in`, `magic-link`). Add one entry:
 
 1. Make the email template in `@repo/emails` (it gets a matching entry in that registry).
 2. Add an `events` entry: payload schema, `critical` (cannot be switched off by the user), and an optional `push` message.

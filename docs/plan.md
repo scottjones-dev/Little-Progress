@@ -40,9 +40,9 @@ Monorepo additions:
 ### Data model (Drizzle, Postgres)
 
 - Better Auth tables (user, session, account, verification) + `user.role` (`parent`).
-- `family`, `family_member(user_id, family_id, role)`, `child(id, family_id, name, dob)`.
+- **Update:** `family` and `family_member` are now the Better Auth `organization` and `member` tables (owner/admin roles, built-in invitations; see `docs/auth.md` 4.9). `family_id` columns on our tables are text references to `organization.id`. Our own: `child(id, family_id, name, dob)`.
 - `carer(id, family_id, display_name, active)` — named carer identities (no password) so entries attribute to a person, not "PIN".
-- `carer_pin(family_id, hash (argon2/scrypt), rotated_at)`; **rotating invalidates carer sessions**.
+- Carer PIN: stored on the organization row (`carer_pin_hash`, `carer_pin_version`, `join_code`, set by the server only); **rotating bumps the version and invalidates carer sessions**. The hash algorithm stays argon2/scrypt.
 - `entry` base: `id, child_id, kind enum(meal|sleep|nappy|milk|milestone), occurred_at, logged_by_user_id | logged_by_carer_id (CHECK exactly one), created_at, updated_at, deleted_at, client_id (idempotency, unique per child)`.
 - Detail tables 1:1 on `entry`: `meal_trial` (food_id, preparation, temperature, attempt_no, reaction, amount, setting, distractions[] , fed_by, note), `sleep` (start,end), `nappy` (wet|dirty|both), `milk` (ml/duration, type), `milestone` (category movement|sound|word|first_try, text).
 - `food` (per family, reusable names/categories) so attempt number & history per food is queryable.

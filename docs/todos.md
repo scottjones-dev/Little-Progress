@@ -49,7 +49,7 @@ Later
 
 ## Notifications (`packages/notifications`)
 
-Delivery layer on Novu. Auth and other features call a typed `notify()`; they never import Novu or `@repo/emails`. Design in `docs/auth.mdx` section 5.
+Delivery layer on Novu. Auth and other features call a typed `notify()`; they never import Novu or `@repo/emails`. Design in `docs/auth.md` section 5.
 
 Done
 
@@ -67,35 +67,54 @@ To do
 - [ ] **You:** create the Novu Cloud (EU) account, add `NOVU_SECRET_KEY` to Infisical `dev /api`, connect the Resend and Expo Push integrations in the dashboard
 - [ ] Live test: `pnpm dev`, `pnpm --filter @repo/notifications studio`, trigger `verify-email`, confirm the email arrives rendered by `@repo/emails`
 - [ ] Production: public API URL for `/api/novu`, `novu sync`, separate prod Novu environment and key
-- [ ] Add events `account-locked`, `two-factor-changed` (and optional `passkey-changed`, `account-linked`) with their email templates
+- [x] Events and templates added: `two-factor-changed`, `delete-account`, `family-invite`
+- [ ] Optional later: `passkey-changed`, `account-linked`; `new-location-sign-in` needs a documented hook (not wired); `magic-link` is unused
 - [ ] SMS: choose a provider, add the Novu integration, add an `sms` field to the catalog and a `step.sms` in `workflows.ts`
 - [ ] Expo app: ask for push permission, get the Expo token (`expo-notifications`), call `POST /api/devices` (API route behind auth, not built yet)
 - [ ] Wire Better Auth callbacks to `notify` (see Auth below)
 - [ ] Privacy notice: Novu stores recipient emails and payloads (EU region chosen)
 
-## Auth (`docs/auth.mdx`)
+## Auth (`docs/auth.md`, client side in `docs/auth-client.md`)
 
-Order follows section 13 of the design.
+Server side (`packages/auth`, built to the Better Auth docs):
 
-- [x] Install Better Auth, generate (`pnpm auth:generate`) and migrate base tables (user, session, account, verification)
-- [x] Mount handler in `apps/api` at `/api/auth/*`; wire verify, reset and password-changed to `notify` (`packages/auth`, server only)
-- [ ] Email and password with required verification; sign-in, sign-up, forgot and reset screens
-- [ ] Password-changed on both reset and in-settings change (after-hook on `/change-password`, verify hook exists)
-- [ ] Account lockout (`account_lock` table, 5 failures in 15 min, unlock email, "lock my account" link)
-- [ ] Google and Microsoft sign-in, account linking settings (`allowDifferentEmails: false`)
-- [ ] 2FA (TOTP, backup codes, trusted devices)
-- [ ] Passkeys (`@better-auth/passkey`; settle production domain first)
-- [ ] Last login method plugin plus session list with country
-- [ ] New-location notice from `CF-IPCountry`
-- [ ] Expo client; Apple sign-in once the Apple Developer account is paid
+- [x] Better Auth installed; schema generated with `pnpm auth:generate`; migrations applied
+- [x] Handler mounted in `apps/api` at `/api/auth/*`; session middleware; `GET /api/me`
+- [x] Email and password with required verification, reset, change password, "password changed" email on both paths
+- [x] Rate limit (database storage, 5 sign-in attempts a minute, Cloudflare IP header) and session settings (7 days, 15 minute fresh age)
+- [x] 2FA (TOTP, backup codes, trusted devices) with the plugin's own lockout; `two-factor-changed` email
+- [x] Google and Microsoft sign-in with account linking and encrypted provider tokens (turn on when credentials are set)
+- [x] Passkeys, Expo server plugin, last login method (database only)
+- [x] Organization plugin as the family: owner/admin roles, 7-day invitations, one family per parent, carer PIN fields on the organization
+- [x] Delete account with email confirmation; a family with no parents left is deleted with its data
+- [x] `family` table replaced by the organization; `child`, `carer`, `food`, `entry`, `attachment` reference `organization.id`
+- [x] Docs: `auth.md` rewritten, `auth-client.md` written, `user-flows.md` updated
+- [ ] **You:** add Google and Microsoft client id and secret to Infisical `/api` (redirect URIs in `auth.md` section 10); settle the production domain for `PASSKEY_RP_ID`
+- [ ] **You:** replace the invalid `NOVU_SECRET_KEY` ("API Key not found") so auth emails actually send
+- [ ] Tests for the server (list in `auth.md` section 12), then a CI job for them
+- [ ] Verify the delete-account flow end to end once emails send (the family cleanup query itself is checked)
+- [ ] Apple sign-in once the Apple Developer account is paid; decide Apple relay emails vs `allowDifferentEmails`
+- [ ] New-location sign-in email (needs a country source and stored countries; no documented hook)
+- [ ] Decide: require 2FA for parents; show the sign-in "last used" badge (needs the consent decision and a cookie)
 - [ ] Write the lost-2FA support process before launch
-- [ ] Decide: Apple relay emails vs `allowDifferentEmails`; require 2FA for parents; last-login cookie consent
+- [ ] Optional later: email OTP (6-digit code in `verify-email`), i18n plugin (`@better-auth/i18n`), openAPI reference, test utils plugin, Facebook
+- [ ] Maybe later, if the project is sold or monetised: Stripe (Better Auth Stripe plugin)
+
+Client side (documentation in `auth-client.md`, screens not built):
+
+- [ ] Decide cookie/origin setup: Next proxy (recommended) or subdomains
+- [ ] `auth-client.ts` in `apps/web` and `apps/native` with the plugins listed in `auth-client.md`
+- [ ] Screens: sign-up, verify, sign-in (+ 2FA code, passkey autofill), forgot/reset, onboarding (family, child), accept invitation
+- [ ] Settings screens: security (password, sessions, linked accounts, passkeys, 2FA), family (members, invites), delete account
+- [ ] Message catalog keys for every auth error (401, 403, 429 with `X-Retry-After`, `ACCOUNT_TEMPORARILY_LOCKED`)
+- [ ] Expo: secure store, deep-link scheme, social sign-in via deep link, authenticated fetch with `getCookie()`
 
 ## User flows (`docs/user-flows.md`)
 
 - [x] Write flows for parent onboarding, carer quick-log, parent daily use, reports and insights
 - [ ] Review the open questions in section 10 and settle them
-- [ ] Add the new routes it implies to `docs/plan.md` (`POST /family`, `POST /children`, invites)
+- [x] Family and invites now use Better Auth organizations (see `auth.md` 4.9); `user-flows.md` updated
+- [ ] Add `POST /children` and the carer routes to `docs/plan.md`, and note in its data model that `family` is now the Better Auth `organization`
 - [ ] Wireframes for each screen in a `.pen` file
 
 ## Testing infrastructure
@@ -108,4 +127,4 @@ Order follows section 13 of the design.
 ## Other
 
 - [ ] `packages/shared` skipped for now: enum lists live in `@repo/db/vocab`, request shapes come from the Hono typed client
-- [ ] Auth (Better Auth), carer PIN gate, entries API, parent dashboard UI (see `docs/plan.md` M1 to M4)
+- [ ] Carer PIN gate, entries API, parent dashboard UI (see `docs/plan.md` M1 to M4); auth is covered in the Auth section

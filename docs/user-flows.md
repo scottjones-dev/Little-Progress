@@ -2,7 +2,7 @@
 
 What each person does in LittleProgress, screen by screen. Build the UI, API routes and tests from this, not the other way round.
 
-Status: **planned, not built.** Related: [`plan.md`](plan.md) (roles, API list, UI brief, sync contract), [`auth.mdx`](auth.mdx) (sign-in, reset, lockout, 2FA).
+Status: **planned, not built.** Related: [`plan.md`](plan.md) (roles, API list, UI brief, sync contract), [`auth.md`](auth.md) (server design: sign-in, reset, 2FA, families) and [`auth-client.md`](auth-client.md) (the client calls behind each screen).
 
 ## 1. Personas and goals
 
@@ -60,7 +60,7 @@ flowchart LR
 
 ## 3. Flow A: parent, sign-up to first log
 
-Sign-up, verification, sign-in, lockout and 2FA mechanics are in [`auth.mdx`](auth.mdx) sections 4.1 to 4.7. This flow starts where those leave off and adds the care-specific setup.
+Sign-up, verification, sign-in, rate limits and 2FA mechanics are in [`auth.md`](auth.md) sections 4.1 to 4.8, and the exact client calls are in [`auth-client.md`](auth-client.md). A family is a Better Auth organization (`auth.md` 4.9). This flow starts where those leave off and adds the care-specific setup.
 
 ```mermaid
 flowchart TD
@@ -94,7 +94,7 @@ Rules:
 
 - Only steps 1 and 2 (family, child) are required. Invite, carers and 2FA can be skipped and are reachable from settings; the dashboard shows a dismissible "finish setup" card until done.
 - The family code and PIN are shown once at creation, with "copy" and "print card for the nursery". Later the PIN can only be rotated, never read.
-- Second parent: gets a single-use invite link, signs up or signs in, and joins as `parent`. Invite expires in 7 days.
+- Second parent: gets an emailed invitation link (Better Auth organization invitation, 7 days), signs up or signs in, verifies their email, then accepts and joins the family as `admin`. The creator is the `owner`. Both are "parents" in this document.
 - Date of birth is asked once and used for age in months (also what the AI sees, never the DOB).
 
 ## 4. Flow B: carer, PIN to quick-log
@@ -197,7 +197,7 @@ Every screen defines these, so none is improvised during build:
 | Offline | Banner plus "N pending"; logging keeps working; read screens show the last cached data marked as old |
 | Session expired | Return to sign-in (parent) or PIN (carer) and come back to the same place |
 | Rate limited (429) | Shows when to try again using `Retry-After` |
-| Account locked | Generic sign-in error; email explains the unlock (see `auth.mdx` 4.6) |
+| Locked out | Password: the 429 countdown (`auth.md` 4.6). 2FA: "too many wrong codes, try again later" (`ACCOUNT_TEMPORARILY_LOCKED`). Sign-in errors stay generic |
 
 Rules for all screens: dark theme first, all text from message catalogs (no hard-coded strings, so i18n stays possible), 24-hour tabular times, tap targets at least 48 px, keyboard and screen-reader usable.
 
@@ -207,9 +207,9 @@ Routes are from `plan.md`'s API list. "New" means the route is implied here but 
 
 | Flow step | API | Milestone | Proof (test) |
 | --- | --- | --- | --- |
-| Sign up, verify, sign in | `/api/auth/*` | M1 | `auth.mdx` section 12 |
-| Create family and child | `POST /family`, `POST /children` (new) | M1 | Parent can only see own family |
-| Invite second parent | `POST /invites`, `POST /invites/:token/accept` (new) | M1 | Token works once, expires |
+| Sign up, verify, sign in | `/api/auth/*` (Better Auth) | M1 | `auth.md` section 12 |
+| Create family and child | `organization.create` (Better Auth), `POST /children` (new, ours) | M1 | Parent can only see own family; one family per parent |
+| Invite second parent | `organization.inviteMember`, `acceptInvitation` (Better Auth) | M1 | Invitation expires in 7 days, needs a verified email |
 | Add carers, set and rotate PIN | `POST /settings/carer-pin`, carer CRUD | M3 | Rotation invalidates carer sessions |
 | Carer PIN login | `POST /carer/login` | M3 | Wrong PIN backoff; carer cannot call parent routes (table test) |
 | Log an entry (any role) | `POST /entries` | M2 | Replay N times gives 1 row; `logged_by` comes from the token |
@@ -228,6 +228,6 @@ Visual design (tokens and layout are in `plan.md` "UI") and wireframes. Wirefram
 - Can a carer undo their own entry after the 10-second window, or is it parent-only from then on?
 - Does the carer "today" list show other people's entries (more useful for nursery handover) or only their own (more private)? Lean: show all of today, read-only.
 - Second-parent invite: link only, or link plus a code read aloud?
-- Where does the 2FA prompt sit: end of onboarding (here), or required before the first report export or PIN change (`auth.mdx` recommendation)? They can be combined.
+- Where does the 2FA prompt sit: end of onboarding (here), or required before the first report export or PIN change (`auth.md` recommendation)? They can be combined.
 - One child at launch with the child switcher added later, or the switcher from day one? Lean: data model supports many, UI shows a switcher only when there is more than one.
 - Is "Meal-lite" the right carer meal form, or should carers get the full form behind a "more" link?

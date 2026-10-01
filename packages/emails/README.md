@@ -13,8 +13,8 @@ All brand data (name, URL, colours, support and privacy links, from address) com
 ```
 src/
   components/  layout, header, footer, button, callout
-  templates/   verify-email, reset-password, magic-link,
-               password-changed, new-location-sign-in
+  templates/   verify-email, reset-password, password-changed, new-location-sign-in,
+               two-factor-changed, delete-account, family-invite, magic-link (unused)
   lib/         tailwind.ts (Tailwind config from app colours, absoluteUrl)
   registry.ts  every template + subject + preview props, renderEmail()
   render.ts    renderElement() -> { html, text, subject }
