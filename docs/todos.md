@@ -39,13 +39,44 @@ Done
 
 Later
 
-- [ ] Notification layer in `apps/api`: send via Resend (`renderEmail` or `react:`) and/or Novu (upload `dist/html` + manifest, or render in a code step)
-- [ ] Wire Better Auth callbacks (verify, reset, magic link, password changed, new-location alert) to these templates
+- [ ] Notification layer: moved to `packages/notifications` (see below)
+- [ ] New templates for auth: `account-locked`, `two-factor-changed`, optionally `passkey-changed` and `account-linked` (`magic-link` is unused, decide whether to keep it)
 - [ ] Real logo image in the header (`app.logos.mark` as absolute URL) once the asset exists
 - [ ] Translate email copy with the rest of the i18n work (strings are en-GB only for now)
 - [ ] Test in real clients (Gmail, Outlook, Apple Mail, dark mode) via the preview Compatibility panel or an email tester; add a light variant if dark renders badly
 - [ ] Templates for care notifications (family invite, report ready, weekly summary) when those features exist
 - [ ] Playwright check that every template renders at `localhost:5000` (desktop + 375px)
+
+## Notifications (`packages/notifications`)
+
+Delivery layer on Novu. Auth and other features call a typed `notify()`; they never import Novu or `@repo/emails`. Design in `docs/auth.mdx` section 5.
+
+- [ ] Scaffold package under `src/` with README (what, why, example, tests, depends on / used by)
+- [ ] `@repo/env` entry for `NOVU_SECRET_KEY` (and region); dev key in Infisical
+- [ ] Decide workflow style: code-first (Novu Framework, `renderEmail`) or uploaded HTML with `{{payload.x}}` tokens (lean: code-first)
+- [ ] Typed `notify(eventId, { to, payload })`: event id decides payload type; catches and logs its own errors
+- [ ] Workflows: `verify-email`, `reset-password`, `password-changed` first, then `new-location-sign-in`, `account-locked`, `two-factor-changed`
+- [ ] Mark security, verify and reset workflows critical so preferences cannot disable them
+- [ ] Vitest: payload typing, error swallowing, subscriber mapping; integration test against Novu dev/self-hosted if feasible
+- [ ] Privacy notice: Novu stores recipient emails and payloads; pick EU region if offered
+
+## Auth (`docs/auth.mdx`)
+
+Order follows section 13 of the design.
+
+- [ ] Install Better Auth, generate and migrate base tables (user, session, account, verification)
+- [ ] Mount handler in `apps/api` at `/api/auth/*`; wire verify, reset and password-changed to `notify`
+- [ ] Email and password with required verification; sign-in, sign-up, forgot and reset screens
+- [ ] Password-changed on both reset and in-settings change (after-hook on `/change-password`, verify hook exists)
+- [ ] Account lockout (`account_lock` table, 5 failures in 15 min, unlock email, "lock my account" link)
+- [ ] Google and Microsoft sign-in, account linking settings (`allowDifferentEmails: false`)
+- [ ] 2FA (TOTP, backup codes, trusted devices)
+- [ ] Passkeys (`@better-auth/passkey`; settle production domain first)
+- [ ] Last login method plugin plus session list with country
+- [ ] New-location notice from `CF-IPCountry`
+- [ ] Expo client; Apple sign-in once the Apple Developer account is paid
+- [ ] Write the lost-2FA support process before launch
+- [ ] Decide: Apple relay emails vs `allowDifferentEmails`; require 2FA for parents; last-login cookie consent
 
 ## Testing infrastructure
 
