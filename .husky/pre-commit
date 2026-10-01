@@ -1,3 +1,7 @@
+# infisical
+infisical scan git-changes --staged
+# infisical end
+
 # ultracite
 #!/bin/sh
 pnpm exec lint-staged
