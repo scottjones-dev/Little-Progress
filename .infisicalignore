@@ -1,0 +1,2 @@
+# Local-only Docker Postgres dev password (not a real secret)
+docker-compose.yml:generic-password:6

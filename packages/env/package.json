@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./api": "./src/api.ts",
+    "./db": "./src/db.ts",
     "./native": "./src/native.ts",
     "./web": "./src/web.ts"
   },
