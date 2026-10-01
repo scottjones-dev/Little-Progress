@@ -12,7 +12,9 @@
     "./web": "./src/web.ts"
   },
   "scripts": {
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "secrets:seed": "tsx src/seed/seed.ts",
+    "test": "vitest run"
   },
   "dependencies": {
     "@repo/config": "workspace:*",
@@ -22,6 +24,8 @@
   },
   "devDependencies": {
     "@types/node": "26.4.1",
-    "typescript": "7.0.2"
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
   }
 }

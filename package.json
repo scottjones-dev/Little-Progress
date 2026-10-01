@@ -21,6 +21,8 @@
     "infra:storage:down": "docker compose -f infra/storage/docker-compose.yml down",
     "infra:storage:up": "docker compose -f infra/storage/docker-compose.yml up -d",
     "infra:up": "pnpm infra:postgres:up && pnpm infra:storage:up",
+    "secrets:push": "infisical secrets set --env=dev --path=/api --file=.env",
+    "secrets:seed": "pnpm --filter @repo/env secrets:seed",
     "storage:init": "turbo run storage:init",
     "test": "turbo run test",
     "test:integration": "turbo run test:integration"

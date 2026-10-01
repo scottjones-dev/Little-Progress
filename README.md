@@ -12,7 +12,7 @@ The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). W
 | [`apps/native`](apps/native) | Expo mobile app, Metro on port 8081 |
 | [`apps/api`](apps/api) | Hono API, port 9000. The only thing that touches the database and storage |
 | [`packages/config`](packages/config) | Shared tsconfigs and global app constants (`@repo/config/app`) |
-| [`packages/env`](packages/env) | Validated environment variables per runtime |
+| [`packages/env`](packages/env) | Validated environment variables per runtime, plus `pnpm secrets:seed <env>` to fill Infisical |
 | [`packages/db`](packages/db) | Drizzle schema, migrations, client, care vocabulary |
 | [`packages/storage`](packages/storage) | S3-compatible storage (AWS S3, Cloudflare R2, Floci) |
 | [`packages/emails`](packages/emails) | React Email templates, preview on port 5000 |
@@ -47,7 +47,7 @@ pnpm dev             # web, api, native, email preview, Drizzle Studio
 | Expo (Metro)  | <http://localhost:8081>     |
 | Floci UI      | <http://localhost:4500>     |
 
-Secrets live in Infisical (`/api`, `/web`, `/native`); `.env.example` lists the key names. Each app also has a `dev:local` script that skips Infisical.
+Secrets live in Infisical (`/api`, `/web`, `/native`); `.env.example` lists the key names. On a fresh Infisical environment run `pnpm secrets:seed dev` (or `prod`) first. Each app also has a `dev:local` script that skips Infisical.
 
 ## Everyday commands
 

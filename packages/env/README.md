@@ -27,9 +27,39 @@ import { env } from "@repo/env/api";
 console.log(env.PORT);
 ```
 
+## Seeding Infisical
+
+`src/seed/` fills a fresh Infisical environment with every key above. It lives here because it is the same list of keys the schemas validate. It is not in `exports`, so apps never bundle it.
+
+Log in once (`infisical login`), then:
+
+```bash
+pnpm secrets:seed dev              # local development
+pnpm secrets:seed prod --dry-run   # show what would be added, change nothing
+pnpm secrets:seed prod
+```
+
+Environments: `dev`, `staging`, `prod`. Per environment it:
+
+1. Creates the `/api`, `/web` and `/native` folders if missing.
+2. Adds any **missing** key it can fill itself. It never overwrites an existing key, so it is safe to re-run.
+3. Prints the keys that still need a real value from a vendor dashboard, with where to get them (see `.env.example`).
+
+| Filled automatically | Notes |
+| --- | --- |
+| `BETTER_AUTH_SECRET`, `CARER_TOKEN_SECRET` | Random, different per key and per environment |
+| `NODE_ENV`, `PORT`, `STORAGE_DRIVER`, `S3_REGION`, `S3_FORCE_PATH_STYLE`, `NOVU_REGION` | Defaults (`NODE_ENV=production` outside `dev`) |
+| `WEB_ORIGIN`, `NEXT_PUBLIC_*`, `EXPO_PUBLIC_API_URL` | `localhost` URLs, **dev only** |
+
+Left for you in every environment: `DATABASE_URL`, `S3_ENDPOINT`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `NOVU_SECRET_KEY`, `AI_GATEWAY_API_KEY`. In `staging` and `prod` the URL keys are manual too.
+
+To push a filled-in root `.env` into Infisical `dev /api`, run `pnpm secrets:push`. It sends **every** key in the file and **overwrites** existing ones, and it only targets `/api`, so keep `NEXT_PUBLIC_*` and `EXPO_PUBLIC_*` keys out of that file (they belong in `/web` and `/native`). Keys with an empty value make it stop with an error.
+
+Generated values reach Infisical through a temporary owner-only file and are never printed. Seeding only fills Infisical. For production, give the deployed API an [Infisical machine identity](https://infisical.com/docs/documentation/platform/identities/universal-auth) and run it with `infisical run --env=prod --path=/api -- ...`, or sync `/web` to Vercel with the [Vercel integration](https://infisical.com/docs/integrations/cloud/vercel). Needs the `infisical` CLI on your PATH.
+
 ## Tests
 
-`pnpm --filter @repo/env check-types`. Validation is exercised by the apps that import it (for example the API refuses to start on a bad `PORT`).
+`pnpm --filter @repo/env test` covers the seed plan (`src/seed/plan.ts`). `seed.ts` is thin glue over the `infisical` CLI and is checked with `--dry-run`. `pnpm --filter @repo/env check-types` for types. Validation itself is exercised by the apps that import it (for example the API refuses to start on a bad `PORT`).
 
 ## Depends on / used by
 
