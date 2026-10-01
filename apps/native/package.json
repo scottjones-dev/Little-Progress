@@ -13,6 +13,7 @@
   "dependencies": {
     "@expo/ui": "~57.0.21",
     "@repo/config": "workspace:*",
+    "@repo/env": "workspace:*",
     "expo": "~57.0.26",
     "expo-constants": "~57.0.20",
     "expo-device": "~57.0.2",

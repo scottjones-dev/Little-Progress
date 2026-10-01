@@ -1,9 +1,27 @@
 {
   "$schema": "https://turborepo.dev/schema.json",
   "ui": "tui",
+  "globalPassThroughEnv": [
+    "AI_GATEWAY_API_KEY",
+    "BETTER_AUTH_SECRET",
+    "CARER_TOKEN_SECRET",
+    "DATABASE_URL",
+    "EXPO_PUBLIC_API_URL",
+    "NEXT_PUBLIC_API_URL",
+    "NEXT_PUBLIC_APP_URL",
+    "NODE_ENV",
+    "PORT",
+    "R2_ACCESS_KEY_ID",
+    "R2_ACCOUNT_ID",
+    "R2_BUCKET",
+    "R2_SECRET_ACCESS_KEY",
+    "SKIP_ENV_VALIDATION",
+    "WEB_ORIGIN"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "env": ["NEXT_PUBLIC_API_URL", "NEXT_PUBLIC_APP_URL"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "!.next/dev/**"]
     },

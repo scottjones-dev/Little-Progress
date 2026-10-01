@@ -1,0 +1,24 @@
+{
+  "name": "@repo/env",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./api": "./src/api.ts",
+    "./native": "./src/native.ts",
+    "./web": "./src/web.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/config": "workspace:*",
+    "@t3-oss/env-core": "0.13.11",
+    "@t3-oss/env-nextjs": "0.13.11",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
+  }
+}

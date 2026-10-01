@@ -1,4 +1,5 @@
 import { app } from "@repo/config/app";
+import { env } from "@repo/env/web";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -16,6 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   description: app.description,
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
   title: app.name,
 };
 
