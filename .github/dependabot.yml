@@ -1,0 +1,26 @@
+# Weekly update pull requests. Minor and patch updates arrive as one grouped pull request;
+# major versions come separately so they are reviewed on their own. Nothing merges itself.
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # Keeps the pinned commit SHAs of the GitHub Actions current.
+  - package-ecosystem: github-actions
+    directories:
+      - /
+      - /.github/actions/setup
+    schedule:
+      interval: weekly
+      day: monday
+    groups:
+      actions:
+        patterns: ["*"]

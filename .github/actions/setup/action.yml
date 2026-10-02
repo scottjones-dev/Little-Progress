@@ -1,0 +1,28 @@
+name: Set up the workspace
+description: Install pnpm and Node, restore caches and install dependencies.
+
+# Every job starts with the same four things, so they live here once. Run
+# actions/checkout before this step (a local action can only be found after checkout).
+# Third-party actions are pinned to a full commit SHA; the version is in the comment and
+# Dependabot opens the update pull requests.
+
+runs:
+  using: composite
+  steps:
+    # The pnpm version comes from "packageManager" in the root package.json.
+    - uses: pnpm/action-setup@d9184bf108216479bc5a137cc391f4d7b14c870b # v6.1.0
+
+    - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+      with:
+        node-version: 24
+        cache: pnpm
+
+    # Turborepo's local cache: unchanged packages are not rebuilt or re-tested.
+    - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: .turbo
+        key: turbo-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
+        restore-keys: turbo-${{ runner.os }}-${{ github.job }}-
+
+    - run: pnpm install --frozen-lockfile
+      shell: bash

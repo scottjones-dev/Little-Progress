@@ -1,2 +1,4 @@
 # Local-only Docker Postgres dev password (not a real secret)
 infra/postgres/docker-compose.yml:generic-password:7
+# Same local-only password, in the earlier commit where the file was still at the repo root
+791210c3dd1157904694b6c8e1979b86ffb8b8ca:docker-compose.yml:generic-password:6
