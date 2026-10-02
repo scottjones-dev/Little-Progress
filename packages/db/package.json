@@ -25,12 +25,12 @@
   },
   "dependencies": {
     "@repo/env": "workspace:*",
-    "drizzle-orm": "1.0.0-rc.5-5935859",
+    "drizzle-orm": "1.0.0-rc.4",
     "pg": "8.23.1"
   },
   "devDependencies": {
     "@repo/config": "workspace:*",
-    "@types/node": "26.6.3",
+    "@types/node": "26.4.1",
     "@types/pg": "8.23.1",
     "drizzle-kit": "1.0.0-rc.4",
     "tsx": "4.23.15",

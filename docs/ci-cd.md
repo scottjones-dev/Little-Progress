@@ -42,6 +42,12 @@ Fixed instead of accepted: the email preview tool (`@react-email/ui`) bundled it
 
 The secret scan ignores two known throwaway local passwords (the Docker Postgres and the CI test database) by listing them in `.infisicalignore` and, for the current CI file, with an inline `betterleaks:allow` comment.
 
+### Dependabot and Expo
+
+Dependabot opens update pull requests every Monday (`.github/dependabot.yml`), but it must not touch the packages Expo manages. Expo SDK 57 needs one exact, matching set (React Native, React, Reanimated, Worklets, screens, Sentry's React Native SDK, `@expo/*`). Updating them one at a time broke the app once: merged pull requests moved `react-native` to 0.87, `react` to 19.3 and `@expo/ui` to 58, which no Expo SDK supports together, and left the lockfile and `package.json` disagreeing so CI failed at install. Those packages are now ignored in `dependabot.yml`; they change together with the SDK, on purpose (`pnpm exec expo install --fix`, then the checks).
+
+Rule: **never merge a Dependabot pull request with red checks.** Branch protection (section 4) enforces it. Close pull requests for ignored packages instead of merging them.
+
 ## 3. Running the integration job locally
 
 ```bash

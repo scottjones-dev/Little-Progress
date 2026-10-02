@@ -12,6 +12,28 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    # Expo SDK 57 needs one exact, matching set of versions of these (React Native, React,
+    # Reanimated, Sentry's React Native SDK, and so on). Bumping them one by one breaks the
+    # app. They change together, on purpose, with the SDK: `pnpm exec expo install --fix`,
+    # then run the checks. Dependabot leaves them alone.
+    ignore:
+      - dependency-name: "@expo/*"
+      - dependency-name: "expo"
+      - dependency-name: "expo-*"
+      - dependency-name: "react-native"
+      - dependency-name: "react-native-*"
+      - dependency-name: "@react-native/*"
+      - dependency-name: "@react-native-async-storage/*"
+      - dependency-name: "@sentry/react-native"
+      - dependency-name: "posthog-react-native"
+      # The app and the website share these through Expo's pinned React.
+      - dependency-name: "react"
+      - dependency-name: "react-dom"
+      - dependency-name: "@types/react"
+      - dependency-name: "@types/react-dom"
+      # Pre-release builds: update by hand when a stable version is out.
+      - dependency-name: "drizzle-orm"
+        versions: ["*-rc.*"]
 
   # Keeps the pinned commit SHAs of the GitHub Actions current.
   - package-ecosystem: github-actions
