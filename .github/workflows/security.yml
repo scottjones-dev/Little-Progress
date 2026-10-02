@@ -1,8 +1,9 @@
 name: Security
 
-# Known-vulnerable dependencies and committed secrets. Also runs every Monday, because new
-# advisories appear without any code change. Works on a private repository without paid
-# GitHub security features (CodeQL is optional, see the last job).
+# Known-vulnerable dependencies, committed secrets and code analysis. Also runs every Monday,
+# because new advisories appear without any code change. The repository is public, so CodeQL
+# and dependency review are free and switch themselves on; if it ever goes private they turn
+# off (they need GitHub's paid code security there) and the other jobs still protect it.
 
 on:
   pull_request:
@@ -72,11 +73,25 @@ jobs:
       - run: npm install --global @infisical/cli@0.43.138
       - run: infisical scan --verbose
 
-  # Off until the repository can use code scanning (public repository, or GitHub's paid
-  # code security on a private one). Turn on with the repository variable ENABLE_CODEQL=true.
+  # New or changed dependencies in a pull request: known vulnerabilities and licenses.
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request' && github.event.repository.private == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: high
+
+  # Code analysis for JavaScript and TypeScript. Free on a public repository. The variable
+  # ENABLE_CODEQL=true turns it on for a private repository that has code security.
   codeql:
     name: CodeQL
-    if: vars.ENABLE_CODEQL == 'true'
+    if: github.event.repository.private == false || vars.ENABLE_CODEQL == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:

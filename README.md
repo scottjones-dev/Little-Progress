@@ -2,7 +2,7 @@
 
 A private family care diary for a toddler who is behind on solids and development. It records detailed feeding trials plus sleep, nappies, milk and milestones, surfaces patterns over time, and produces printable reports for health visitors, dietitians and paediatricians. Parents have full accounts; carers (nursery, grandparents) log through a shared-PIN quick-log screen.
 
-The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). What each person does screen by screen is in [`docs/user-flows.md`](docs/user-flows.md). Open work is tracked in [`docs/todos.md`](docs/todos.md). Project rules for contributors and AI agents are in [`AGENTS.md`](AGENTS.md).
+This is an open source project (MIT license) and contributions are welcome: see [`CONTRIBUTING.md`](CONTRIBUTING.md). It never contains real family data; please keep it that way. The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). What each person does screen by screen is in [`docs/user-flows.md`](docs/user-flows.md). Open work is tracked in [`docs/todos.md`](docs/todos.md). Project rules for contributors and AI agents are in [`AGENTS.md`](AGENTS.md).
 
 ## Workspaces
 
@@ -34,7 +34,20 @@ config + env are used by everything
 
 ## Getting started
 
-Requirements: Node 24+, pnpm, Docker, the [Infisical CLI](https://infisical.com/docs/cli/overview) (logged in).
+Requirements: Node 24+, pnpm, Docker.
+
+**Anyone, no accounts** (details in [`CONTRIBUTING.md`](CONTRIBUTING.md)):
+
+```bash
+pnpm install
+pnpm setup:local          # writes a .env with local settings and random secrets
+pnpm infra:up             # Postgres + storage (Docker)
+pnpm db:migrate:local     # create tables
+pnpm storage:init:local   # create the local bucket
+pnpm dev:local            # API, website and app
+```
+
+**The maintainer's setup**, with secrets in Infisical (needs the [Infisical CLI](https://infisical.com/docs/cli/overview), logged in):
 
 ```bash
 pnpm install
@@ -52,7 +65,7 @@ pnpm dev             # web, api, native, email preview, Drizzle Studio
 | Expo (Metro)  | <http://localhost:8081>     |
 | Floci UI      | <http://localhost:4500>     |
 
-Secrets live in Infisical (`/api`, `/web`, `/native`); `.env.example` lists the key names. On a fresh Infisical environment run `pnpm secrets:seed dev` (or `prod`) first. Each app also has a `dev:local` script that skips Infisical.
+Secrets live in Infisical (`/api`, `/web`, `/native`); `.env.example` lists the key names. On a fresh Infisical environment run `pnpm secrets:seed dev` (or `prod`) first. The `:local` commands skip Infisical and read the root `.env` instead.
 
 ## Everyday commands
 

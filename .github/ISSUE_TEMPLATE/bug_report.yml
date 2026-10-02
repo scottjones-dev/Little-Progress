@@ -1,0 +1,50 @@
+name: Bug report
+description: Something does not work as it should
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping. **Do not include real personal or health data**: no real names, photos, entries, emails or keys. Use made-up examples. For a security problem, do not use this form: see SECURITY.md.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run `pnpm dev:local`
+        2. Open ...
+        3. Click ...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where
+      options:
+        - Website
+        - App (Expo)
+        - API
+        - Emails or notifications
+        - Translations
+        - Documentation
+        - Setup or tooling
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Your setup
+      description: Operating system, Node version, browser or phone, and the commit or version.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages or logs
+      description: Check there is nothing personal in them first.
+      render: shell

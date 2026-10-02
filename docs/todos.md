@@ -153,6 +153,16 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [ ] Translated SEO description and metadata (`app.description` is English)
 - [ ] CI step runs `pnpm i18n:check`; Languine will need the Pro plan once keys pass 500 (about 160 English keys for three languages)
 
+## Open source (`CONTRIBUTING.md`)
+
+- [x] MIT `LICENSE`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, issue forms; contributors run everything locally with `pnpm setup:local` and the `:local` commands (no Infisical)
+- [ ] GitHub settings (see `docs/ci-cd.md` section 4): private vulnerability reporting, secret scanning and push protection, approval for fork pull request workflows, Discussions if wanted
+- [ ] Confirm the contact email in `CODE_OF_CONDUCT.md` and `SECURITY.md` (it is the author address from `@repo/config/app`)
+- [ ] Add `good first issue` and `help wanted` labels and a few starter issues from these todos
+- [ ] Decide about the name and logo: the code is MIT, but say in the README whether others may use "LittleProgress" for their own hosted service
+- [ ] Review what is public: `docs/plan.md` and the other docs describe the product and its security design; remove anything you do not want public (for example detailed threat notes) before promoting the repository
+- [ ] Make `:local` variants for the Novu preview (`packages/notifications`) if contributors need to test notifications without an account
+
 ## CI/CD (`docs/ci-cd.md`)
 
 - [x] GitHub Actions: lint, types, tests, build, Expo bundle, migrations + storage integration, dependency audit, OSV, secret scan, Dependabot (checked with actionlint and in a clean Linux container; not run on GitHub yet)

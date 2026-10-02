@@ -16,7 +16,8 @@ Status: **checks and security scans only. Nothing is deployed yet.** The workflo
 | **Dependency audit** (`security.yml`) | no high or critical advisory in production dependencies | `pnpm audit --prod --audit-level high` |
 | **OSV scan** | no known-vulnerable package in `pnpm-lock.yaml`. On a pull request only new vulnerabilities fail it; on `main` and every Monday everything is scanned |  |
 | **Secret scan** | no secret anywhere in the git history (same scanner and `.infisicalignore` as the pre-commit hook) | `infisical scan` |
-| **CodeQL** | code analysis. Off by default (needs GitHub code scanning, which private repositories do not have on the free plan) | set the repository variable `ENABLE_CODEQL=true` once available |
+| **Dependency review** | a pull request does not add a dependency with a known high or critical vulnerability. Public repositories only (free there) |  |
+| **CodeQL** | code analysis. Runs automatically while the repository is public; on a private one it needs GitHub's paid code security, then set the repository variable `ENABLE_CODEQL=true` |  |
 
 No job needs a real secret. The integration job uses throwaway values for two disposable containers (the same ones as local development).
 
@@ -53,11 +54,12 @@ CI runs the underlying commands directly with the values in `ci.yml` instead of 
 
 ## 4. Setting up the repository (once)
 
-1. Create a **private** GitHub repository, add it as `origin` and push `main`.
+1. Create the GitHub repository (it is public: the project is open source), add it as `origin` and push `main`.
 2. Settings, Actions: allow actions. Turn on Dependabot alerts and Dependabot security updates.
 3. Settings, Branches: protect `main`. Require a pull request and these checks: _Lint, types, tests_, _Build_, _Expo bundle_, _Database migrations and storage_, _Dependency audit_, _Secret scan_, _OSV scan (new in this pull request)_. Require branches to be up to date. No force pushes.
-4. Optional: if the plan allows code scanning, set the repository variable `ENABLE_CODEQL` to `true`.
-5. Add a `CODEOWNERS` file with your GitHub username when you know it.
+4. Settings, Code security: turn on _Private vulnerability reporting_ (SECURITY.md sends reporters there), _Secret scanning_ and _Push protection_.
+5. Settings, Actions, General: _Fork pull request workflows_ set to require approval for all outside contributors, and the default token set to read-only. The workflows need no secrets, so a fork cannot reach any.
+6. Add a `CODEOWNERS` file with your GitHub username when you know it.
 
 Watch these on the first real run: the runner can download Google fonts for the website build, the S3 emulator starts in time, the Expo bundle duration, and cache hits on the second run.
 
