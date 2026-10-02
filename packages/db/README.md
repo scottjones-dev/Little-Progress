@@ -40,6 +40,7 @@ Postgres runs in Docker: `pnpm infra:postgres:up`. All commands run through Infi
 | --- | --- |
 | `pnpm db:generate` | create a migration from schema changes |
 | `pnpm db:migrate` | apply migrations |
+| `pnpm db:migrate:local` | same, without Infisical: reads the root `.env` (`pnpm setup:local`). Also `db:generate:local`, `db:check:local` and `dev:local` (Drizzle Studio) in this package |
 | `pnpm db:push` | push schema directly (throwaway dev use) |
 | `pnpm db:pull`, `db:export`, `db:check`, `db:up` | other drizzle-kit commands |
 | `pnpm auth:generate` | regenerate `src/schemas/auth.ts` with the Better Auth CLI (never edit that file by hand) |

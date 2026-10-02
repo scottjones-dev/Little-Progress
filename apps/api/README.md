@@ -24,7 +24,7 @@ Every response has an `x-request-id`; every error uses the shape from `@repo/err
 ```bash
 pnpm dev                              # whole repo; API on http://localhost:9000
 pnpm --filter @repo/api dev           # API only (secrets via Infisical /api)
-pnpm --filter @repo/api dev:local     # without Infisical, defaults only
+pnpm --filter @repo/api dev:local     # without Infisical: reads the root .env (pnpm setup:local)
 ```
 
 Port, base path and name come from `@repo/config/app`; env is validated by `@repo/env/api`.

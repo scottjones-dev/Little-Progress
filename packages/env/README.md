@@ -28,6 +28,10 @@ import { env } from "@repo/env/api";
 console.log(env.PORT);
 ```
 
+## Local setup without Infisical
+
+`pnpm setup:local` writes a root `.env` for running everything on one machine with no accounts: random secrets for this machine, the local Docker Postgres and S3 emulator, and localhost URLs. It never overwrites an existing `.env` unless you add `--force`. The `:local` scripts (`dev:local`, `db:migrate:local`, `storage:init:local`, `test:integration:local`) read that file through `dotenv-cli`. Features that need an account stay off. Code: `src/local/`.
+
 ## Seeding Infisical
 
 `src/seed/` fills a fresh Infisical environment with every key above. It lives here because it is the same list of keys the schemas validate. It is not in `exports`, so apps never bundle it.

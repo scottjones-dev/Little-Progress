@@ -11,7 +11,7 @@ Quick one-handed logging at mealtimes and a nursery-tablet quick-log. Currently 
 ```bash
 pnpm dev                              # whole repo; Metro on http://localhost:8081
 pnpm --filter @repo/native dev        # Expo only (secrets via Infisical /native)
-pnpm --filter @repo/native dev:local  # without Infisical
+pnpm --filter @repo/native dev:local  # without Infisical: reads the root .env
 ```
 
 Scan the QR code with Expo Go. Text comes from translation files (`@repo/i18n`); the language is the one chosen in the app, then the device language (`src/lib/i18n.ts`, switcher on the home screen); see `docs/i18n.md`. Analytics (PostHog EU) lives in `src/lib/analytics.ts` with screen tracking in `src/app/_layout.tsx`; see `docs/analytics.md`. Errors are reported to Sentry from `src/app/_layout.tsx` (with an Expo Router `ErrorBoundary`); `metro.config.js` adds Sentry debug ids. In development the home screen has Sentry test buttons (`src/components/sentry-test.tsx`). Native crashes need a development build, see `docs/error-handling.md`. Code lives under `src/app` (expo-router). Colours and name come from `@repo/config/app`; the API URL from `@repo/env/native` (`src/lib/api.ts`).

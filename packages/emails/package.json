@@ -16,7 +16,8 @@
     "export": "email export --dir src/templates --outDir dist/export --pretty",
     "preview:build": "email build --dir src/templates",
     "preview:start": "email start --port 5000",
-    "test": "vitest run"
+    "test": "vitest run",
+    "dev:local": "email dev --dir src/templates --port 5000"
   },
   "dependencies": {
     "@react-email/components": "1.0.12",

@@ -12,7 +12,9 @@
     "check-types": "tsc --noEmit",
     "storage:init": "infisical run --path=/api -- tsx src/server/init.ts",
     "test": "vitest run --exclude **/*.integration.test.ts",
-    "test:integration": "infisical run --path=/api -- vitest run integration"
+    "test:integration": "infisical run --path=/api -- vitest run integration",
+    "storage:init:local": "dotenv -e ../../.env -- tsx src/server/init.ts",
+    "test:integration:local": "dotenv -e ../../.env -- vitest run integration"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.1144.0",

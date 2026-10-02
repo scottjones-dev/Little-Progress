@@ -42,7 +42,7 @@ import {
 
 ## Run it
 
-Local storage is Floci: `pnpm infra:storage:up` (S3 on :4566, UI on <http://localhost:4500>), then `pnpm storage:init` to create the bucket and CORS.
+Local storage is Floci: `pnpm infra:storage:up` (S3 on :4566, UI on <http://localhost:4500>), then `pnpm storage:init` (or `pnpm storage:init:local` without Infisical, reading the root `.env`) to create the bucket and CORS.
 
 ## Tests
 

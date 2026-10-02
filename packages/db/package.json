@@ -17,7 +17,11 @@
     "db:migrate": "infisical run --path=/api -- drizzle-kit migrate",
     "db:pull": "infisical run --path=/api -- drizzle-kit pull",
     "db:push": "infisical run --path=/api -- drizzle-kit push",
-    "db:up": "infisical run --path=/api -- drizzle-kit up"
+    "db:up": "infisical run --path=/api -- drizzle-kit up",
+    "dev:local": "dotenv -e ../../.env -- drizzle-kit studio",
+    "db:migrate:local": "dotenv -e ../../.env -- drizzle-kit migrate",
+    "db:generate:local": "dotenv -e ../../.env -- drizzle-kit generate",
+    "db:check:local": "dotenv -e ../../.env -- drizzle-kit check"
   },
   "dependencies": {
     "@repo/env": "workspace:*",

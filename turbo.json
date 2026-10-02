@@ -82,6 +82,19 @@
     "storage:init": {
       "cache": false
     },
+    "dev:local": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:migrate:local": {
+      "cache": false
+    },
+    "storage:init:local": {
+      "cache": false
+    },
+    "test:integration:local": {
+      "cache": false
+    },
     "test": {
       "dependsOn": ["^build"],
       "cache": true

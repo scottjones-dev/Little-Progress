@@ -15,7 +15,8 @@
   "scripts": {
     "check-types": "tsc --noEmit",
     "secrets:seed": "tsx src/seed/seed.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "setup:local": "tsx src/local/setup.ts"
   },
   "dependencies": {
     "@repo/config": "workspace:*",

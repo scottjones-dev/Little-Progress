@@ -11,7 +11,7 @@ The main way parents (and carers on a nursery tablet) use the diary in a browser
 ```bash
 pnpm dev                          # whole repo; web on http://localhost:3000
 pnpm --filter @repo/web dev       # web only (secrets via Infisical /web)
-pnpm --filter @repo/web dev:local # without Infisical
+pnpm --filter @repo/web dev:local # without Infisical: reads the root .env
 pnpm --filter @repo/web build
 ```
 
