@@ -138,6 +138,15 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [ ] Optional: server-side capture with `posthog-node` in `apps/api` for exact counts (same catalog)
 - [ ] Dashboards in PostHog: sign-up to first entry, entries per week, time to log, report use
 
+## UI package (`docs/ui.md`)
+
+- [x] `packages/ui` set up the shadcn monorepo way and used by the website: dependencies in the right package, theme (light and dark, brand colours, contrast tested), Sora and JetBrains Mono, theme toggle, language switcher, `ThemeProvider`
+- [ ] Make the shadcn components' built-in English strings translatable ("Close", "Toggle Sidebar", "Previous slide", pagination and breadcrumb labels) before using those components in screens
+- [ ] Design the carer quick-log components (big touch targets, one-handed) on top of these
+- [ ] Trim unused components and libraries when the screens are built (recharts, embla, react-day-picker, cmdk and others are only needed for charts, carousels, date pickers)
+- [ ] Review the light theme with real screens; adjust the palette if needed (contrast is tested, taste is not)
+- [ ] Matching fonts (Sora, JetBrains Mono) and light/dark in the native app with the UI step there
+
 ## Native app styling
 
 - [x] Nativewind 5 (release candidate) installed in `apps/native`; the web side removed from the app (`react-native-web`, `react-dom`, web script, web config, web assets)

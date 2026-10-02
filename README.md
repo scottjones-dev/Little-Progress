@@ -21,6 +21,7 @@ This is an open source project (MIT license) and contributions are welcome: see 
 | [`packages/i18n`](packages/i18n) | Translation catalogs (English, Polish, Spanish, Welsh) and language helpers for server, web and native |
 | [`packages/errors`](packages/errors) | Standard API error shape and the privacy rules for Sentry (api, web, native) |
 | [`packages/notifications`](packages/notifications) | `notify()` for email, push and later SMS, delivered through Novu |
+| [`packages/ui`](packages/ui) | The website's design system: shadcn/ui components and the light and dark Midnight Sanctuary theme. Web only |
 | [`infra/postgres`](infra/postgres) | Local PostgreSQL via Docker |
 | [`infra/storage`](infra/storage) | Local S3 emulator (Floci) and its UI via Docker |
 | [`.github`](.github) | CI and security checks on every pull request (GitHub Actions), Dependabot. See [`docs/ci-cd.md`](docs/ci-cd.md) |
