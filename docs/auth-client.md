@@ -308,6 +308,8 @@ Needs a session signed in within 15 minutes (or the password). Warn that a famil
 
 ## 4. Errors
 
+Show messages in the person's language: our own API errors by `error.code` and Better Auth errors by their code, from the translation files (`i18n.md`). The language of a signed-in parent is saved with `authClient.updateUser({ locale })` (the `locale` field already exists on the user) and is used for emails and push; the settings screen calls it when the language changes.
+
 Errors from our own API routes (not `/api/auth/*`) use the shape in `error-handling.md`: branch on `error.code`.
 
 Branch on `error.status` and `error.code`, never on the message text, and look the text up in the catalogs.

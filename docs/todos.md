@@ -138,6 +138,21 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [ ] Optional: server-side capture with `posthog-node` in `apps/api` for exact counts (same catalog)
 - [ ] Dashboards in PostHog: sign-up to first entry, entries per week, time to log, report use
 
+## Internationalization (`docs/i18n.md`)
+
+- [x] `packages/i18n`: English catalogs, language choice, formatting, checks; emails, push, website and app read from it
+- [ ] **Languine spike (needs you):** `npx languine@latest auth login`, then `languine init` in `packages/i18n` (creates `languine.json` and the project id), put `LANGUINE_API_KEY` and `LANGUINE_PROJECT_ID` into Infisical folder `/i18n`; confirm the include pattern `src/locales/[locale]/*.json` and that Polish and Welsh plural forms (`_few`, `_many`, `_zero`, `_two`) are produced
+- [ ] Run `pnpm i18n:translate` for pl, es, cy, then `pnpm i18n:check` until green; commit `languine.lock` with the catalogs
+- [ ] Languine instructions in its dashboard: tone and a glossary (weaning, nappy, highchair, texture words)
+- [ ] Native-speaker review (Polish, Spanish, Welsh) of everything about health, feeding and security before go-live, and of clinician reports when they exist
+- [ ] Parent settings: language choice saved with `updateUser({ locale })` and used for emails and push
+- [ ] Better Auth error codes into the translation files with the auth screens
+- [ ] Reports and AI insights take a `locale` argument when built
+- [ ] Right-to-left (Urdu): logical CSS on web, `I18nManager` on native, layout checks
+- [ ] Marketing site: language URL prefixes and static pages for search engines
+- [ ] Translated SEO description and metadata (`app.description` is English)
+- [ ] CI step runs `pnpm i18n:check`; Languine will need the Pro plan once keys pass 500 (about 160 English keys for three languages)
+
 ## CI/CD and release tracking (not started)
 
 - [ ] Set up CI (GitHub Actions, see `docs/plan.md` CI/CD): check, check-types, tests, build

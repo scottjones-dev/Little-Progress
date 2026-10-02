@@ -57,7 +57,8 @@ const { html, text, subject } = await renderEmail("verify-email", {
 
 ## Depends on / used by
 
-- Depends on `@repo/config` (brand data), `@react-email/components`, `@react-email/render`, `react-email` (preview CLI).
+- Every template takes an optional `locale` and reads its text from `@repo/i18n` (`emails` namespace); no text is written in the components. `registry[id].renderPreview(locale)` renders a template in a language; the React Email preview and the `dist` HTML build stay English. See `docs/i18n.md`.
+- Depends on `@repo/config` (brand data), `@repo/i18n` (text), `@react-email/components`, `@react-email/render`, `react-email` (preview CLI).
 - Used by `packages/notifications`, which renders these templates inside its Novu email step.
 
 ## Notes

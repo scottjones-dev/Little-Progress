@@ -80,4 +80,4 @@ Not covered yet: a live send. Do that manually with a Novu dev key (see setup) b
 
 ## Depends on / used by
 
-Depends on `@novu/framework`, `@novu/api`, `@repo/emails` (templates), `@repo/env`, `zod`, `hono`. Used by `apps/api` (bridge now, `notify` from auth next).
+Notifications follow the recipient's language: `notify(..., { to: { locale } })` passes it to the workflow, so the email and the push text (`push` namespace in `@repo/i18n`) are in that language; an unknown language means English. Depends on `@repo/i18n`, `@novu/framework`, `@novu/api`, `@repo/emails` (templates), `@repo/env`, `zod`, `hono`. Used by `apps/api` (bridge now, `notify` from auth next).

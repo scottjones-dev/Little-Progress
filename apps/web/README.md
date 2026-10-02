@@ -15,7 +15,7 @@ pnpm --filter @repo/web dev:local # without Infisical
 pnpm --filter @repo/web build
 ```
 
-Errors are reported to Sentry (`src/instrumentation.ts`, `src/instrumentation-client.ts`, browser events through `/monitoring`) and shown by `error.tsx`, `global-error.tsx` and `not-found.tsx`; see `docs/error-handling.md`. `/debug` (development only) has buttons that throw test errors. Analytics (PostHog EU, through the `/ingest` rewrites in `next.config.ts`) starts from `src/lib/analytics.ts`; see `docs/analytics.md`. Code lives under `src/app`. Name and description come from `@repo/config/app`; env from `@repo/env/web`.
+Errors are reported to Sentry (`src/instrumentation.ts`, `src/instrumentation-client.ts`, browser events through `/monitoring`) and shown by `error.tsx`, `global-error.tsx` and `not-found.tsx`; see `docs/error-handling.md`. `/debug` (development only) has buttons that throw test errors. Analytics (PostHog EU, through the `/ingest` rewrites in `next.config.ts`) starts from `src/lib/analytics.ts`; see `docs/analytics.md`. Text comes from translation files (`@repo/i18n`): the language is chosen in `src/lib/i18n` (cookie, browser, English) and switched with the language switcher; see `docs/i18n.md`. Code lives under `src/app`. Name and description come from `@repo/config/app`; env from `@repo/env/web`.
 
 ## Tests
 
@@ -23,4 +23,4 @@ Errors are reported to Sentry (`src/instrumentation.ts`, `src/instrumentation-cl
 
 ## Depends on / used by
 
-Depends on `@repo/analytics`, `posthog-js`, `@repo/config`, `@repo/env`, `@repo/errors`, `@sentry/nextjs`, Next.js, Tailwind. Talks to `apps/api`. shadcn/ui will be added when the UI is built.
+Depends on `@repo/i18n`, `react-i18next`, `@repo/analytics`, `posthog-js`, `@repo/config`, `@repo/env`, `@repo/errors`, `@sentry/nextjs`, Next.js, Tailwind. Talks to `apps/api`. shadcn/ui will be added when the UI is built.

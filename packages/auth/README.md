@@ -75,4 +75,4 @@ None yet (deferred on request). The planned list is in `docs/auth.md` section 12
 
 ## Depends on / used by
 
-Depends on `better-auth`, `@better-auth/drizzle-adapter`, `@better-auth/passkey`, `@better-auth/expo`, `@repo/db`, `@repo/env`, `@repo/notifications`, `@repo/config`. Used by `apps/api`.
+Emails are sent in the user's saved language (`user.locale`) and dates are written for it (`@repo/i18n/format`). Depends on `@repo/i18n`, `better-auth`, `@better-auth/drizzle-adapter`, `@better-auth/passkey`, `@better-auth/expo`, `@repo/db`, `@repo/env`, `@repo/notifications`, `@repo/config`. Used by `apps/api`.

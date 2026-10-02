@@ -18,6 +18,7 @@ The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). W
 | [`packages/emails`](packages/emails) | React Email templates, preview on port 5000 |
 | [`packages/auth`](packages/auth) | Better Auth for parent accounts (server side): email and password, verification |
 | [`packages/analytics`](packages/analytics) | Event catalog and privacy rules for PostHog EU analytics (web and native) |
+| [`packages/i18n`](packages/i18n) | Translation catalogs (English, Polish, Spanish, Welsh) and language helpers for server, web and native |
 | [`packages/errors`](packages/errors) | Standard API error shape and the privacy rules for Sentry (api, web, native) |
 | [`packages/notifications`](packages/notifications) | `notify()` for email, push and later SMS, delivered through Novu |
 | [`infra/postgres`](infra/postgres) | Local PostgreSQL via Docker |
