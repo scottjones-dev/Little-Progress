@@ -30,9 +30,16 @@ How it is built:
 
 ## 2. Accepted vulnerabilities
 
-An advisory we have decided to live with is listed under `audit.ignore` in `pnpm-workspace.yaml`, with a reason and a date to look again. Never skip the audit job instead.
+An advisory we have decided to live with is listed with a reason and a date to look again. Never skip the job instead. There are two lists, one per scanner, kept in step:
 
-Today: `GHSA-86w9-cpqp-85rv` (node-forge, high, no patched version). It comes from Expo's command line tooling used to build the app, not from the app that ships. Check again on 2026-12-01. Two moderate advisories (`uuid`, `decode-uri-component`) do not fail the job; they will clear when Expo updates.
+- `pnpm audit`: `audit.ignore` in `pnpm-workspace.yaml` (high and critical only fail the job).
+- OSV scan: `osv-scanner.toml` (every severity fails the job). After the `ignoreUntil` date the scan fails again, so an old exception cannot be forgotten.
+
+Today, all from Expo's build tooling, none in the app that ships: `GHSA-86w9-cpqp-85rv` (node-forge, no patched version), `GHSA-w5hq-g745-h8pq` (uuid 7), `GHSA-vcc3-ghjq-m6fr` (decode-uri-component). Check again on 2026-12-01, or when Expo updates.
+
+Fixed instead of accepted: the email preview tool (`@react-email/ui`) bundled its own `next` 16.3.3 with a critical advisory. `overrides` in `pnpm-workspace.yaml` points it at the website's version (checked: the preview still starts). Remove the override when `@react-email/ui` ships a patched `next`.
+
+The secret scan ignores two known throwaway local passwords (the Docker Postgres and the CI test database) by listing them in `.infisicalignore` and, for the current CI file, with an inline `betterleaks:allow` comment.
 
 ## 3. Running the integration job locally
 

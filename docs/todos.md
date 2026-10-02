@@ -162,7 +162,7 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [ ] Add `.github/CODEOWNERS` with your GitHub username
 - [ ] Make `pnpm i18n:check` blocking in `ci.yml` (remove `continue-on-error`) once the translations exist
 - [ ] Turn on CodeQL (`ENABLE_CODEQL=true`) if the repository gets code scanning; consider Semgrep as a free alternative
-- [ ] Re-check the accepted `GHSA-86w9-cpqp-85rv` (node-forge via Expo) on 2026-12-01 and remove it when Expo updates
+- [ ] Re-check the accepted advisories (node-forge, uuid 7, decode-uri-component, all Expo tooling) on 2026-12-01: `osv-scanner.toml` and `audit.ignore`; remove the `@react-email/ui>next` override when react-email ships a patched next
 - [ ] Playwright E2E job when there are screens to test
 - [ ] Deploy stage (not started): choose API hosting and add `deploy.yml` with a `production` environment needing approval; Infisical machine identity via OIDC; Vercel and EAS tokens
 - [ ] Pass the commit hash to Sentry as `SENTRY_RELEASE` (`GITHUB_SHA`): API at deploy time, web and native at build time. Check what each SDK needs when this is built

@@ -7,6 +7,13 @@ allowBuilds:
   core-js: false
   esbuild: true
 
+# The email preview tool (@react-email/ui, a dev dependency of packages/emails) pins its own
+# copy of next 16.3.3, which has a critical advisory fixed in 16.3.6. Its newest release still
+# pins it, so we point it at the version the website already uses. Remove this when
+# @react-email/ui ships with a patched next.
+overrides:
+  "@react-email/ui>next": 16.3.7
+
 # Advisories we have looked at and accepted. Each needs a reason and a date to look again.
 audit:
   ignore:

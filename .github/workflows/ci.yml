@@ -71,7 +71,7 @@ jobs:
         image: postgres:18
         env:
           POSTGRES_DB: littleprogress
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: postgres # betterleaks:allow (throwaway password for the disposable test database)
           POSTGRES_USER: postgres
         ports:
           - 5432:5432

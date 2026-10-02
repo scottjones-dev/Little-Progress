@@ -2,3 +2,5 @@
 infra/postgres/docker-compose.yml:generic-password:7
 # Same local-only password, in the earlier commit where the file was still at the repo root
 791210c3dd1157904694b6c8e1979b86ffb8b8ca:docker-compose.yml:generic-password:6
+# The CI test database's throwaway password, in the commit that added ci.yml
+67ae05dd88bf39274f51e94b53b828529be12ad3:.github/workflows/ci.yml:generic-password:74
