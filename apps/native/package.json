@@ -12,14 +12,14 @@
     "dev:local": "expo start"
   },
   "dependencies": {
-    "@expo/ui": "~57.0.21",
+    "@expo/ui": "~58.0.8",
     "@react-native-async-storage/async-storage": "2.2.0",
     "@repo/analytics": "workspace:*",
     "@repo/config": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/errors": "workspace:*",
     "@repo/i18n": "workspace:*",
-    "@sentry/react-native": "~7.11.0",
+    "@sentry/react-native": "~8.28.0",
     "expo": "~57.0.26",
     "expo-application": "~57.0.3",
     "expo-constants": "~57.0.20",
