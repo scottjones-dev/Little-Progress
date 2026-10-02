@@ -22,6 +22,7 @@
     "@react-email/components": "1.0.12",
     "@react-email/render": "2.1.0",
     "@repo/config": "workspace:*",
+    "@repo/i18n": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

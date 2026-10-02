@@ -39,7 +39,15 @@
           "url": "https://de.sentry.io/"
         }
       ],
-      "expo-localization"
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "android": ["en", "pl", "es", "cy"],
+            "ios": ["en", "pl", "es", "cy"]
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

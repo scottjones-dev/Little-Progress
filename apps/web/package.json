@@ -14,11 +14,14 @@
     "@repo/config": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/errors": "workspace:*",
+    "@repo/i18n": "workspace:*",
     "@sentry/nextjs": "^11.1.0",
+    "i18next": "^26.4.2",
     "next": "16.3.7",
     "posthog-js": "^1.435.5",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "react-i18next": "^17.0.15"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

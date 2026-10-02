@@ -21,6 +21,7 @@
     "@repo/config": "workspace:*",
     "@repo/emails": "workspace:*",
     "@repo/env": "workspace:*",
+    "@repo/i18n": "workspace:*",
     "hono": "4.13.12",
     "zod": "4.6.5"
   },

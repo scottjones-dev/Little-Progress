@@ -1,0 +1,10 @@
+{
+  "actions": {
+    "goHome": "Go home",
+    "tryAgain": "Try again"
+  },
+  "language": {
+    "label": "Language"
+  },
+  "tagline": "A calm family care diary"
+}

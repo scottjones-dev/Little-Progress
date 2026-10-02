@@ -30,7 +30,7 @@ describe("notify", () => {
     });
 
     expect(trigger).toHaveBeenCalledWith({
-      payload,
+      payload: { ...payload, locale: "en" },
       to: {
         email: "alex@example.test",
         locale: "en-GB",
@@ -40,6 +40,27 @@ describe("notify", () => {
       transactionId: "pc-1",
       workflowId: "password-changed",
     });
+  });
+
+  it("passes the recipient's language to the workflow, ignoring the region", async () => {
+    const { notify, trigger } = setup();
+
+    await notify("password-changed", {
+      payload,
+      to: { ...to, locale: "pl-PL" },
+    });
+
+    expect(trigger).toHaveBeenCalledWith(
+      expect.objectContaining({ payload: { ...payload, locale: "pl" } })
+    );
+  });
+
+  it("sends no language for an unsupported one, so the message is English", async () => {
+    const { notify, trigger } = setup();
+
+    await notify("password-changed", { payload, to: { ...to, locale: "fr" } });
+
+    expect(trigger).toHaveBeenCalledWith(expect.objectContaining({ payload }));
   });
 
   it("does not send an invalid payload and logs why", async () => {

@@ -1,4 +1,5 @@
 import type { Novu } from "@novu/api";
+import { toLocale } from "@repo/i18n/resolve";
 import { z } from "zod";
 
 import { getNovu } from "./client";
@@ -64,8 +65,10 @@ export const createNotify =
         return;
       }
       const validPayload = events[eventId].payload.parse(payload);
+      // The email and push text follow the recipient's language. An unknown one means English.
+      const locale = toLocale(to.locale);
       await client.trigger({
-        payload: validPayload,
+        payload: locale ? { ...validPayload, locale } : validPayload,
         to: {
           email: to.email,
           locale: to.locale,

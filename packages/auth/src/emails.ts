@@ -1,10 +1,13 @@
 import { env } from "@repo/env/auth";
+import { formatDateTime } from "@repo/i18n/format";
 import { notify } from "@repo/notifications/notify";
 
 /** The user fields Better Auth hands to our email callbacks. */
 interface EmailUser {
   email: string;
   id: string;
+  /** The user's saved language (user.locale); English when empty. */
+  locale?: string | null;
   name: string;
 }
 
@@ -13,6 +16,7 @@ export const RESET_PASSWORD_EXPIRES_IN_SECONDS = 60 * 60;
 
 const toRecipient = (user: EmailUser) => ({
   email: user.email,
+  locale: user.locale ?? undefined,
   subscriberId: user.id,
 });
 
@@ -62,10 +66,7 @@ export const sendResetPassword = ({
 export const notifyPasswordChanged = (user: EmailUser) => {
   void notify("password-changed", {
     payload: {
-      changedAt: new Intl.DateTimeFormat("en-GB", {
-        dateStyle: "long",
-        timeStyle: "short",
-      }).format(new Date()),
+      changedAt: formatDateTime(new Date(), user.locale),
       name: user.name,
       // Until account lockdown exists, "secure my account" means choosing a new password.
       secureAccountUrl: `${env.WEB_ORIGIN}/forgot-password`,
@@ -124,10 +125,7 @@ export const notifyTwoFactorChanged = (
 ) => {
   void notify("two-factor-changed", {
     payload: {
-      changedAt: new Intl.DateTimeFormat("en-GB", {
-        dateStyle: "long",
-        timeStyle: "short",
-      }).format(new Date()),
+      changedAt: formatDateTime(new Date(), user.locale),
       name: user.name,
       secureAccountUrl: `${env.WEB_ORIGIN}/forgot-password`,
       state,

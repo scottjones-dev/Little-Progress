@@ -1,40 +1,49 @@
 import { Heading, Text } from "@react-email/components";
+import { getT } from "@repo/i18n/core";
 
 import { EmailButton } from "../components/button";
 import { EmailCallout } from "../components/callout";
 import { EmailLayout } from "../components/layout";
+import { pluralOptions } from "../lib/plural";
 
 export interface ResetPasswordProps {
   expiresInMinutes: number;
+  /** The recipient's language; English when left out. */
+  locale?: string;
   name: string;
   resetUrl: string;
 }
 
-export const resetPasswordSubject = () => "Reset your password";
+export const resetPasswordSubject = ({ locale }: ResetPasswordProps) =>
+  getT(locale, "emails")("resetPassword.subject");
 
 const ResetPassword = ({
   expiresInMinutes,
+  locale,
   name,
   resetUrl,
-}: ResetPasswordProps) => (
-  <EmailLayout
-    footerReason="You received this email because a password reset was requested for your account."
-    preview="Use this link to choose a new password"
-  >
-    <Heading className="text-mist m-0 mb-4 text-[22px] font-semibold">
-      Reset your password
-    </Heading>
-    <Text className="text-mist m-0 mb-2 text-[15px] leading-[24px]">
-      Hi {name}, we received a request to reset your password. Choose a new one
-      with the button below.
-    </Text>
-    <EmailButton href={resetUrl}>Choose a new password</EmailButton>
-    <EmailCallout label="Did not ask for this?">
-      Ignore this email and your password stays the same. The link expires in{" "}
-      {expiresInMinutes} minutes and works once.
-    </EmailCallout>
-  </EmailLayout>
-);
+}: ResetPasswordProps) => {
+  const t = getT(locale, "emails");
+
+  return (
+    <EmailLayout
+      footerReason={t("resetPassword.footerReason")}
+      locale={locale}
+      preview={t("resetPassword.preview")}
+    >
+      <Heading className="text-mist m-0 mb-4 text-[22px] font-semibold">
+        {t("resetPassword.heading")}
+      </Heading>
+      <Text className="text-mist m-0 mb-2 text-[15px] leading-[24px]">
+        {t("resetPassword.body", { name })}
+      </Text>
+      <EmailButton href={resetUrl}>{t("resetPassword.button")}</EmailButton>
+      <EmailCallout label={t("resetPassword.noticeLabel")}>
+        {t("resetPassword.notice", pluralOptions(expiresInMinutes))}
+      </EmailCallout>
+    </EmailLayout>
+  );
+};
 
 ResetPassword.PreviewProps = {
   expiresInMinutes: 30,

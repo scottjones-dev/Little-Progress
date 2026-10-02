@@ -31,6 +31,7 @@ export default defineConfig({
       files: [
         "packages/errors/src/scrub.ts",
         "packages/analytics/src/options.ts",
+        "packages/i18n/src/catalog-check.ts",
       ],
       rules: {
         "anti-slop/no-known-value-widening": "off",

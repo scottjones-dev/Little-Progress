@@ -21,6 +21,14 @@ export const app = {
     from: "LittleProgress <no-reply@littleprogress.app>",
     replyTo: "support@littleprogress.app",
   },
+  i18n: {
+    // Cookie that remembers the language of a signed-out visitor or a carer's device.
+    cookie: "lp_locale",
+    defaultLocale: "en",
+    locales: ["en", "pl", "es", "cy"],
+    // Each language written in itself, for the language switcher.
+    names: { cy: "Cymraeg", en: "English", es: "Español", pl: "Polski" },
+  },
   keywords: [
     "baby feeding diary",
     "weaning tracker",
@@ -32,8 +40,8 @@ export const app = {
     support: "mailto:support@littleprogress.app",
     terms: "/terms",
   },
+  // Regional flavour used for formatting dates and numbers. Translations use language codes below.
   locale: "en-GB",
-  locales: ["en-GB"],
   logos: {
     favicon: "/favicon.ico",
     icon192: "/icons/icon-192.png",

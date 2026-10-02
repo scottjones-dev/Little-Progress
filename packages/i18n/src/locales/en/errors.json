@@ -1,0 +1,10 @@
+{
+  "CONFLICT": "This clashes with something that is already saved. Please refresh and try again.",
+  "FORBIDDEN": "You do not have permission to do that.",
+  "INTERNAL": "Something went wrong. Please try again.",
+  "NOT_FOUND": "We could not find that.",
+  "RATE_LIMITED": "Too many attempts. Please wait a moment and try again.",
+  "STALE_VERSION": "This was changed somewhere else. Reload to see the latest version.",
+  "UNAUTHORIZED": "Please sign in to continue.",
+  "VALIDATION_FAILED": "Some details are not valid. Please check them and try again."
+}

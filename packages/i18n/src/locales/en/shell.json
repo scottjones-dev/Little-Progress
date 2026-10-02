@@ -1,0 +1,10 @@
+{
+  "error": {
+    "body": "We have been told about it. Please try again.",
+    "title": "Something went wrong"
+  },
+  "notFound": {
+    "body": "That page does not exist in {{appName}}.",
+    "title": "Page not found"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "@repo/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./core": "./src/core.ts",
+    "./format": "./src/format.ts",
+    "./resolve": "./src/resolve.ts",
+    "./resources": "./src/resources.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit",
+    "i18n:check": "tsx src/scripts/check.ts",
+    "i18n:translate": "infisical run --path=/i18n -- pnpm dlx languine@latest translate",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@repo/config": "workspace:*",
+    "@repo/errors": "workspace:*",
+    "i18next": "^26.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vitest": "5.0.3"
+  }
+}

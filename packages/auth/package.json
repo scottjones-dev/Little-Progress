@@ -16,6 +16,7 @@
     "@repo/config": "workspace:*",
     "@repo/db": "workspace:*",
     "@repo/env": "workspace:*",
+    "@repo/i18n": "workspace:*",
     "@repo/notifications": "workspace:*",
     "better-auth": "^1.7.6",
     "drizzle-orm": "1.0.0-rc.4",

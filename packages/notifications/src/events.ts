@@ -1,6 +1,14 @@
+import { app } from "@repo/config/app";
 import { renderEmail } from "@repo/emails/registry";
 import type { EmailId, EmailPropsMap } from "@repo/emails/registry";
+import { getT } from "@repo/i18n/core";
 import { z } from "zod";
+
+/**
+ * Every event can carry the recipient's language. notify() fills it in from the recipient,
+ * so callers never put it in the payload themselves.
+ */
+const localeField = { locale: z.enum(app.i18n.locales).optional() };
 
 /** A payload as it arrives from Novu: plain JSON. Each event parses it with its own schema. */
 export const rawPayloadSchema = z.record(z.string(), z.json());
@@ -49,6 +57,7 @@ export const events = {
   "delete-account": defineEmailEvent("delete-account", {
     critical: true,
     payload: z.object({
+      ...localeField,
       confirmUrl: z.url(),
       expiresInHours: z.number().int().positive(),
       name: z.string().min(1),
@@ -57,6 +66,7 @@ export const events = {
   "family-invite": defineEmailEvent("family-invite", {
     critical: true,
     payload: z.object({
+      ...localeField,
       expiresInDays: z.number().int().positive(),
       familyName: z.string().min(1),
       inviteUrl: z.url(),
@@ -67,6 +77,7 @@ export const events = {
   "magic-link": defineEmailEvent("magic-link", {
     critical: true,
     payload: z.object({
+      ...localeField,
       expiresInMinutes: z.number().int().positive(),
       name: z.string().min(1),
       signInUrl: z.url(),
@@ -75,32 +86,41 @@ export const events = {
   "new-location-sign-in": defineEmailEvent("new-location-sign-in", {
     critical: true,
     payload: z.object({
+      ...localeField,
       device: z.string().min(1),
       location: z.string().min(1),
       name: z.string().min(1),
       secureAccountUrl: z.url(),
       time: z.string().min(1),
     }),
-    push: (payload) => ({
-      body: `Signed in from ${payload.location}. Was this you?`,
-      title: "New sign-in",
-    }),
+    push: (payload) => {
+      const t = getT(payload.locale, "push");
+      return {
+        body: t("newLocationSignIn.body", { location: payload.location }),
+        title: t("newLocationSignIn.title"),
+      };
+    },
   }),
   "password-changed": defineEmailEvent("password-changed", {
     critical: true,
     payload: z.object({
+      ...localeField,
       changedAt: z.string().min(1),
       name: z.string().min(1),
       secureAccountUrl: z.url(),
     }),
-    push: () => ({
-      body: "Your password was changed. Tap to review if this was not you.",
-      title: "Password changed",
-    }),
+    push: (payload) => {
+      const t = getT(payload.locale, "push");
+      return {
+        body: t("passwordChanged.body"),
+        title: t("passwordChanged.title"),
+      };
+    },
   }),
   "reset-password": defineEmailEvent("reset-password", {
     critical: true,
     payload: z.object({
+      ...localeField,
       expiresInMinutes: z.number().int().positive(),
       name: z.string().min(1),
       resetUrl: z.url(),
@@ -109,6 +129,7 @@ export const events = {
   "two-factor-changed": defineEmailEvent("two-factor-changed", {
     critical: true,
     payload: z.object({
+      ...localeField,
       changedAt: z.string().min(1),
       name: z.string().min(1),
       secureAccountUrl: z.url(),
@@ -118,6 +139,7 @@ export const events = {
   "verify-email": defineEmailEvent("verify-email", {
     critical: true,
     payload: z.object({
+      ...localeField,
       code: z.string().min(1).optional(),
       expiresInMinutes: z.number().int().positive(),
       name: z.string().min(1),

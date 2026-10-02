@@ -1,0 +1,10 @@
+{
+  "newLocationSignIn": {
+    "body": "Signed in from {{location}}. Was this you?",
+    "title": "New sign-in"
+  },
+  "passwordChanged": {
+    "body": "Your password was changed. Tap to review if this was not you.",
+    "title": "Password changed"
+  }
+}

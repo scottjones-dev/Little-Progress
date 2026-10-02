@@ -47,7 +47,7 @@ export interface EmailEntry<P extends object> {
   id: string;
   previewProps: P;
   render: (props: P) => Promise<RenderedEmail>;
-  renderPreview: () => Promise<RenderedEmail>;
+  renderPreview: (locale?: string) => Promise<RenderedEmail>;
   renderWithTokens: (token: (key: string) => string) => Promise<RenderedEmail>;
   subject: (props: P) => string;
   variables: string[];
@@ -71,7 +71,8 @@ const define = <P extends object>(entry: {
     id: entry.id,
     previewProps: entry.previewProps,
     render,
-    renderPreview: () => render(entry.previewProps),
+    // SAFETY: every template's props include an optional `locale`, so adding it keeps them valid.
+    renderPreview: (locale) => render({ ...entry.previewProps, locale } as P),
     renderWithTokens: (token) => {
       // SAFETY: every prop is replaced by a string placeholder purely to produce a variable-token template; the result is never used as typed data.
       const props = Object.fromEntries(

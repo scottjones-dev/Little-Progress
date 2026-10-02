@@ -16,6 +16,8 @@
     "db:pull": "turbo run db:pull",
     "db:push": "turbo run db:push",
     "db:up": "turbo run db:up",
+    "i18n:check": "pnpm --filter @repo/i18n i18n:check",
+    "i18n:translate": "pnpm --filter @repo/i18n i18n:translate",
     "infra:down": "pnpm infra:postgres:down && pnpm infra:storage:down",
     "infra:postgres:down": "docker compose -f infra/postgres/docker-compose.yml down",
     "infra:postgres:up": "docker compose -f infra/postgres/docker-compose.yml up -d",

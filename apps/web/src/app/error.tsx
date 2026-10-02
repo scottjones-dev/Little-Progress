@@ -2,6 +2,7 @@
 
 import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 // Shown when a page throws while rendering. The layout above it keeps working.
 const ErrorPage = ({
@@ -11,16 +12,18 @@ const ErrorPage = ({
   error: Error & { digest?: string };
   retry: () => void;
 }) => {
+  const { t } = useTranslation(["shell", "common"]);
+
   useEffect(() => {
     Sentry.captureException(error);
   }, [error]);
 
   return (
     <main className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center">
-      <h1 className="text-2xl font-semibold">Something went wrong</h1>
-      <p>We have been told about it. Please try again.</p>
+      <h1 className="text-2xl font-semibold">{t("shell:error.title")}</h1>
+      <p>{t("shell:error.body")}</p>
       <button type="button" onClick={() => retry()}>
-        Try again
+        {t("common:actions.tryAgain")}
       </button>
     </main>
   );

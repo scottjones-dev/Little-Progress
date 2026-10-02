@@ -1,4 +1,5 @@
 import { Heading, Text } from "@react-email/components";
+import { getT } from "@repo/i18n/core";
 
 import { EmailButton } from "../components/button";
 import { EmailCallout } from "../components/callout";
@@ -6,35 +7,44 @@ import { EmailLayout } from "../components/layout";
 
 export interface PasswordChangedProps {
   changedAt: string;
+  /** The recipient's language; English when left out. */
+  locale?: string;
   name: string;
   secureAccountUrl: string;
 }
 
-export const passwordChangedSubject = () => "Your password was changed";
+export const passwordChangedSubject = ({ locale }: PasswordChangedProps) =>
+  getT(locale, "emails")("passwordChanged.subject");
 
 const PasswordChanged = ({
   changedAt,
+  locale,
   name,
   secureAccountUrl,
-}: PasswordChangedProps) => (
-  <EmailLayout
-    footerReason="This is a security notice about your account."
-    preview="Your password was just changed"
-  >
-    <Heading className="text-mist m-0 mb-4 text-[22px] font-semibold">
-      Password changed
-    </Heading>
-    <Text className="text-mist m-0 mb-2 text-[15px] leading-[24px]">
-      Hi {name}, the password for your account was changed on {changedAt}. All
-      other devices have been signed out.
-    </Text>
-    <EmailCallout label="Was this not you?">
-      Secure your account straight away so nobody else can read your
-      family&apos;s diary.
-    </EmailCallout>
-    <EmailButton href={secureAccountUrl}>Secure my account</EmailButton>
-  </EmailLayout>
-);
+}: PasswordChangedProps) => {
+  const t = getT(locale, "emails");
+
+  return (
+    <EmailLayout
+      footerReason={t("passwordChanged.footerReason")}
+      locale={locale}
+      preview={t("passwordChanged.preview")}
+    >
+      <Heading className="text-mist m-0 mb-4 text-[22px] font-semibold">
+        {t("passwordChanged.heading")}
+      </Heading>
+      <Text className="text-mist m-0 mb-2 text-[15px] leading-[24px]">
+        {t("passwordChanged.body", { changedAt, name })}
+      </Text>
+      <EmailCallout label={t("passwordChanged.noticeLabel")}>
+        {t("passwordChanged.notice")}
+      </EmailCallout>
+      <EmailButton href={secureAccountUrl}>
+        {t("passwordChanged.button")}
+      </EmailButton>
+    </EmailLayout>
+  );
+};
 
 PasswordChanged.PreviewProps = {
   changedAt: "1 October 2026, 14:32 BST",

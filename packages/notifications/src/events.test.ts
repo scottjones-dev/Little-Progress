@@ -56,6 +56,19 @@ describe("push messages", () => {
     expect(`${title} ${body}`).not.toMatch(/https?:\/\//u);
   });
 
+  it.each(pushIds)("%s push text works in every language", (id) => {
+    // Until the translations exist every language falls back to English; once they do, the
+    // text differs by language and this test only checks nothing is empty or a raw key.
+    for (const locale of ["en", "pl", "es", "cy"] as const) {
+      const { body, title } = events[id].renderPush({
+        ...registry[id].previewProps,
+        locale,
+      });
+      expect(`${title}${body}`).not.toMatch(/[a-z]+[A-Z]\w*\.[a-z]/u);
+      expect(title.length).toBeGreaterThan(0);
+    }
+  });
+
   it("throws when asked for a push that the event does not have", () => {
     expect(() =>
       events["verify-email"].renderPush(registry["verify-email"].previewProps)

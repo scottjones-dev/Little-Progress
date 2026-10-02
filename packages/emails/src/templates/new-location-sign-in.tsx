@@ -1,4 +1,5 @@
 import { Heading, Text } from "@react-email/components";
+import { getT } from "@repo/i18n/core";
 
 import { EmailButton } from "../components/button";
 import { EmailCallout } from "../components/callout";
@@ -6,45 +7,55 @@ import { EmailLayout } from "../components/layout";
 
 export interface NewLocationSignInProps {
   device: string;
+  /** The recipient's language; English when left out. */
+  locale?: string;
   location: string;
   name: string;
   secureAccountUrl: string;
   time: string;
 }
 
-export const newLocationSignInSubject = () => "New sign-in from a new location";
+export const newLocationSignInSubject = ({ locale }: NewLocationSignInProps) =>
+  getT(locale, "emails")("newLocationSignIn.subject");
 
 const NewLocationSignIn = ({
   device,
+  locale,
   location,
   name,
   secureAccountUrl,
   time,
-}: NewLocationSignInProps) => (
-  <EmailLayout
-    footerReason="This is a security notice about a sign-in to your account."
-    preview={`New sign-in from ${location}`}
-  >
-    <Heading className="text-mist m-0 mb-4 text-[22px] font-semibold">
-      New sign-in from {location}
-    </Heading>
-    <Text className="text-mist m-0 mb-2 text-[15px] leading-[24px]">
-      Hi {name}, we noticed a sign-in to your account from somewhere new.
-    </Text>
-    <EmailCallout label="Sign-in details">
-      Location: {location} (approximate)
-      <br />
-      Device: {device}
-      <br />
-      Time: {time}
-    </EmailCallout>
-    <Text className="text-muted m-0 mb-2 text-[14px] leading-[22px]">
-      If this was you, no action is needed. If not, change your password and
-      sign out other devices.
-    </Text>
-    <EmailButton href={secureAccountUrl}>Secure my account</EmailButton>
-  </EmailLayout>
-);
+}: NewLocationSignInProps) => {
+  const t = getT(locale, "emails");
+
+  return (
+    <EmailLayout
+      footerReason={t("newLocationSignIn.footerReason")}
+      locale={locale}
+      preview={t("newLocationSignIn.preview", { location })}
+    >
+      <Heading className="text-mist m-0 mb-4 text-[22px] font-semibold">
+        {t("newLocationSignIn.heading", { location })}
+      </Heading>
+      <Text className="text-mist m-0 mb-2 text-[15px] leading-[24px]">
+        {t("newLocationSignIn.body", { name })}
+      </Text>
+      <EmailCallout label={t("newLocationSignIn.detailsLabel")}>
+        {t("newLocationSignIn.detailsLocation", { location })}
+        <br />
+        {t("newLocationSignIn.detailsDevice", { device })}
+        <br />
+        {t("newLocationSignIn.detailsTime", { time })}
+      </EmailCallout>
+      <Text className="text-muted m-0 mb-2 text-[14px] leading-[22px]">
+        {t("newLocationSignIn.advice")}
+      </Text>
+      <EmailButton href={secureAccountUrl}>
+        {t("newLocationSignIn.button")}
+      </EmailButton>
+    </EmailLayout>
+  );
+};
 
 NewLocationSignIn.PreviewProps = {
   device: "Chrome on Windows",
