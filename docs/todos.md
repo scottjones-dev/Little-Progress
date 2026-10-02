@@ -138,6 +138,13 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [ ] Optional: server-side capture with `posthog-node` in `apps/api` for exact counts (same catalog)
 - [ ] Dashboards in PostHog: sign-up to first entry, entries per week, time to log, report use
 
+## Native app styling
+
+- [x] Nativewind 5 (release candidate) installed in `apps/native`; the web side removed from the app (`react-native-web`, `react-dom`, web script, web config, web assets)
+- [ ] Share the brand colours with the website: `src/global.css` repeats the values from `packages/config/src/app.ts`; the UI package should generate one theme for both
+- [ ] Dark/light: `userInterfaceStyle` is still `dark`; switch to `automatic` with the dark-mode provider in the UI step
+- [ ] Re-check Nativewind when it leaves release candidate: remove the exact pins, the `lightningcss` override in `pnpm-workspace.yaml`, and the Dependabot ignores
+
 ## Internationalization (`docs/i18n.md`)
 
 - [x] `packages/i18n`: English catalogs, language choice, formatting, checks; emails, push, website and app read from it

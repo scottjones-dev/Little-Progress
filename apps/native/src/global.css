@@ -1,0 +1,24 @@
+/*
+ * Tailwind for the app (Nativewind 5). Keep the utilities unlayered as written here: a single
+ * `@import "tailwindcss"` can put them below the platform defaults.
+ */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
+
+/*
+ * Brand colours (Midnight Sanctuary), the same values as `colors` in
+ * packages/config/src/app.ts. Use them as bg-obsidian, text-mist, border-border and so on.
+ * Keep in step with that file until the shared UI theme generates this block.
+ */
+@theme {
+  --color-border: #2a2c31;
+  --color-gold: #d97706;
+  --color-gold-text: #0f1012;
+  --color-mist: #e2e8f0;
+  --color-muted: #94a3b8;
+  --color-obsidian: #0f1012;
+  --color-surface: #17181b;
+}

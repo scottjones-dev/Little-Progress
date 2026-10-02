@@ -14,21 +14,21 @@ export const SentryTest = () => {
   }
 
   return (
-    <View style={{ gap: 12, marginTop: 32 }}>
+    <View className="mt-8 gap-3">
       <Pressable
         onPress={() =>
           Sentry.captureException(new Error("Debug error: native captured"))
         }
       >
-        <Text style={{ color: "#E2E8F0" }}>Send a captured error</Text>
+        <Text className="text-mist">Send a captured error</Text>
       </Pressable>
       <Pressable onPress={() => track("insight_viewed", {})}>
-        <Text style={{ color: "#E2E8F0" }}>
+        <Text className="text-mist">
           Send an analytics test event (insight_viewed)
         </Text>
       </Pressable>
       <Pressable onPress={() => setCrashRender(true)}>
-        <Text style={{ color: "#E2E8F0" }}>
+        <Text className="text-mist">
           Crash while rendering (shows the error screen)
         </Text>
       </Pressable>

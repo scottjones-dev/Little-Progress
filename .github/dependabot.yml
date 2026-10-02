@@ -26,6 +26,13 @@ updates:
       - dependency-name: "@react-native-async-storage/*"
       - dependency-name: "@sentry/react-native"
       - dependency-name: "posthog-react-native"
+      # Nativewind 5 is a release candidate that only works with this exact set. Update the
+      # whole set together, after reading its migration notes.
+      - dependency-name: "nativewind"
+      - dependency-name: "react-native-css"
+      - dependency-name: "tailwindcss"
+      - dependency-name: "@tailwindcss/postcss"
+      - dependency-name: "lightningcss"
       # The app and the website share these through Expo's pinned React.
       - dependency-name: "react"
       - dependency-name: "react-dom"

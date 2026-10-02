@@ -1,4 +1,3 @@
-import { app } from "@repo/config/app";
 import { env } from "@repo/env/native";
 import { baseSentryOptions } from "@repo/errors/options";
 import * as Sentry from "@sentry/react-native";
@@ -9,6 +8,8 @@ import { useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
 
 import { trackScreen } from "../lib/analytics";
+
+import "../global.css";
 import { i18n, restoreLanguage } from "../lib/i18n";
 
 // No screenshots or view hierarchy: the screens show a child's health diary.
@@ -33,21 +34,12 @@ export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
   }, [error]);
 
   return (
-    <View
-      style={{
-        alignItems: "center",
-        backgroundColor: app.backgroundColor,
-        flex: 1,
-        gap: 16,
-        justifyContent: "center",
-        padding: 24,
-      }}
-    >
-      <Text style={{ color: "#E2E8F0", fontSize: 18 }}>
+    <View className="bg-obsidian flex-1 items-center justify-center gap-4 p-6">
+      <Text className="text-mist text-lg">
         {shell("error.title")}. {shell("error.body")}
       </Text>
       <Pressable onPress={() => retry()}>
-        <Text style={{ color: "#E2E8F0", fontSize: 16 }}>
+        <Text className="text-mist text-base">
           {common("actions.tryAgain")}
         </Text>
       </Pressable>

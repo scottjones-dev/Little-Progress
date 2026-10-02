@@ -4,6 +4,7 @@ packages:
 
 allowBuilds:
   "@sentry/cli": true
+  "@tailwindcss/oxide": false
   core-js: false
   esbuild: true
 
@@ -13,6 +14,8 @@ allowBuilds:
 # @react-email/ui ships with a patched next.
 overrides:
   "@react-email/ui>next": 16.3.7
+  # Nativewind 5 (apps/native) fails to read global.css with other lightningcss versions.
+  lightningcss: 1.30.1
 
 # Advisories we have looked at and accepted. Each needs a reason and a date to look again.
 audit:

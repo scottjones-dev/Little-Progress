@@ -9,18 +9,9 @@ const HomeScreen = () => {
   const { t } = useTranslation("common");
 
   return (
-    <View
-      style={{
-        alignItems: "center",
-        backgroundColor: app.backgroundColor,
-        flex: 1,
-        justifyContent: "center",
-      }}
-    >
-      <Text style={{ color: "#E2E8F0", fontSize: 24, fontWeight: "600" }}>
-        {app.name}
-      </Text>
-      <Text style={{ color: "#94A3B8" }}>{t("tagline")}</Text>
+    <View className="bg-obsidian flex-1 items-center justify-center">
+      <Text className="text-mist text-2xl font-semibold">{app.name}</Text>
+      <Text className="text-muted">{t("tagline")}</Text>
       <LanguageSwitcher />
       {__DEV__ ? <SentryTest /> : null}
     </View>

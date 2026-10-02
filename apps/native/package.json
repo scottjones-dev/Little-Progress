@@ -8,7 +8,6 @@
     "check-types": "tsc --noEmit",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
     "dev:local": "dotenv -e ../../.env -- expo start"
   },
   "dependencies": {
@@ -37,20 +36,24 @@
     "expo-system-ui": "~57.0.4",
     "expo-web-browser": "~57.0.3",
     "i18next": "^26.4.2",
+    "nativewind": "5.0.0-rc.0",
     "posthog-react-native": "^4.78.2",
     "react": "19.2.3",
-    "react-dom": "19.2.3",
     "react-i18next": "^17.0.15",
     "react-native": "0.86.3",
+    "react-native-css": "3.1.0-rc.0",
     "react-native-gesture-handler": "~2.32.0",
     "react-native-reanimated": "4.5.1",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
-    "react-native-web": "~0.21.0",
     "react-native-worklets": "0.10.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "4.1.12",
     "@types/react": "~19.2.2",
+    "lightningcss": "1.30.1",
+    "postcss": "8.5.28",
+    "tailwindcss": "4.1.12",
     "typescript": "7.0.2"
   }
 }

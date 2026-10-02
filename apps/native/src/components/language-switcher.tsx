@@ -9,9 +9,9 @@ export const LanguageSwitcher = () => {
   const { i18n, t } = useTranslation("common");
 
   return (
-    <View style={{ alignItems: "center", gap: 8, marginTop: 24 }}>
-      <Text style={{ color: "#94A3B8" }}>{t("language.label")}</Text>
-      <View style={{ flexDirection: "row", gap: 16 }}>
+    <View className="mt-6 items-center gap-2">
+      <Text className="text-muted">{t("language.label")}</Text>
+      <View className="flex-row gap-4">
         {app.i18n.locales.map((locale) => (
           <Pressable
             accessibilityRole="button"
@@ -20,10 +20,11 @@ export const LanguageSwitcher = () => {
             onPress={() => setLanguage(locale)}
           >
             <Text
-              style={{
-                color: "#E2E8F0",
-                fontWeight: i18n.language === locale ? "700" : "400",
-              }}
+              className={
+                i18n.language === locale
+                  ? "text-mist font-bold"
+                  : "text-mist font-normal"
+              }
             >
               {app.i18n.names[locale]}
             </Text>
