@@ -19,11 +19,11 @@
     "@repo/i18n": "workspace:*",
     "@repo/notifications": "workspace:*",
     "better-auth": "^1.7.6",
-    "drizzle-orm": "1.0.0-rc.4",
+    "drizzle-orm": "1.0.0-rc.5-5935859",
     "zod": "4.6.5"
   },
   "devDependencies": {
-    "@types/node": "26.4.1",
+    "@types/node": "26.6.3",
     "typescript": "7.0.2"
   }
 }
