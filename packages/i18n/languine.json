@@ -1,0 +1,18 @@
+{
+  "projectId": "",
+  "locale": {
+    "source": "en",
+    "targets": ["pl", "es", "cy"]
+  },
+  "files": {
+    "json": {
+      "include": [
+        "src/locales/[locale]/common.json",
+        "src/locales/[locale]/emails.json",
+        "src/locales/[locale]/errors.json",
+        "src/locales/[locale]/push.json",
+        "src/locales/[locale]/shell.json"
+      ]
+    }
+  }
+}
