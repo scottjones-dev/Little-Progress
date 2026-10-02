@@ -1,0 +1,65 @@
+# CI/CD
+
+What runs automatically on every pull request, how to run the same checks yourself, and how to set the repository up. Files: `.github/workflows/ci.yml`, `.github/workflows/security.yml`, `.github/actions/setup/action.yml`, `.github/dependabot.yml`.
+
+Status: **checks and security scans only. Nothing is deployed yet.** The workflows were checked with `actionlint` and every command was run in a clean Linux container, but they have not run on GitHub because the repository has no remote yet.
+
+## 1. What a pull request must prove
+
+| Job | Proves | Same thing locally |
+| --- | --- | --- |
+| **Lint, types, tests** (`ci.yml`) | formatting and lint rules, TypeScript, unit tests | `pnpm check`, `pnpm check-types`, `pnpm test` |
+| (advisory step) `i18n:check` | every language has every key. Only reports for now, because Polish, Spanish and Welsh are empty until the translation service works | `pnpm i18n:check` |
+| **Build** | the website and the packages build | `pnpm build` |
+| **Expo bundle** | the app compiles into a bundle with Sentry, PostHog and translations | `pnpm --filter @repo/native exec expo export --platform android` |
+| **Database migrations and storage** | every migration applies to an empty Postgres 18, and the storage code works against the S3 emulator | see section 3 |
+| **Dependency audit** (`security.yml`) | no high or critical advisory in production dependencies | `pnpm audit --prod --audit-level high` |
+| **OSV scan** | no known-vulnerable package in `pnpm-lock.yaml`. On a pull request only new vulnerabilities fail it; on `main` and every Monday everything is scanned |  |
+| **Secret scan** | no secret anywhere in the git history (same scanner and `.infisicalignore` as the pre-commit hook) | `infisical scan` |
+| **CodeQL** | code analysis. Off by default (needs GitHub code scanning, which private repositories do not have on the free plan) | set the repository variable `ENABLE_CODEQL=true` once available |
+
+No job needs a real secret. The integration job uses throwaway values for two disposable containers (the same ones as local development).
+
+How it is built:
+
+- Third-party actions are pinned to a full commit SHA with the version in a comment; Dependabot opens the update pull requests each Monday.
+- `permissions: contents: read` everywhere; only the OSV and CodeQL jobs ask for more.
+- A new push to the same pull request cancels the older run.
+- `.github/actions/setup` is the shared start of each job: pnpm (version from `packageManager`), Node 24 with the pnpm cache, the Turborepo cache, `pnpm install --frozen-lockfile`.
+- Git hooks are switched off on the runner (`HUSKY=0`) and telemetry is off.
+
+## 2. Accepted vulnerabilities
+
+An advisory we have decided to live with is listed under `audit.ignore` in `pnpm-workspace.yaml`, with a reason and a date to look again. Never skip the audit job instead.
+
+Today: `GHSA-86w9-cpqp-85rv` (node-forge, high, no patched version). It comes from Expo's command line tooling used to build the app, not from the app that ships. Check again on 2026-12-01. Two moderate advisories (`uuid`, `decode-uri-component`) do not fail the job; they will clear when Expo updates.
+
+## 3. Running the integration job locally
+
+```bash
+pnpm infra:up                     # Postgres 18 and the S3 emulator (Floci)
+pnpm db:migrate                   # applies the migrations (through Infisical)
+pnpm storage:init && pnpm test:integration
+```
+
+CI runs the underlying commands directly with the values in `ci.yml` instead of going through Infisical: `drizzle-kit check`, `drizzle-kit migrate`, `tsx src/server/init.ts` and `vitest run integration`.
+
+## 4. Setting up the repository (once)
+
+1. Create a **private** GitHub repository, add it as `origin` and push `main`.
+2. Settings, Actions: allow actions. Turn on Dependabot alerts and Dependabot security updates.
+3. Settings, Branches: protect `main`. Require a pull request and these checks: _Lint, types, tests_, _Build_, _Expo bundle_, _Database migrations and storage_, _Dependency audit_, _Secret scan_, _OSV scan (new in this pull request)_. Require branches to be up to date. No force pushes.
+4. Optional: if the plan allows code scanning, set the repository variable `ENABLE_CODEQL` to `true`.
+5. Add a `CODEOWNERS` file with your GitHub username when you know it.
+
+Watch these on the first real run: the runner can download Google fonts for the website build, the S3 emulator starts in time, the Expo bundle duration, and cache hits on the second run.
+
+## 5. When a job fails
+
+- **Audit or OSV**: read the advisory. Update the package (`pnpm update <name>`), or if there is no fix and it is not reachable, add an entry under `audit.ignore` with a reason and a date.
+- **Secret scan**: rotate the secret first, then remove it. A secret in git history stays valuable to an attacker even after you delete it.
+- **Integration**: run the same commands locally (section 3); the container images match.
+
+## 6. Adding deploys later
+
+Not built. When hosting is chosen add a `deploy.yml` that runs after `ci.yml` succeeds on `main`, with a `production` environment that needs your approval. It will need: Infisical machine identity (OIDC, no long-lived keys in GitHub), the Vercel and EAS tokens, `SENTRY_AUTH_TOKEN` and `SENTRY_RELEASE=${{ github.sha }}` for readable stack traces, and a migration step before the API starts. All are listed in `todos.md`.

@@ -122,7 +122,7 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [x] Sentry auth token, org and project are in Infisical dev `/web`
 - [x] `@sentry/cli` (and `esbuild`) enabled in `pnpm-workspace.yaml` `allowBuilds`
 - [ ] EAS builds: set the secrets `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` so native source maps upload
-- [ ] CI/CD and alerts: see the section "CI/CD and release tracking"
+- [ ] CI/CD and alerts: see the section "CI/CD"
 - [x] Proved capture with real DSNs on api, web and native (debug route, `/debug` page, native test buttons)
 - [ ] Use `AppError` in the real routes as they are added (entries, uploads, reports)
 
@@ -153,11 +153,20 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [ ] Translated SEO description and metadata (`app.description` is English)
 - [ ] CI step runs `pnpm i18n:check`; Languine will need the Pro plan once keys pass 500 (about 160 English keys for three languages)
 
-## CI/CD and release tracking (not started)
+## CI/CD (`docs/ci-cd.md`)
 
-- [ ] Set up CI (GitHub Actions, see `docs/plan.md` CI/CD): check, check-types, tests, build
-- [ ] Pass the commit hash to Sentry as `SENTRY_RELEASE` (GitHub Actions has it as `GITHUB_SHA`): API at deploy time, web and native at build time. Check what each SDK needs when this is built
-- [ ] Give CI the web source map token (`SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`) through Infisical
+- [x] GitHub Actions: lint, types, tests, build, Expo bundle, migrations + storage integration, dependency audit, OSV, secret scan, Dependabot (checked with actionlint and in a clean Linux container; not run on GitHub yet)
+- [ ] Create the private GitHub repository, add `origin`, push `main` (the repo is local-only today)
+- [ ] Protect `main` and require the checks listed in `docs/ci-cd.md` section 4; enable Dependabot alerts
+- [ ] Watch the first real run (fonts download, Floci start, Expo bundle time, cache hits) and fix what differs from the local container run
+- [ ] Add `.github/CODEOWNERS` with your GitHub username
+- [ ] Make `pnpm i18n:check` blocking in `ci.yml` (remove `continue-on-error`) once the translations exist
+- [ ] Turn on CodeQL (`ENABLE_CODEQL=true`) if the repository gets code scanning; consider Semgrep as a free alternative
+- [ ] Re-check the accepted `GHSA-86w9-cpqp-85rv` (node-forge via Expo) on 2026-12-01 and remove it when Expo updates
+- [ ] Playwright E2E job when there are screens to test
+- [ ] Deploy stage (not started): choose API hosting and add `deploy.yml` with a `production` environment needing approval; Infisical machine identity via OIDC; Vercel and EAS tokens
+- [ ] Pass the commit hash to Sentry as `SENTRY_RELEASE` (`GITHUB_SHA`): API at deploy time, web and native at build time. Check what each SDK needs when this is built
+- [ ] Give the deploy build the web source map token (`SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT`) through Infisical
 - [ ] After the first deploy, create the Sentry alert rules on the website (Alerts > Create Alert): new issue in `environment = production`, a metric alert for API error-rate spikes, and the weekly report under Settings > Notifications
 
 ## User flows (`docs/user-flows.md`)

@@ -23,6 +23,7 @@ The full plan, decisions and trade-offs are in [`docs/plan.md`](docs/plan.md). W
 | [`packages/notifications`](packages/notifications) | `notify()` for email, push and later SMS, delivered through Novu |
 | [`infra/postgres`](infra/postgres) | Local PostgreSQL via Docker |
 | [`infra/storage`](infra/storage) | Local S3 emulator (Floci) and its UI via Docker |
+| [`.github`](.github) | CI and security checks on every pull request (GitHub Actions), Dependabot. See [`docs/ci-cd.md`](docs/ci-cd.md) |
 
 ```
 web / native ──▶ api ──▶ Postgres (db)

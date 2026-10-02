@@ -96,7 +96,7 @@ Expo: offline queue (MMKV/SQLite) of pending entries with `client_id` → replay
 - Privacy/compliance: UK child health data → data minimisation, export + delete-all, retention policy.
 - Risks: PIN shared by many people (mitigate with carer names, rotation, rate limit, audit); LLM over-claiming causality from small n (mitigate with thresholds + disclosure); Turborepo/Next 16/TS 7 are new versions — read installed docs (`node_modules/turbo/docs`) before editing `turbo.json`.
 
-## CI/CD
+## CI/CD (checks and security scans built, see `ci-cd.md`; deploy jobs not built; CodeQL and dependency-review need GitHub code security on private repos, so OSV-Scanner, `pnpm audit` and `infisical scan` are used instead)
 
 - **GitHub Actions**, Turbo remote cache; jobs on PR: install (pnpm, frozen lockfile) → `ultracite check` → `check-types` → unit/integration tests (Postgres service container) → `build` → Playwright E2E (web+api) → `infisical scan` + gitleaks.
 - **Security jobs**: `pnpm audit --prod` (fail on high/critical), Dependabot/Renovate (grouped weekly, auto-merge patch/dev), CodeQL (JS/TS), `actions/dependency-review-action`, OSV-Scanner on lockfile; pinned action SHAs; least-privilege `GITHUB_TOKEN`; npm provenance not needed (private).
