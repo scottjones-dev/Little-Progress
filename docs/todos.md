@@ -141,8 +141,8 @@ Client side (documentation in `auth-client.md`, screens not built):
 ## Internationalization (`docs/i18n.md`)
 
 - [x] `packages/i18n`: English catalogs, language choice, formatting, checks; emails, push, website and app read from it
-- [ ] **Languine spike (needs you):** `npx languine@latest auth login`, then `languine init` in `packages/i18n` (creates `languine.json` and the project id), put `LANGUINE_API_KEY` and `LANGUINE_PROJECT_ID` into Infisical folder `/i18n`; confirm the include pattern `src/locales/[locale]/*.json` and that Polish and Welsh plural forms (`_few`, `_many`, `_zero`, `_two`) are produced
-- [ ] Run `pnpm i18n:translate` for pl, es, cy, then `pnpm i18n:check` until green; commit `languine.lock` with the catalogs
+- [ ] **Blocked on Languine (their server):** `pnpm i18n:translate` fails with `422 Trigger.dev v3 is no longer supported` on their `jobs.startJob` call (the CLI then shows a misleading "Body has already been read"). Account, project and keys (Infisical `/i18n`) and `packages/i18n/languine.json` are set up correctly. Retry `pnpm i18n:translate` when they fix it (add `LANGUINE_DEBUG=true` in a temporary `packages/i18n/.env` to see the real error). Until then Polish, Spanish and Welsh fall back to English. Alternative if it stays broken: our own translate script using the Vercel AI Gateway on the same JSON files
+- [ ] After the first successful run: confirm Polish and Welsh plural forms (`_few`, `_many`, `_zero`, `_two`) were produced, `pnpm i18n:check` green, commit `languine.lock` with the catalogs
 - [ ] Languine instructions in its dashboard: tone and a glossary (weaning, nappy, highchair, texture words)
 - [ ] Native-speaker review (Polish, Spanish, Welsh) of everything about health, feeding and security before go-live, and of clinician reports when they exist
 - [ ] Parent settings: language choice saved with `updateUser({ locale })` and used for emails and push
