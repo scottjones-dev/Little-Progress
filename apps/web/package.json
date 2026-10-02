@@ -10,11 +10,13 @@
     "dev:local": "next dev"
   },
   "dependencies": {
+    "@repo/analytics": "workspace:*",
     "@repo/config": "workspace:*",
     "@repo/env": "workspace:*",
     "@repo/errors": "workspace:*",
     "@sentry/nextjs": "^11.1.0",
     "next": "16.3.7",
+    "posthog-js": "^1.435.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

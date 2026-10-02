@@ -3,6 +3,8 @@
 import * as Sentry from "@sentry/nextjs";
 import { useState } from "react";
 
+import { track } from "../../lib/analytics";
+
 // Three ways an error can happen in the browser, one button each.
 export const DebugButtons = () => {
   const [crashRender, setCrashRender] = useState(false);
@@ -30,6 +32,9 @@ export const DebugButtons = () => {
         }}
       >
         Throw in a click handler
+      </button>
+      <button type="button" onClick={() => track("insight_viewed", {})}>
+        Send an analytics test event (insight_viewed)
       </button>
       <button type="button" onClick={() => setCrashRender(true)}>
         Crash while rendering (shows the error page)

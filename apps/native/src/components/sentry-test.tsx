@@ -2,7 +2,9 @@ import * as Sentry from "@sentry/react-native";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 
-// Development only: buttons to prove error reporting reaches Sentry (docs/error-handling.md).
+import { track } from "../lib/analytics";
+
+// Development only: buttons to prove error reporting and analytics work (docs/error-handling.md, docs/analytics.md).
 export const SentryTest = () => {
   const [crashRender, setCrashRender] = useState(false);
 
@@ -19,6 +21,11 @@ export const SentryTest = () => {
         }
       >
         <Text style={{ color: "#E2E8F0" }}>Send a captured error</Text>
+      </Pressable>
+      <Pressable onPress={() => track("insight_viewed", {})}>
+        <Text style={{ color: "#E2E8F0" }}>
+          Send an analytics test event (insight_viewed)
+        </Text>
       </Pressable>
       <Pressable onPress={() => setCrashRender(true)}>
         <Text style={{ color: "#E2E8F0" }}>

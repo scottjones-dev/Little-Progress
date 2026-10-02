@@ -26,9 +26,12 @@ export default defineConfig({
       },
     },
     {
-      // The error scrubber walks arbitrary event data from Sentry's SDKs, so unknown-typed
+      // The error and analytics scrubbers walk arbitrary event data from the SDKs, so unknown-typed
       // values and typeof checks are the point of that file.
-      files: ["packages/errors/src/scrub.ts"],
+      files: [
+        "packages/errors/src/scrub.ts",
+        "packages/analytics/src/options.ts",
+      ],
       rules: {
         "anti-slop/no-known-value-widening": "off",
         "anti-slop/no-runtime-typeof": "off",

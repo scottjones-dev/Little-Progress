@@ -3,10 +3,12 @@ import { env } from "@repo/env/native";
 import { baseSentryOptions } from "@repo/errors/options";
 import * as Sentry from "@sentry/react-native";
 import type { ErrorBoundaryProps } from "expo-router";
-import { Stack } from "expo-router";
+import { Stack, usePathname } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
+
+import { trackScreen } from "../lib/analytics";
 
 // No screenshots or view hierarchy: the screens show a child's health diary.
 // Without a DSN nothing is sent. What is scrubbed and why: docs/error-handling.md.
@@ -46,12 +48,22 @@ export const ErrorBoundary = ({ error, retry }: ErrorBoundaryProps) => {
   );
 };
 
-const RootLayout = () => (
-  <>
-    <StatusBar style="light" />
-    <Stack screenOptions={{ headerShown: false }} />
-  </>
-);
+const RootLayout = () => {
+  const pathname = usePathname();
+
+  // One screen view per route change (the carer quick-log is dropped inside trackScreen's SDK
+  // filter, see @repo/analytics). The path is the route, never entry content.
+  useEffect(() => {
+    trackScreen(pathname);
+  }, [pathname]);
+
+  return (
+    <>
+      <StatusBar style="light" />
+      <Stack screenOptions={{ headerShown: false }} />
+    </>
+  );
+};
 
 // Reports crashes, unhandled promise rejections and slow frames from the root.
 export default Sentry.wrap(RootLayout);
