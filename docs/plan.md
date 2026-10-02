@@ -105,7 +105,7 @@ Expo: offline queue (MMKV/SQLite) of pending entries with `client_id` → replay
 
 ## Analytics (privacy-first — children's health data)
 
-- **Product analytics**: PostHog (EU cloud or self-host), cookieless/memory persistence, **no entry content, names, notes, or child data ever sent** — only event names + coarse props (e.g. `entry_logged{kind}`, `report_generated`, duration-to-log). Autocapture off; respects Do-Not-Track; no analytics at all on the carer quick-log screen. Opt-out toggle in parent settings.
+- **Product analytics** (see `analytics.md`): PostHog (EU cloud or self-host), cookieless/memory persistence, **no entry content, names, notes, or child data ever sent** — only event names + coarse props (e.g. `entry_logged{kind}`, `report_generated`, duration-to-log). Autocapture off; respects Do-Not-Track; no analytics at all on the carer quick-log screen. Opt-out toggle in parent settings.
 - **Care analytics** (the app's own insights) stay in Postgres/Analysis package — never routed through third-party analytics.
 - Metrics that matter: time-to-log (<30 s target), logging completeness per day, carer adoption, API p95, error rate.
 

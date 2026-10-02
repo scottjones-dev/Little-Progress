@@ -126,6 +126,18 @@ Client side (documentation in `auth-client.md`, screens not built):
 - [x] Proved capture with real DSNs on api, web and native (debug route, `/debug` page, native test buttons)
 - [ ] Use `AppError` in the real routes as they are added (entries, uploads, reports)
 
+## Analytics (`docs/analytics.md`)
+
+- [x] `packages/analytics`: event catalog, privacy rules; wired into web and native with dev-only test buttons
+- [ ] Create the PostHog EU project, turn on "Discard client IP data", put the tokens in Infisical (`/web`, `/native`; staging and prod later)
+- [ ] Prove capture with real tokens (page view, `insight_viewed`, scrubbed URL, nothing from `/quick-log`)
+- [ ] Parent settings screen: analytics on/off toggle calling `setAnalyticsEnabled` (and keep the choice on the account so it follows the parent across devices)
+- [ ] Call `identifyUser` after sign-in and `resetAnalytics` on sign-out in the auth flow
+- [ ] Send `entry_logged`, `report_generated`, `report_printed`, `insight_viewed`, `invite_*`, `sign_*` events when those features are built
+- [ ] Mention analytics (what, why, EU, opt-out) in the privacy notice and review the no-cookie-banner decision
+- [ ] Optional: server-side capture with `posthog-node` in `apps/api` for exact counts (same catalog)
+- [ ] Dashboards in PostHog: sign-up to first entry, entries per week, time to log, report use
+
 ## CI/CD and release tracking (not started)
 
 - [ ] Set up CI (GitHub Actions, see `docs/plan.md` CI/CD): check, check-types, tests, build

@@ -15,8 +15,8 @@ Bad or missing config should fail at startup with a clear message, not deep insi
 | `@repo/env/auth` | `packages/auth` | `BETTER_AUTH_SECRET` (required), `BETTER_AUTH_URL`, `WEB_ORIGIN` |
 | `@repo/env/storage` | `packages/storage` | `S3_*`, `STORAGE_DRIVER` (required keys) |
 | `@repo/env/notifications` | `packages/notifications` | `NOVU_SECRET_KEY` (optional in dev), `NOVU_REGION` |
-| `@repo/env/web` | `apps/web` | `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_SENTRY_DSN` (optional) |
-| `@repo/env/native` | `apps/native` | `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_SENTRY_DSN` (optional) |
+| `@repo/env/web` | `apps/web` | `NEXT_PUBLIC_API_URL`, `NEXT_PUBLIC_APP_URL`, `NEXT_PUBLIC_SENTRY_DSN`, `NEXT_PUBLIC_POSTHOG_TOKEN` (optional) |
+| `@repo/env/native` | `apps/native` | `EXPO_PUBLIC_API_URL`, `EXPO_PUBLIC_SENTRY_DSN`, `EXPO_PUBLIC_POSTHOG_TOKEN` (optional) |
 
 Defaults come from `@repo/config` so the apps still run with no secrets set. Real values live in Infisical (folders `/api`, `/web`, `/native`); `.env.example` at the repo root lists the key names. Set `SKIP_ENV_VALIDATION=1` to skip validation (CI builds).
 
