@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@repo/ui/components/button";
 import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,9 +23,7 @@ const ErrorPage = ({
     <main className="flex flex-1 flex-col items-center justify-center gap-4 p-6 text-center">
       <h1 className="text-2xl font-semibold">{t("shell:error.title")}</h1>
       <p>{t("shell:error.body")}</p>
-      <button type="button" onClick={() => retry()}>
-        {t("common:actions.tryAgain")}
-      </button>
+      <Button onClick={() => retry()}>{t("common:actions.tryAgain")}</Button>
     </main>
   );
 };

@@ -1,6 +1,11 @@
 "use client";
 
 import { app } from "@repo/config/app";
+import { Label } from "@repo/ui/components/label";
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@repo/ui/components/native-select";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,11 +19,11 @@ export const LanguageSwitcher = () => {
   const [pending, startTransition] = useTransition();
 
   return (
-    <label className="flex items-center gap-2 text-sm">
-      {t("language.label")}
-      <select
-        className="rounded border px-2 py-1"
+    <div className="flex items-center gap-2">
+      <Label htmlFor="language">{t("language.label")}</Label>
+      <NativeSelect
         disabled={pending}
+        id="language"
         onChange={(event) => {
           const next = event.target.value;
           startTransition(async () => {
@@ -30,11 +35,11 @@ export const LanguageSwitcher = () => {
         value={i18n.language}
       >
         {app.i18n.locales.map((locale) => (
-          <option key={locale} value={locale}>
+          <NativeSelectOption key={locale} value={locale}>
             {app.i18n.names[locale]}
-          </option>
+          </NativeSelectOption>
         ))}
-      </select>
-    </label>
+      </NativeSelect>
+    </div>
   );
 };

@@ -1,0 +1,147 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+@source "../../../apps/**/*.{ts,tsx}";
+@source "../../../components/**/*.{ts,tsx}";
+@source "../**/*.{ts,tsx}";
+
+/*
+ * Midnight Sanctuary. The dark theme is the brand: its colours are the ones in
+ * packages/config/src/app.ts (obsidian, surface, mist, muted, gold, border) and a test
+ * checks they have not drifted. The light theme is a warm off-white with a darker gold.
+ * Every text pair is at least 4.5:1 and every control border at least 3:1 (checked).
+ * Dark is the default; the website's ThemeProvider adds or removes the `dark` class.
+ */
+:root {
+  --background: #faf9f7;
+  --foreground: #17181b;
+  --card: #ffffff;
+  --card-foreground: #17181b;
+  --popover: #ffffff;
+  --popover-foreground: #17181b;
+  --primary: #b45309;
+  --primary-foreground: #ffffff;
+  --secondary: #f1efea;
+  --secondary-foreground: #17181b;
+  --muted: #f1efea;
+  --muted-foreground: #5b6472;
+  --accent: #f1efea;
+  --accent-foreground: #17181b;
+  --destructive: #b91c1c;
+  --border: #e3e0d8;
+  --input: #8b8678;
+  --ring: #b45309;
+  --chart-1: #b45309;
+  --chart-2: #0369a1;
+  --chart-3: #047857;
+  --chart-4: #6d28d9;
+  --chart-5: #be123c;
+  --radius: 0.875rem;
+  --sidebar: #f1efea;
+  --sidebar-foreground: #17181b;
+  --sidebar-primary: #b45309;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8e5dd;
+  --sidebar-accent-foreground: #17181b;
+  --sidebar-border: #e3e0d8;
+  --sidebar-ring: #b45309;
+}
+
+.dark {
+  --background: #0f1012;
+  --foreground: #e2e8f0;
+  --card: #17181b;
+  --card-foreground: #e2e8f0;
+  --popover: #17181b;
+  --popover-foreground: #e2e8f0;
+  --primary: #d97706;
+  --primary-foreground: #0f1012;
+  --secondary: #23252a;
+  --secondary-foreground: #e2e8f0;
+  --muted: #1d1f23;
+  --muted-foreground: #94a3b8;
+  --accent: #23252a;
+  --accent-foreground: #e2e8f0;
+  --destructive: #f87171;
+  --border: #2a2c31;
+  --input: #646b78;
+  --ring: #d97706;
+  --chart-1: #d97706;
+  --chart-2: #38bdf8;
+  --chart-3: #34d399;
+  --chart-4: #a78bfa;
+  --chart-5: #fb7185;
+  --sidebar: #17181b;
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #d97706;
+  --sidebar-primary-foreground: #0f1012;
+  --sidebar-accent: #23252a;
+  --sidebar-accent-foreground: #e2e8f0;
+  --sidebar-border: #2a2c31;
+  --sidebar-ring: #d97706;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+  --font-mono: var(--font-mono);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}

@@ -2,6 +2,7 @@ import { withSentryConfig } from "@sentry/nextjs/config";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  devIndicators: { position: "bottom-right" },
   reactCompiler: true,
   // Analytics goes through our own domain like the Sentry tunnel, so blockers and a strict
   // CSP are fine. These are PostHog's documented EU rewrites; /ingest matches webIngestPath
@@ -24,6 +25,8 @@ const nextConfig: NextConfig = {
   },
   // PostHog's API paths end in a slash; do not redirect them away.
   skipTrailingSlashRedirect: true,
+  // @repo/ui ships TypeScript source, so Next compiles it with the website.
+  transpilePackages: ["@repo/ui"],
 };
 
 // Source maps (readable stack traces) are uploaded only when SENTRY_AUTH_TOKEN is set,

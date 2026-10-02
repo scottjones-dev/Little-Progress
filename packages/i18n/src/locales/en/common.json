@@ -6,5 +6,11 @@
   "language": {
     "label": "Language"
   },
-  "tagline": "A calm family care diary"
+  "tagline": "A calm family care diary",
+  "theme": {
+    "dark": "Dark",
+    "label": "Theme",
+    "light": "Light",
+    "system": "System"
+  }
 }
